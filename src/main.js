@@ -15,7 +15,7 @@ function initLoadingScreen() {
   let progress = 0;
 
   const interval = setInterval(() => {
-    progress += Math.floor(Math.random() * 15) + 10;
+    progress += Math.floor(Math.random() * 6) + 3;
     if (progress >= 100) {
       progress = 100;
       clearInterval(interval);
@@ -27,12 +27,12 @@ function initLoadingScreen() {
           loadingScreen.style.opacity = '0';
           loadingScreen.style.pointerEvents = 'none';
         }
-      }, 350);
+      }, 500);
     } else {
       if (loadingBar) loadingBar.style.width = `${progress}%`;
       if (loadingPercent) loadingPercent.innerText = `${progress}%`;
     }
-  }, 35);
+  }, 40);
 }
 
 // ==========================================

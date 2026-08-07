@@ -14,18 +14,38 @@
 </head>
 <body class="bg-bgDark text-textMuted antialiased selection:bg-accent/30 selection:text-accent bg-noise relative min-h-screen font-sans">
 
-  <!-- ==================== INITIALIZER LOADING SCREEN ==================== -->
-  <div id="loading-screen" class="fixed inset-0 z-[100] bg-bgDark flex flex-col items-center justify-center transition-opacity duration-700 pointer-events-auto">
-    <div class="flex flex-col items-center space-y-4">
+  <!-- ==================== INITIALIZER LOADING SCREEN (Cinematic & Large) ==================== -->
+  <div id="loading-screen" class="fixed inset-0 z-[100] bg-bgDark flex flex-col items-center justify-center transition-opacity duration-700 pointer-events-auto overflow-hidden bg-noise">
+    <!-- Ambient Radial Glow -->
+    <div class="absolute w-[600px] h-[600px] bg-accent/20 rounded-full blur-[140px] pointer-events-none animate-pulse"></div>
+
+    <div class="relative z-10 flex flex-col items-center space-y-8 px-6 max-w-2xl text-center">
+      
+      <!-- Logo Container with Spinning Holographic Tech Ring -->
+      <div class="relative flex items-center justify-center p-6">
+        <div class="absolute inset-0 rounded-full border border-accent/30 border-t-accentGlow border-r-purple-400 animate-spin transition-all duration-1000" style="animation-duration: 4s;"></div>
+        <div class="absolute -inset-4 rounded-full border border-purple-500/20 border-b-accent animate-spin" style="animation-duration: 7s; animation-direction: reverse;"></div>
+        
+        <img src="/spi-logo.png" alt="Spark Point Infotech" class="h-24 sm:h-36 md:h-44 w-auto object-contain drop-shadow-[0_0_40px_rgba(168,85,247,0.85)] hover:scale-105 transition-transform duration-500">
+      </div>
+
+      <!-- Status Subtext -->
       <div class="flex items-center space-x-3">
-        <img src="/spi-logo.png" alt="Spark Point Infotech Logo" class="h-12 w-auto object-contain animate-pulse">
-        <span class="text-white font-mono tracking-[0.2em] text-xs uppercase font-bold">Initializing</span>
+        <span class="w-2.5 h-2.5 rounded-full bg-accentGlow animate-ping"></span>
+        <span class="text-white font-mono tracking-[0.25em] text-xs sm:text-sm uppercase font-bold">INITIALIZING SYSTEM ENGINE</span>
       </div>
-      <!-- 160px wide, 2px height progress bar -->
-      <div class="w-[160px] h-[2px] bg-white/10 rounded-full overflow-hidden relative">
-        <div id="loading-bar" class="h-full bg-gradient-to-r from-accent to-accentGlow w-0 transition-all duration-100 ease-out shadow-[0_0_10px_#A855F7]"></div>
+
+      <!-- Wide Bold Progress Bar Container -->
+      <div class="w-[300px] sm:w-[460px] md:w-[540px] h-3 bg-white/5 border border-white/10 rounded-full p-[2px] overflow-hidden relative shadow-[0_0_25px_rgba(139,92,246,0.3)]">
+        <div id="loading-bar" class="h-full bg-gradient-to-r from-accent via-purple-300 to-accentGlow w-0 rounded-full transition-all duration-100 ease-out shadow-[0_0_15px_#A855F7]"></div>
       </div>
-      <span id="loading-percent" class="text-white/40 font-mono text-[10px] tracking-widest">0%</span>
+
+      <!-- Percentage Counter -->
+      <div class="flex items-baseline space-x-2">
+        <span id="loading-percent" class="text-3xl sm:text-4xl font-mono font-bold text-white tracking-widest drop-shadow-[0_0_12px_rgba(255,255,255,0.5)]">0%</span>
+        <span class="text-xs font-mono text-accent uppercase tracking-[0.2em] font-bold">Complete</span>
+      </div>
+
     </div>
   </div>
 
