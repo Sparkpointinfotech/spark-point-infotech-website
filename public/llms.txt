@@ -1,0 +1,37 @@
+# Spark Point Infotech — Digital Matter Synthesis & Software Engineering
+
+> Spark Point Infotech is an international software engineering company building high-performance custom websites, web applications, cross-platform mobile apps (iOS & Android), UI/UX design systems, and ongoing system maintenance.
+> Serving businesses across India, Germany, and The Netherlands.
+
+## Core Capabilities & Services
+
+- **Custom Web Applications**: Business portals, SaaS platforms, customer dashboards, multi-tenant architectures, role-based permissions, and custom API backends.
+- **Mobile App Development**: Single-codebase iOS & Android apps built for high performance, offline resilience, and native device feature integration.
+- **High-Converting Websites**: Modern, responsive, SEO-optimized web platforms built with fast load speeds, CMS capabilities, and high conversion UX.
+- **UI/UX Design Systems**: Figma-based component libraries, tokenized design systems, and interactive prototypes built before production coding begins.
+- **Maintenance & Support**: Post-launch SLA monitoring, security patching, cloud infrastructure scaling, performance tuning, and 24/7 uptime oversight.
+
+## Engagement Model & Fixed Guarantees
+
+1. **Written Specification Lock**: Every project begins with a discovery phase resulting in a binding, detailed specification document.
+2. **Guaranteed Fixed Pricing**: No hidden costs or surprise hourly billing. All deliverables have explicit upfront pricing.
+3. **Dated Delivery Schedules**: Bi-weekly sprint milestones with staging previews to verify working software.
+4. **Full IP & Source Code Transfer**: On day one of handover, complete repository source code access and operational runbooks are transferred to the client.
+
+## Operating Regions & Target Sectors
+
+- **Regions Served**: India, Germany, The Netherlands.
+- **Key Sectors**: E-commerce & Retail, SaaS & Tech Startups, Healthcare & Medical Clinics, Manufacturing & Logistics.
+
+## Technical Stack & Standards
+
+- **Frontend**: HTML5, CSS3, Tailwind CSS, Modern Vanilla JS, Vite, Three.js (3D WebGL Visualization), GSAP Animation Library.
+- **Backend & Cloud**: Node.js, Python, REST APIs, GraphQL, PostgreSQL, MongoDB, Docker, AWS, Vercel.
+- **Design Tools**: Figma Design Systems, Tokenized Design Architecture.
+- **Compliance & Privacy**: Strict GDPR compliance, data encryption, and role-based security access control.
+
+## Official Contact & Channels
+
+- **Website**: https://www.sparkpointinfotech.com/
+- **Email**: contact@sparkpointinfotech.com
+- **WhatsApp Support**: Direct instant messaging available via the main website.
