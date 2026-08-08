@@ -1,48 +1,68 @@
 <!DOCTYPE html>
 <html lang="en" class="dark scroll-smooth">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Software Development Company | Spark Point Infotech</title>
-  <meta name="description" content="Websites, web applications and mobile apps built to a written specification. Serving India, Germany and the Netherlands. Every project starts with a written scope, a fixed price and a dated schedule.">
-  <link rel="icon" type="image/png" href="/spi-logo.png">
-  
+  <meta name="description"
+    content="Websites, web applications and mobile apps built to a written specification. Serving India, Germany and the Netherlands. Every project starts with a written scope, a fixed price and a dated schedule.">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=3">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=3">
+  <link rel="shortcut icon" href="/favicon.ico?v=3">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=3">
+
   <!-- Google Fonts Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
 </head>
-<body class="bg-bgDark text-textMuted antialiased selection:bg-accent/30 selection:text-accent bg-noise relative min-h-screen font-sans">
+
+<body
+  class="bg-bgDark text-textMuted antialiased selection:bg-accent/30 selection:text-accent bg-noise relative min-h-screen font-sans">
 
   <!-- ==================== INITIALIZER LOADING SCREEN (Cinematic & Large) ==================== -->
-  <div id="loading-screen" class="fixed inset-0 z-[100] bg-bgDark flex flex-col items-center justify-center transition-opacity duration-700 pointer-events-auto overflow-hidden bg-noise">
+  <div id="loading-screen"
+    class="fixed inset-0 z-[100] bg-bgDark flex flex-col items-center justify-center transition-opacity duration-700 pointer-events-auto overflow-hidden bg-noise">
     <!-- Ambient Radial Glow -->
-    <div class="absolute w-[600px] h-[600px] bg-accent/20 rounded-full blur-[140px] pointer-events-none animate-pulse"></div>
+    <div class="absolute w-[600px] h-[600px] bg-accent/20 rounded-full blur-[140px] pointer-events-none animate-pulse">
+    </div>
 
     <div class="relative z-10 flex flex-col items-center space-y-8 px-6 max-w-2xl text-center">
-      
+
       <!-- Logo Container with Spinning Holographic Tech Ring -->
       <div class="relative flex items-center justify-center p-6">
-        <div class="absolute inset-0 rounded-full border border-accent/30 border-t-accentGlow border-r-purple-400 animate-spin transition-all duration-1000" style="animation-duration: 4s;"></div>
-        <div class="absolute -inset-4 rounded-full border border-purple-500/20 border-b-accent animate-spin" style="animation-duration: 7s; animation-direction: reverse;"></div>
-        
-        <img src="/spi-logo.png" alt="Spark Point Infotech" class="h-24 sm:h-36 md:h-44 w-auto object-contain drop-shadow-[0_0_40px_rgba(168,85,247,0.85)] hover:scale-105 transition-transform duration-500">
+        <div
+          class="absolute inset-0 rounded-full border border-accent/30 border-t-accentGlow border-r-purple-400 animate-spin transition-all duration-1000"
+          style="animation-duration: 4s;"></div>
+        <div class="absolute -inset-4 rounded-full border border-purple-500/20 border-b-accent animate-spin"
+          style="animation-duration: 7s; animation-direction: reverse;"></div>
+
+        <img src="/spi-logo.png" alt="Spark Point Infotech"
+          class="h-24 sm:h-36 md:h-44 w-auto object-contain drop-shadow-[0_0_40px_rgba(168,85,247,0.85)] hover:scale-105 transition-transform duration-500">
       </div>
 
       <!-- Status Subtext -->
       <div class="flex items-center space-x-3">
         <span class="w-2.5 h-2.5 rounded-full bg-accentGlow animate-ping"></span>
-        <span class="text-white font-mono tracking-[0.25em] text-xs sm:text-sm uppercase font-bold">INITIALIZING SYSTEM ENGINE</span>
+        <span class="text-white font-mono tracking-[0.25em] text-xs sm:text-sm uppercase font-bold">INITIALIZING SYSTEM
+          ENGINE</span>
       </div>
 
       <!-- Wide Bold Progress Bar Container -->
-      <div class="w-[300px] sm:w-[460px] md:w-[540px] h-3 bg-white/5 border border-white/10 rounded-full p-[2px] overflow-hidden relative shadow-[0_0_25px_rgba(139,92,246,0.3)]">
-        <div id="loading-bar" class="h-full bg-gradient-to-r from-accent via-purple-300 to-accentGlow w-0 rounded-full transition-all duration-100 ease-out shadow-[0_0_15px_#A855F7]"></div>
+      <div
+        class="w-[300px] sm:w-[460px] md:w-[540px] h-3 bg-white/5 border border-white/10 rounded-full p-[2px] overflow-hidden relative shadow-[0_0_25px_rgba(139,92,246,0.3)]">
+        <div id="loading-bar"
+          class="h-full bg-gradient-to-r from-accent via-purple-300 to-accentGlow w-0 rounded-full transition-all duration-100 ease-out shadow-[0_0_15px_#A855F7]">
+        </div>
       </div>
 
       <!-- Percentage Counter -->
       <div class="flex items-baseline space-x-2">
-        <span id="loading-percent" class="text-3xl sm:text-4xl font-mono font-bold text-white tracking-widest drop-shadow-[0_0_12px_rgba(255,255,255,0.5)]">0%</span>
+        <span id="loading-percent"
+          class="text-3xl sm:text-4xl font-mono font-bold text-white tracking-widest drop-shadow-[0_0_12px_rgba(255,255,255,0.5)]">0%</span>
         <span class="text-xs font-mono text-accent uppercase tracking-[0.2em] font-bold">Complete</span>
       </div>
 
@@ -54,98 +74,105 @@
   <div id="canvas-container" class="fixed inset-0 z-0 pointer-events-none"></div>
 
   <!-- ==================== NAVIGATION HEADER (Layer 50 Fixed) ==================== -->
-  <header class="fixed top-0 left-0 right-0 z-[50] h-16 sm:h-18 glass-panel border-b border-white/5 px-6 sm:px-8 flex items-center justify-between">
-    
-    <!-- Top-Left Logo (Preserved constant large visual scale, sleek compact header bar) -->
+  <header
+    class="fixed top-0 left-0 right-0 z-[50] h-16 sm:h-20 glass-panel border-b border-white/5 px-4 sm:px-10 flex items-center justify-between">
+
+    <!-- Top-Left Logo (Optimized for mobile & desktop screens) -->
     <a href="#" class="flex items-center group py-1">
-      <img src="/spi-logo.png" alt="Spark Point Infotech" class="h-16 sm:h-20 w-auto max-w-[320px] sm:max-w-[400px] object-contain scale-125 sm:scale-150 origin-left hover:scale-[1.6] transition-transform duration-300 drop-shadow-[0_0_25px_rgba(139,92,246,0.8)]">
+      <img src="/spi-logo.png" alt="Spark Point Infotech"
+        class="h-12 sm:h-16 md:h-20 w-auto max-w-[180px] sm:max-w-[340px] md:max-w-[420px] object-contain hover:scale-105 transition-transform duration-300 drop-shadow-[0_0_20px_rgba(139,92,246,0.8)]">
     </a>
 
-    <!-- Nav Links -->
-    <nav class="hidden lg:flex items-center space-x-7 text-xs font-medium text-white/70">
-      <a href="#services" class="hover:text-white transition-colors duration-200">Services</a>
-      <a href="#industries" class="hover:text-white transition-colors duration-200">Industries</a>
-      <a href="#process" class="hover:text-white transition-colors duration-200">How We Work</a>
-      <a href="#engagements" class="hover:text-white transition-colors duration-200">Engagements</a>
-      <a href="#about" class="hover:text-white transition-colors duration-200">About</a>
-      <a href="#faq" class="hover:text-white transition-colors duration-200">FAQ</a>
-      <a href="#careers" class="hover:text-white transition-colors duration-200">Careers</a>
-      <a href="#contact" class="hover:text-white transition-colors duration-200">Contact</a>
+    <!-- Nav Links (Essential & Streamlined Sequence) -->
+    <nav class="hidden lg:flex items-center space-x-8 text-xs sm:text-sm font-semibold text-white/80">
+      <a href="#services" class="hover:text-accent transition-colors duration-200">Services</a>
+      <a href="#process" class="hover:text-accent transition-colors duration-200">How We Work</a>
+      <a href="#about" class="hover:text-accent transition-colors duration-200">About</a>
+      <a href="#faq" class="hover:text-accent transition-colors duration-200">FAQ</a>
+      <a href="#contact" class="hover:text-accent transition-colors duration-200">Contact</a>
     </nav>
 
     <!-- Header Action Button -->
     <div class="flex items-center space-x-4">
-      <a href="#contact" class="inline-flex items-center px-4 py-2 text-xs font-semibold rounded-full btn-primary">
+      <a href="#contact" class="inline-flex items-center px-4 sm:px-5 py-2 sm:py-2.5 text-xs font-semibold rounded-full btn-primary">
         Start a project
-        <svg class="w-3.5 h-3.5 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        <svg class="w-3.5 h-3.5 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+        </svg>
       </a>
     </div>
   </header>
 
   <!-- ==================== SECTION 2 - HERO ==================== -->
-  <section id="hero-section" class="relative h-[420vh]">
-    
+  <section id="hero-section" class="relative h-[280vh] md:h-[420vh]">
+
     <!-- Hero Title & Tagline -->
-    <div id="hero-content" class="fixed inset-0 z-10 flex flex-col items-center justify-center text-center px-4 pointer-events-none">
-      <div class="max-w-4xl mx-auto space-y-6 pointer-events-auto mt-[-40px]">
-        
-        <!-- Status Pill (Bright white text for maximum legibility) -->
-        <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-accent/20 border border-accent/40 text-white text-[10px] font-mono font-bold tracking-[0.2em] uppercase shadow-[0_0_20px_rgba(168,85,247,0.4)]">
-          <span class="w-2 h-2 rounded-full bg-accentGlow animate-ping"></span>
-          <span class="text-white">INDIA &bull; GERMANY &bull; THE NETHERLANDS</span>
+    <div id="hero-content"
+      class="fixed inset-0 z-10 flex flex-col items-center justify-center text-center px-4 sm:px-8 pointer-events-none">
+      <div class="max-w-6xl mx-auto space-y-6 sm:space-y-8 pointer-events-auto mt-[-20px] sm:mt-[-30px]">
+
+        <!-- Status Pill (Increased font size & legibility) -->
+        <div
+          class="inline-flex items-center space-x-2 sm:space-x-3 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-accent/25 border border-accent/50 text-white text-[10px] sm:text-xs font-mono font-bold tracking-[0.2em] uppercase shadow-[0_0_25px_rgba(168,85,247,0.5)]">
+          <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-accentGlow animate-ping"></span>
+          <span class="text-white font-bold">INDIA &bull; GERMANY &bull; NETHERLANDS</span>
         </div>
 
-        <!-- Main Headline -->
-        <h1 class="text-4xl sm:text-6xl md:text-7xl font-semibold text-white tracking-[-0.05em] leading-[1.08]">
-          Software built to a <span class="bg-gradient-to-r from-accent via-purple-300 to-accentGlow bg-clip-text text-transparent">written specification.</span>
+        <!-- Main Headline (Stretched & Larger) -->
+        <h1 class="text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white tracking-[-0.03em] leading-[1.1]">
+          Engineered with clarity <span class="bg-gradient-to-r from-accent via-purple-300 to-accentGlow bg-clip-text text-transparent">built for scale.</span>
         </h1>
 
-        <!-- Subheadline & Tagline -->
-        <p class="text-base sm:text-lg text-textMuted max-w-2xl mx-auto font-light leading-[1.6]">
-          <span class="text-white font-medium">Engineered with clarity, built for scale.</span> Websites, custom web applications and mobile apps built with a fixed price, a dated schedule, and zero agency overhead.
+        <!-- Subheadline & Tagline (Highly Visible Text) -->
+        <p class="text-sm sm:text-lg md:text-xl text-slate-200 max-w-4xl mx-auto font-normal leading-[1.6]">
+          Websites, custom web applications and mobile apps built with a fixed price, a dated schedule, and zero agency overhead.
         </p>
 
-        <!-- Action Buttons with Authentic WhatsApp Logo -->
-        <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
-          <a href="#contact" class="px-8 py-3.5 rounded-full text-xs font-semibold btn-primary">
+        <!-- Action Buttons (Removed WhatsApp button, Added 'Our services' button) -->
+        <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 pt-2 sm:pt-4">
+          <a href="#contact" class="px-6 sm:px-9 py-3 sm:py-4 rounded-full text-xs sm:text-sm font-bold btn-primary">
             Start a project
           </a>
-          
-          <a href="https://wa.me/917024105119?text=Hi%20Spark%20Point%20Infotech%20%E2%80%94%20I'd%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer" class="px-8 py-3.5 rounded-full text-xs font-medium glass-panel text-white hover:bg-white/10 transition-all border border-white/15 flex items-center space-x-2.5 group">
-            <!-- Authentic Green WhatsApp Logo Icon -->
-            <svg class="w-4 h-4 fill-emerald-400 group-hover:scale-110 transition-transform duration-200" viewBox="0 0 24 24">
-              <path d="M12.031 0C5.384 0 0 5.384 0 12.031c0 2.125.553 4.2 1.606 6.027L.031 24l6.096-1.597c1.764.962 3.76 1.47 5.904 1.47 6.647 0 12.031-5.385 12.031-12.031S18.678 0 12.031 0zm0 21.905c-1.815 0-3.593-.487-5.143-1.408l-.368-.219-3.618.948.966-3.527-.24-.383a9.92 9.92 0 0 1-1.523-5.285c0-5.485 4.464-9.949 9.949-9.949 5.484 0 9.949 4.464 9.949 9.949 0 5.485-4.465 9.949-9.949 9.949z"/>
+
+          <a href="#services"
+            class="px-6 sm:px-9 py-3 sm:py-4 rounded-full text-xs sm:text-sm font-semibold glass-panel text-white hover:bg-white/15 transition-all border border-white/20 flex items-center space-x-2 group shadow-lg">
+            <span>Our services</span>
+            <svg class="w-4 h-4 text-accent group-hover:translate-y-0.5 transition-transform duration-200" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
-            <span>WhatsApp us</span>
           </a>
         </div>
       </div>
     </div>
 
-    <!-- Contextual Popovers -->
-    <div id="story-popovers" class="fixed inset-0 z-[15] pointer-events-none flex flex-col justify-between p-6 md:p-12">
-      <div id="popover-1" class="self-end mt-20 glass-panel p-4 rounded-2xl border border-accent/20 max-w-xs transition-all duration-700 opacity-0 translate-y-4 pointer-events-auto shadow-2xl">
-        <div class="flex items-center space-x-3 mb-2">
-          <div class="w-2 h-2 rounded-full bg-accent"></div>
-          <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-accent font-bold">Written Scope & Fixed Price</span>
+    <!-- Contextual Popovers (Refined position & size to prevent overlap) -->
+    <div id="story-popovers" class="fixed inset-0 z-[15] pointer-events-none flex flex-col justify-between p-4 sm:p-8 md:p-12">
+      <div id="popover-1"
+        class="self-center md:self-end mt-16 md:mt-20 glass-panel p-4 sm:p-6 rounded-2xl border border-accent/40 w-[90%] max-w-xs sm:max-w-sm transition-all duration-500 opacity-0 translate-y-4 pointer-events-auto shadow-2xl bg-surfaceDark/95 backdrop-blur-xl">
+        <div class="flex items-center space-x-2.5 mb-2">
+          <div class="w-2.5 h-2.5 rounded-full bg-accent"></div>
+          <span class="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-accent font-bold">Written Scope & Fixed Price</span>
         </div>
-        <p class="text-xs text-white/90 leading-normal font-light">Every project starts with a written scope and a fixed price. Tools chosen to fit the job.</p>
+        <p class="text-xs sm:text-sm text-slate-100 leading-relaxed font-normal">Every project starts with a fully detailed written scope, fixed pricing guarantee, and dated schedule. Tools chosen specifically to fit the job.</p>
       </div>
 
-      <div id="popover-2" class="self-start mb-24 glass-panel p-4 rounded-2xl border border-purple-500/20 max-w-xs transition-all duration-700 opacity-0 translate-y-4 pointer-events-auto shadow-2xl">
-        <div class="flex items-center space-x-3 mb-2">
-          <div class="w-2 h-2 rounded-full bg-purple-400"></div>
-          <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-purple-300 font-bold">Cross-Platform Mobile</span>
+      <div id="popover-2"
+        class="self-center md:self-start mb-20 md:mb-24 glass-panel p-4 sm:p-6 rounded-2xl border border-accent/40 w-[90%] max-w-xs sm:max-w-sm transition-all duration-500 opacity-0 translate-y-4 pointer-events-auto shadow-2xl bg-surfaceDark/95 backdrop-blur-xl">
+        <div class="flex items-center space-x-2.5 mb-2">
+          <div class="w-2.5 h-2.5 rounded-full bg-accent"></div>
+          <span class="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-accent font-bold">Cross-Platform Mobile Apps</span>
         </div>
-        <p class="text-xs text-white/90 leading-normal font-light">iOS and Android apps from a single codebase. Both platforms for close to the cost of one.</p>
+        <p class="text-xs sm:text-sm text-slate-100 leading-relaxed font-normal">Native-performance iOS and Android apps crafted from a unified single codebase. Dual platform reach delivered efficiently.</p>
       </div>
 
-      <div id="popover-3" class="self-end mb-16 glass-panel p-4 rounded-2xl border border-accentGlow/20 max-w-xs transition-all duration-700 opacity-0 translate-y-4 pointer-events-auto shadow-2xl">
-        <div class="flex items-center space-x-3 mb-2">
-          <div class="w-2 h-2 rounded-full bg-accentGlow"></div>
-          <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-accentGlow font-bold">Sub-2s Web Performance</span>
+      <div id="popover-3"
+        class="self-center md:self-end mb-12 md:mb-16 glass-panel p-4 sm:p-6 rounded-2xl border border-accent/40 w-[90%] max-w-xs sm:max-w-sm transition-all duration-500 opacity-0 translate-y-4 pointer-events-auto shadow-2xl bg-surfaceDark/95 backdrop-blur-xl">
+        <div class="flex items-center space-x-2.5 mb-2">
+          <div class="w-2.5 h-2.5 rounded-full bg-accent"></div>
+          <span class="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-accent font-bold">Sub-2s Web Performance & SEO</span>
         </div>
-        <p class="text-xs text-white/90 leading-normal font-light">Search-optimised marketing websites structured so Google and AI answer engines read them.</p>
+        <p class="text-xs sm:text-sm text-slate-100 leading-relaxed font-normal">Search-optimised, lightning-fast marketing websites structured so search engines and modern AI engines index them seamlessly.</p>
       </div>
     </div>
 
@@ -156,116 +183,238 @@
 
     <!-- ==================== SECTION 3: KARAOKE TEXT ==================== -->
     <section id="karaoke-section" class="py-32 px-6 max-w-6xl mx-auto border-t border-white/5">
-      <div class="text-center space-y-4 mb-8">
-        <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-accent font-bold">Core Operating Rule</span>
-      </div>
-
-      <div id="kakaoke-text" class="text-3xl sm:text-5xl md:text-6xl font-semibold tracking-[-0.025em] leading-[1.25] text-center max-w-5xl mx-auto">
-        Every engagement drawn before it is built. We would rather be excellent at five things than mediocre at ten. Each of these starts with a written scope and a fixed price.
+      <div id="kakaoke-text"
+        class="text-3xl sm:text-5xl md:text-6xl font-semibold tracking-[-0.025em] leading-[1.25] text-center max-w-5xl mx-auto">
+        Every engagement drawn before it is built. We would rather be excellent at six core capabilities than mediocre
+        at ten. Each of these starts with a written scope, a fixed price, and a dated milestone schedule.
       </div>
     </section>
 
-    <!-- ==================== SECTION 4: FIVE SERVICES ==================== -->
+    <!-- ==================== SECTION 4: SIX SERVICES ==================== -->
     <section id="services" class="py-32 px-6 border-t border-white/5 relative">
       <div class="max-w-7xl mx-auto space-y-16">
-        
+
         <div class="text-center space-y-4 max-w-3xl mx-auto">
-          <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-accent font-bold">Services</span>
-          <h2 class="text-3xl sm:text-5xl font-semibold text-white tracking-[-0.025em]">Every engagement, drawn before it's built</h2>
-          <p class="text-textMuted text-base font-light leading-[1.6]">
-            We would rather be excellent at five things than mediocre at ten. Each of these starts with a written scope and a fixed price.
+          <h2 class="text-3xl sm:text-5xl font-semibold text-white tracking-[-0.025em]">Every engagement, drawn before
+            it's built</h2>
+          <p class="text-slate-300 text-base sm:text-lg font-light leading-[1.6]">
+            We build high-performance web applications, mobile platforms, and digital products to written specifications
+            — backed by transparent scope and guaranteed milestones.
           </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          
-          <div class="glass-panel rounded-3xl p-8 border border-white/10 hover:border-accent/40 transition-all flex flex-col justify-between group">
+
+          <!-- Service 1 -->
+          <div
+            class="glass-panel rounded-3xl p-6 border border-white/10 hover:border-accent/40 transition-all flex flex-col justify-between group">
             <div class="space-y-4">
-              <div class="w-12 h-12 rounded-2xl bg-accent/15 border border-accent/30 flex items-center justify-center text-accent">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+              <div
+                class="w-12 h-12 rounded-2xl bg-accent/15 border border-accent/30 flex items-center justify-center text-accent">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9">
+                  </path>
+                </svg>
               </div>
-              <h3 class="text-xl font-semibold text-white group-hover:text-accent transition-colors">Website development</h3>
-              <p class="text-xs text-textMuted leading-[1.6] font-light">
-                We build fast, search-optimised marketing websites that load in under two seconds and are structured so search engines and AI assistants can read them.
+              <h3 class="text-xl font-semibold text-white group-hover:text-accent transition-colors">Website development
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-[1.6] font-light">
+                We build fast, search-optimised marketing websites that load in under two seconds and are structured so
+                search engines and modern AI assistants can index them effortlessly.
               </p>
-              <ul class="text-xs font-mono text-white/80 space-y-2 pt-4 border-t border-white/5">
-                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>Responsive design across phone, tablet and desktop</span></li>
-                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>Technical SEO, structured data and sitemap</span></li>
-                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>CMS so your team can edit copy without a developer</span></li>
-                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>Analytics and contact form wiring</span></li>
+              <ul class="text-xs font-mono text-white/90 space-y-2 pt-4 border-t border-white/5">
+                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>Responsive design
+                    for desktop, tablet & mobile</span></li>
+                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>Technical SEO,
+                    structured data & sitemap</span></li>
+                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>Headless CMS
+                    integration for effortless content editing</span></li>
+                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>Full analytics &
+                    custom form lead routing</span></li>
               </ul>
+            </div>
+            <div class="pt-4 flex flex-wrap gap-1.5 font-mono text-[10px] text-accent">
+              <span class="px-2 py-0.5 rounded bg-accent/10 border border-accent/20">Next.js</span>
+              <span class="px-2 py-0.5 rounded bg-accent/10 border border-accent/20">Tailwind</span>
+              <span class="px-2 py-0.5 rounded bg-accent/10 border border-accent/20">SEO</span>
             </div>
           </div>
 
-          <div class="glass-panel rounded-3xl p-8 border border-white/10 hover:border-purple-400/40 transition-all flex flex-col justify-between group">
+          <!-- Service 2 -->
+          <div
+            class="glass-panel rounded-3xl p-6 border border-white/10 hover:border-accent/40 transition-all flex flex-col justify-between group">
             <div class="space-y-4">
-              <div class="w-12 h-12 rounded-2xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+              <div
+                class="w-12 h-12 rounded-2xl bg-accent/15 border border-accent/30 flex items-center justify-center text-accent">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                  </path>
+                </svg>
               </div>
-              <h3 class="text-xl font-semibold text-white group-hover:text-purple-400 transition-colors">Custom web applications</h3>
-              <p class="text-xs text-textMuted leading-[1.6] font-light">
-                We build web applications around your actual workflow — dashboards, portals, booking systems and internal tools — instead of bending a template to fit.
+              <h3 class="text-xl font-semibold text-white group-hover:text-accent transition-colors">Custom web
+                applications</h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-[1.6] font-light">
+                We build scalable web applications around your real operational workflows — dashboards, portals, booking
+                platforms, and internal tools — tailored to your exact business rules.
               </p>
-              <ul class="text-xs font-mono text-white/80 space-y-2 pt-4 border-t border-white/5">
-                <li class="flex items-center space-x-2"><span class="text-purple-400">&bull;</span><span>Written technical specification before any code</span></li>
-                <li class="flex items-center space-x-2"><span class="text-purple-400">&bull;</span><span>Role-based accounts and permissions</span></li>
-                <li class="flex items-center space-x-2"><span class="text-purple-400">&bull;</span><span>Admin interface and reporting</span></li>
-                <li class="flex items-center space-x-2"><span class="text-purple-400">&bull;</span><span>Automated tests and deployment pipeline</span></li>
+              <ul class="text-xs font-mono text-white/90 space-y-2 pt-4 border-t border-white/5">
+                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>Written technical
+                    specification before any coding</span></li>
+                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>Role-based
+                    authorization & multi-tenant security</span></li>
+                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>Admin reporting &
+                    data visualization portals</span></li>
+                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>Automated test
+                    suites & CI/CD deployment pipelines</span></li>
               </ul>
+            </div>
+            <div class="pt-4 flex flex-wrap gap-1.5 font-mono text-[10px] text-accent">
+              <span class="px-2 py-0.5 rounded bg-accent/10 border border-accent/20">React</span>
+              <span class="px-2 py-0.5 rounded bg-accent/10 border border-accent/20">Node.js</span>
+              <span class="px-2 py-0.5 rounded bg-accent/10 border border-accent/20">PostgreSQL</span>
             </div>
           </div>
 
-          <div class="glass-panel rounded-3xl p-8 border border-white/10 hover:border-accentGlow/40 transition-all flex flex-col justify-between group">
+          <!-- Service 3 -->
+          <div
+            class="glass-panel rounded-3xl p-6 border border-white/10 hover:border-accent/40 transition-all flex flex-col justify-between group">
             <div class="space-y-4">
-              <div class="w-12 h-12 rounded-2xl bg-accentGlow/15 border border-accentGlow/30 flex items-center justify-center text-accentGlow">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+              <div
+                class="w-12 h-12 rounded-2xl bg-accent/15 border border-accent/30 flex items-center justify-center text-accent">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                </svg>
               </div>
-              <h3 class="text-xl font-semibold text-white group-hover:text-accentGlow transition-colors">Mobile app development</h3>
-              <p class="text-xs text-textMuted leading-[1.6] font-light">
-                We build iOS and Android apps from a single cross-platform codebase, which delivers both platforms for close to the cost of one.
+              <h3 class="text-xl font-semibold text-white group-hover:text-accent transition-colors">Mobile app
+                development</h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-[1.6] font-light">
+                We construct high-performance iOS and Android applications from a single cross-platform codebase,
+                delivering native feel and fluid performance across both app stores.
               </p>
-              <ul class="text-xs font-mono text-white/80 space-y-2 pt-4 border-t border-white/5">
-                <li class="flex items-center space-x-2"><span class="text-accentGlow">&bull;</span><span>Single codebase targeting both app stores</span></li>
-                <li class="flex items-center space-x-2"><span class="text-accentGlow">&bull;</span><span>App Store and Play Store submission</span></li>
-                <li class="flex items-center space-x-2"><span class="text-accentGlow">&bull;</span><span>Push notifications and offline handling</span></li>
-                <li class="flex items-center space-x-2"><span class="text-accentGlow">&bull;</span><span>Crash reporting and release monitoring</span></li>
+              <ul class="text-xs font-mono text-white/90 space-y-2 pt-4 border-t border-white/5">
+                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>Single
+                    cross-platform codebase for iOS & Android</span></li>
+                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>Complete Apple App
+                    Store & Google Play publishing</span></li>
+                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>Push notification
+                    systems & offline data sync</span></li>
+                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>Crash reporting &
+                    telemetry monitoring</span></li>
               </ul>
+            </div>
+            <div class="pt-4 flex flex-wrap gap-1.5 font-mono text-[10px] text-accent">
+              <span class="px-2 py-0.5 rounded bg-accent/10 border border-accent/20">Flutter</span>
+              <span class="px-2 py-0.5 rounded bg-accent/10 border border-accent/20">React Native</span>
+              <span class="px-2 py-0.5 rounded bg-accent/10 border border-accent/20">iOS/Android</span>
             </div>
           </div>
 
-          <div class="glass-panel rounded-3xl p-8 border border-white/10 hover:border-accent/40 transition-all flex flex-col justify-between group">
+          <!-- Service 4 -->
+          <div
+            class="glass-panel rounded-3xl p-6 border border-white/10 hover:border-accent/40 transition-all flex flex-col justify-between group">
             <div class="space-y-4">
-              <div class="w-12 h-12 rounded-2xl bg-accent/15 border border-accent/30 flex items-center justify-center text-accent">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
+              <div
+                class="w-12 h-12 rounded-2xl bg-accent/15 border border-accent/30 flex items-center justify-center text-accent">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01">
+                  </path>
+                </svg>
               </div>
               <h3 class="text-xl font-semibold text-white group-hover:text-accent transition-colors">UI/UX design</h3>
-              <p class="text-xs text-textMuted leading-[1.6] font-light">
-                We design interfaces for clarity first and decoration second, delivered as a working design system rather than flat mockups.
+              <p class="text-xs sm:text-sm text-slate-300 leading-[1.6] font-light">
+                We craft product interfaces prioritizing user clarity, visual elegance, and intuitive navigation —
+                delivered as structured Figma design systems ready for development.
               </p>
-              <ul class="text-xs font-mono text-white/80 space-y-2 pt-4 border-t border-white/5">
-                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>User flows and wireframes</span></li>
-                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>High-fidelity screens for every state</span></li>
-                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>Reusable component library in Figma</span></li>
-                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>WCAG 2.2 AA contrast and focus review</span></li>
+              <ul class="text-xs font-mono text-white/90 space-y-2 pt-4 border-t border-white/5">
+                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>User research,
+                    wireframing & interaction flows</span></li>
+                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>High-fidelity
+                    screens covering every interface state</span></li>
+                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>Reusable Figma
+                    component system & design tokens</span></li>
+                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>WCAG 2.2 AA
+                    accessibility & contrast auditing</span></li>
               </ul>
+            </div>
+            <div class="pt-4 flex flex-wrap gap-1.5 font-mono text-[10px] text-accent">
+              <span class="px-2 py-0.5 rounded bg-accent/10 border border-accent/20">Figma</span>
+              <span class="px-2 py-0.5 rounded bg-accent/10 border border-accent/20">Design System</span>
+              <span class="px-2 py-0.5 rounded bg-accent/10 border border-accent/20">WCAG AA</span>
             </div>
           </div>
 
-          <div class="glass-panel rounded-3xl p-8 border border-white/10 hover:border-purple-400/40 transition-all flex flex-col justify-between group md:col-span-2 lg:col-span-2">
+          <!-- Service 5 -->
+          <div
+            class="glass-panel rounded-3xl p-6 border border-white/10 hover:border-accent/40 transition-all flex flex-col justify-between group">
             <div class="space-y-4">
-              <div class="w-12 h-12 rounded-2xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+              <div
+                class="w-12 h-12 rounded-2xl bg-accent/15 border border-accent/30 flex items-center justify-center text-accent">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                  </path>
+                </svg>
               </div>
-              <h3 class="text-xl font-semibold text-white group-hover:text-purple-400 transition-colors">Maintenance and support</h3>
-              <p class="text-xs text-textMuted leading-[1.6] font-light">
-                We keep software running after launch with monitoring, security patching and a guaranteed response time on a fixed monthly fee.
+              <h3 class="text-xl font-semibold text-white group-hover:text-accent transition-colors">Maintenance &
+                support</h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-[1.6] font-light">
+                We safeguard your software post-launch with 24/7 proactive monitoring, security updates, infrastructure
+                optimization, and guaranteed response SLAs under a predictable fee.
               </p>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono text-white/80 pt-4 border-t border-white/5">
-                <div class="flex items-center space-x-2"><span class="text-purple-400">&bull;</span><span>Security patching and dependency updates</span></div>
-                <div class="flex items-center space-x-2"><span class="text-purple-400">&bull;</span><span>Uptime and error monitoring with alerts</span></div>
-                <div class="flex items-center space-x-2"><span class="text-purple-400">&bull;</span><span>Monthly backup verification</span></div>
-                <div class="flex items-center space-x-2"><span class="text-purple-400">&bull;</span><span>A named contact who knows your system</span></div>
+              <ul class="text-xs font-mono text-white/90 space-y-2 pt-4 border-t border-white/5">
+                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>Security patching &
+                    dependency upgrades</span></li>
+                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>Uptime monitoring &
+                    automated error alerting</span></li>
+                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>Monthly database
+                    backups & restore verification</span></li>
+                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>Dedicated account
+                    lead familiar with your system</span></li>
+              </ul>
+            </div>
+            <div class="pt-4 flex flex-wrap gap-1.5 font-mono text-[10px] text-accent">
+              <span class="px-2 py-0.5 rounded bg-accent/10 border border-accent/20">SLA Support</span>
+              <span class="px-2 py-0.5 rounded bg-accent/10 border border-accent/20">Security</span>
+              <span class="px-2 py-0.5 rounded bg-accent/10 border border-accent/20">Backups</span>
+            </div>
+          </div>
+
+          <!-- Service 6 (Added for 6-card symmetry) -->
+          <div
+            class="glass-panel rounded-3xl p-6 border border-white/10 hover:border-accent/40 transition-all flex flex-col justify-between group">
+            <div class="space-y-4">
+              <div
+                class="w-12 h-12 rounded-2xl bg-accent/15 border border-accent/30 flex items-center justify-center text-accent">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z">
+                  </path>
+                </svg>
               </div>
+              <h3 class="text-xl font-semibold text-white group-hover:text-accent transition-colors">Cloud Architecture
+                & APIs</h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-[1.6] font-light">
+                We engineer reliable cloud backends, microservices, and secure API integrations connecting third-party
+                services, payment gateways, and enterprise software.
+              </p>
+              <ul class="text-xs font-mono text-white/90 space-y-2 pt-4 border-t border-white/5">
+                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>RESTful & GraphQL
+                    API gateway development</span></li>
+                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>Cloud server
+                    infrastructure setup on AWS / Vercel</span></li>
+                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>Stripe, PayPal &
+                    banking gateway integrations</span></li>
+                <li class="flex items-center space-x-2"><span class="text-accent">&bull;</span><span>GDPR-compliant data
+                    storage & encryption</span></li>
+              </ul>
+            </div>
+            <div class="pt-4 flex flex-wrap gap-1.5 font-mono text-[10px] text-accent">
+              <span class="px-2 py-0.5 rounded bg-accent/10 border border-accent/20">AWS</span>
+              <span class="px-2 py-0.5 rounded bg-accent/10 border border-accent/20">APIs</span>
+              <span class="px-2 py-0.5 rounded bg-accent/10 border border-accent/20">Docker</span>
             </div>
           </div>
 
@@ -276,58 +425,67 @@
     <!-- ==================== SECTION 5: INDUSTRIES ==================== -->
     <section id="industries" class="py-32 px-6 border-t border-white/5 relative">
       <div class="max-w-7xl mx-auto space-y-16">
-        
+
         <div class="text-center space-y-4 max-w-3xl mx-auto">
-          <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-accent font-bold">Sectors & Industries</span>
-          <h2 class="text-3xl sm:text-5xl font-semibold text-white tracking-[-0.025em]">The software changes — the approach does not</h2>
-          <p class="text-textMuted text-base font-light leading-[1.6]">
-            The software changes from one sector to the next — the way we scope, price and hand it over does not. A few of the areas we build for:
+          <h2 class="text-3xl sm:text-5xl font-semibold text-white tracking-[-0.025em]">The software changes — the
+            approach does not</h2>
+          <p class="text-slate-300 text-base font-light leading-[1.6]">
+            The software changes from one sector to the next — the way we scope, price and hand it over does not. A few
+            of the key industries we build for:
           </p>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          
-          <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-accent/30 transition-all space-y-3">
+
+          <div
+            class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-accent/30 transition-all space-y-3">
             <span class="text-[10px] font-mono text-accent uppercase tracking-[0.2em] font-bold">Sector 01</span>
             <h3 class="text-lg font-semibold text-white">E-commerce & retail</h3>
-            <p class="text-xs text-textMuted leading-[1.6] font-light">Online stores that are fast to browse and simple to buy from, with stock and order tools needed to run them.</p>
-            <ul class="text-[11px] font-mono text-white/70 space-y-1.5 pt-3 border-t border-white/5">
-              <li>&bull; Storefronts and product catalogues</li>
-              <li>&bull; Checkout and payment integration</li>
-              <li>&bull; Inventory and order dashboards</li>
+            <p class="text-xs sm:text-sm text-slate-300 leading-[1.6] font-light">Online storefronts designed for swift
+              browsing, friction-free checkout, and seamless inventory management tools.</p>
+            <ul class="text-[11px] font-mono text-white/80 space-y-1.5 pt-3 border-t border-white/5">
+              <li>&bull; Storefronts & digital product catalogues</li>
+              <li>&bull; Checkout & multi-currency payment gates</li>
+              <li>&bull; Real-time inventory & order dashboards</li>
             </ul>
           </div>
 
-          <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-purple-400/30 transition-all space-y-3">
-            <span class="text-[10px] font-mono text-purple-400 uppercase tracking-[0.2em] font-bold">Sector 02</span>
+          <div
+            class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-accent/30 transition-all space-y-3">
+            <span class="text-[10px] font-mono text-accent uppercase tracking-[0.2em] font-bold">Sector 02</span>
             <h3 class="text-lg font-semibold text-white">SaaS & startups</h3>
-            <p class="text-xs text-textMuted leading-[1.6] font-light">The web application behind a software product — from a first MVP to a multi-tenant platform.</p>
-            <ul class="text-[11px] font-mono text-white/70 space-y-1.5 pt-3 border-t border-white/5">
-              <li>&bull; MVPs built to test ideas quickly</li>
-              <li>&bull; Customer dashboards & admin panels</li>
-              <li>&bull; Subscriptions and role-based access</li>
+            <p class="text-xs sm:text-sm text-slate-300 leading-[1.6] font-light">The core web engine behind software
+              products — from initial validation MVPs to robust multi-tenant platforms.</p>
+            <ul class="text-[11px] font-mono text-white/80 space-y-1.5 pt-3 border-t border-white/5">
+              <li>&bull; MVPs built to test business ideas fast</li>
+              <li>&bull; Customer portals & admin control panels</li>
+              <li>&bull; Subscription billing & role permissions</li>
             </ul>
           </div>
 
-          <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-accentGlow/30 transition-all space-y-3">
-            <span class="text-[10px] font-mono text-accentGlow uppercase tracking-[0.2em] font-bold">Sector 03</span>
+          <div
+            class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-accent/30 transition-all space-y-3">
+            <span class="text-[10px] font-mono text-accent uppercase tracking-[0.2em] font-bold">Sector 03</span>
             <h3 class="text-lg font-semibold text-white">Healthcare & clinics</h3>
-            <p class="text-xs text-textMuted leading-[1.6] font-light">Booking, records and patient-facing software, built with data privacy treated as a requirement from day one.</p>
-            <ul class="text-[11px] font-mono text-white/70 space-y-1.5 pt-3 border-t border-white/5">
-              <li>&bull; Appointment booking and reminders</li>
-              <li>&bull; Patient portals and intake forms</li>
-              <li>&bull; Practice and clinic websites</li>
+            <p class="text-xs sm:text-sm text-slate-300 leading-[1.6] font-light">Scheduling platforms, patient portals,
+              and clinic software engineered with strict data privacy from day one.</p>
+            <ul class="text-[11px] font-mono text-white/80 space-y-1.5 pt-3 border-t border-white/5">
+              <li>&bull; Appointment booking & automated alerts</li>
+              <li>&bull; Secure patient portals & intake forms</li>
+              <li>&bull; Practice & medical clinic websites</li>
             </ul>
           </div>
 
-          <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-emerald-400/30 transition-all space-y-3">
-            <span class="text-[10px] font-mono text-emerald-400 uppercase tracking-[0.2em] font-bold">Sector 04</span>
+          <div
+            class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-accent/30 transition-all space-y-3">
+            <span class="text-[10px] font-mono text-accent uppercase tracking-[0.2em] font-bold">Sector 04</span>
             <h3 class="text-lg font-semibold text-white">Manufacturing & logistics</h3>
-            <p class="text-xs text-textMuted leading-[1.6] font-light">Internal tools replacing spreadsheets — tracking stock, orders and jobs across teams rarely sitting at desks.</p>
-            <ul class="text-[11px] font-mono text-white/70 space-y-1.5 pt-3 border-t border-white/5">
-              <li>&bull; Inventory and warehouse tools</li>
-              <li>&bull; Order and shipment tracking</li>
-              <li>&bull; B2B ordering portals</li>
+            <p class="text-xs sm:text-sm text-slate-300 leading-[1.6] font-light">Internal digital systems replacing
+              paper and spreadsheets — tracking inventory, shipments, and field operations.</p>
+            <ul class="text-[11px] font-mono text-white/80 space-y-1.5 pt-3 border-t border-white/5">
+              <li>&bull; Inventory control & warehouse tools</li>
+              <li>&bull; Order dispatch & shipment tracking</li>
+              <li>&bull; B2B client wholesale ordering portals</li>
             </ul>
           </div>
 
@@ -338,89 +496,105 @@
     <!-- ==================== SECTION 6: HOW WE WORK (4 PHASES) ==================== -->
     <section id="process" class="py-32 px-6 border-t border-white/5 relative">
       <div class="max-w-5xl mx-auto space-y-20">
-        
+
         <div class="text-center space-y-4 max-w-2xl mx-auto">
-          <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-accent font-bold">How We Work</span>
-          <h2 class="text-3xl sm:text-5xl font-semibold text-white tracking-[-0.025em]">Four phases, the same on every project</h2>
-          <p class="text-textMuted text-base font-light leading-[1.6]">
-            You know what happens in each one and what you receive at the end of it before you sign anything — the schedule is set for your scope in discovery.
+          <h2 class="text-3xl sm:text-5xl font-semibold text-white tracking-[-0.025em]">Four phases, the same on every
+            project</h2>
+          <p class="text-slate-300 text-base font-light leading-[1.6]">
+            You know what happens in each phase and what deliverables you receive before signing — schedules and
+            milestones are committed upfront during discovery.
           </p>
         </div>
 
         <div class="relative pl-8 md:pl-0">
-          
+
           <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-[2px] bg-white/10 -translate-x-1/2">
-            <div id="timeline-fill" class="w-full bg-gradient-to-b from-accent via-accentGlow to-purple-400 h-0 transition-all duration-100 shadow-[0_0_15px_#A855F7]"></div>
+            <div id="timeline-fill" class="w-full bg-accent h-0 transition-all duration-100 shadow-[0_0_15px_#8B5CF6]">
+            </div>
           </div>
 
           <!-- Phase 01 -->
-          <div class="timeline-step relative mb-24 md:flex items-center justify-between group opacity-20 blur-[4px] scale-[0.98]">
+          <div
+            class="timeline-step relative mb-24 md:flex items-center justify-between group opacity-20 blur-[4px] scale-[0.98]">
             <div class="md:w-5/12 md:text-right pr-8 space-y-2">
-              <span class="text-accent font-mono text-[10px] uppercase font-bold tracking-[0.2em]">Phase 01</span>
-              <h3 class="text-xl font-semibold text-white">Discovery</h3>
-              <p class="text-xs text-textMuted leading-[1.6] font-light">We map what the software has to do and what it must not do, then write it down. Nothing is estimated from a phone call.</p>
-              <ul class="text-[11px] font-mono text-white/80 space-y-1 pt-2">
-                <li>&bull; Written scope document</li>
-                <li>&bull; Fixed price and dated schedule</li>
-                <li>&bull; Named risks with mitigations</li>
+              <span class="text-accent font-mono text-xs uppercase font-bold tracking-[0.2em]">Phase 01</span>
+              <h3 class="text-xl font-semibold text-white">Discovery & Scope Lock</h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-[1.6] font-light">We map everything the system must do
+                and must not do in a written specification. Nothing is estimated loosely.</p>
+              <ul class="text-xs font-mono text-white/90 space-y-1 pt-2">
+                <li>&bull; Written specification & functional breakdown</li>
+                <li>&bull; Guaranteed fixed price & dated delivery schedule</li>
+                <li>&bull; Identified risk registry & mitigation strategy</li>
               </ul>
             </div>
-            <div class="absolute left-4 md:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-bgDark border-2 border-white/20 timeline-point z-10 flex items-center justify-center">
-              <div class="w-2 h-2 rounded-full bg-white/40"></div>
+            <div
+              class="absolute left-4 md:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-bgDark border-2 border-white/20 timeline-point z-10 flex items-center justify-center">
+              <div class="w-2 h-2 rounded-full bg-accent"></div>
             </div>
             <div class="md:w-5/12 pl-8 hidden md:block"></div>
           </div>
 
           <!-- Phase 02 -->
-          <div class="timeline-step relative mb-24 md:flex items-center justify-between group opacity-20 blur-[4px] scale-[0.98]">
+          <div
+            class="timeline-step relative mb-24 md:flex items-center justify-between group opacity-20 blur-[4px] scale-[0.98]">
             <div class="md:w-5/12 pr-8 hidden md:block"></div>
-            <div class="absolute left-4 md:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-bgDark border-2 border-white/20 timeline-point z-10 flex items-center justify-center">
-              <div class="w-2 h-2 rounded-full bg-white/40"></div>
+            <div
+              class="absolute left-4 md:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-bgDark border-2 border-white/20 timeline-point z-10 flex items-center justify-center">
+              <div class="w-2 h-2 rounded-full bg-accent"></div>
             </div>
             <div class="md:w-5/12 pl-8 space-y-2">
-              <span class="text-purple-400 font-mono text-[10px] uppercase font-bold tracking-[0.2em]">Phase 02</span>
-              <h3 class="text-xl font-semibold text-white">Design</h3>
-              <p class="text-xs text-textMuted leading-[1.6] font-light">Every screen is designed and approved before a line of production code is written. Changing a drawing is cheap.</p>
-              <ul class="text-[11px] font-mono text-white/80 space-y-1 pt-2">
-                <li>&bull; Screens for every state</li>
-                <li>&bull; Component library and design tokens</li>
-                <li>&bull; Approved click-through prototype</li>
+              <span class="text-accent font-mono text-xs uppercase font-bold tracking-[0.2em]">Phase 02</span>
+              <h3 class="text-xl font-semibold text-white">UI/UX Design Systems</h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-[1.6] font-light">Every single screen state is
+                designed and approved in Figma before production code begins. Adapting designs early prevents unexpected
+                rework.</p>
+              <ul class="text-xs font-mono text-white/90 space-y-1 pt-2">
+                <li>&bull; Complete UI screens for mobile & desktop</li>
+                <li>&bull; Structured component tokens & Figma design system</li>
+                <li>&bull; Interactive prototype approval</li>
               </ul>
             </div>
           </div>
 
           <!-- Phase 03 -->
-          <div class="timeline-step relative mb-24 md:flex items-center justify-between group opacity-20 blur-[4px] scale-[0.98]">
+          <div
+            class="timeline-step relative mb-24 md:flex items-center justify-between group opacity-20 blur-[4px] scale-[0.98]">
             <div class="md:w-5/12 md:text-right pr-8 space-y-2">
-              <span class="text-accentGlow font-mono text-[10px] uppercase font-bold tracking-[0.2em]">Phase 03</span>
-              <h3 class="text-xl font-semibold text-white">Build</h3>
-              <p class="text-xs text-textMuted leading-[1.6] font-light">We build in two-week increments. At the end of each one you get a working environment you can click through.</p>
-              <ul class="text-[11px] font-mono text-white/80 space-y-1 pt-2">
-                <li>&bull; Working software every two weeks</li>
-                <li>&bull; Automated test suite</li>
-                <li>&bull; Staging environment access</li>
+              <span class="text-accent font-mono text-xs uppercase font-bold tracking-[0.2em]">Phase 03</span>
+              <h3 class="text-xl font-semibold text-white">Iterative Development</h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-[1.6] font-light">We execute development in two-week
+                milestone sprints. At the conclusion of each sprint, you test a live click-through preview staging
+                environment.</p>
+              <ul class="text-xs font-mono text-white/90 space-y-1 pt-2">
+                <li>&bull; Bi-weekly working software releases</li>
+                <li>&bull; Comprehensive automated test suites</li>
+                <li>&bull; Protected live staging environment preview</li>
               </ul>
             </div>
-            <div class="absolute left-4 md:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-bgDark border-2 border-white/20 timeline-point z-10 flex items-center justify-center">
-              <div class="w-2 h-2 rounded-full bg-white/40"></div>
+            <div
+              class="absolute left-4 md:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-bgDark border-2 border-white/20 timeline-point z-10 flex items-center justify-center">
+              <div class="w-2 h-2 rounded-full bg-accent"></div>
             </div>
             <div class="md:w-5/12 pl-8 hidden md:block"></div>
           </div>
 
           <!-- Phase 04 -->
-          <div class="timeline-step relative md:flex items-center justify-between group opacity-20 blur-[4px] scale-[0.98]">
+          <div
+            class="timeline-step relative md:flex items-center justify-between group opacity-20 blur-[4px] scale-[0.98]">
             <div class="md:w-5/12 pr-8 hidden md:block"></div>
-            <div class="absolute left-4 md:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-bgDark border-2 border-white/20 timeline-point z-10 flex items-center justify-center">
-              <div class="w-2 h-2 rounded-full bg-white/40"></div>
+            <div
+              class="absolute left-4 md:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-bgDark border-2 border-white/20 timeline-point z-10 flex items-center justify-center">
+              <div class="w-2 h-2 rounded-full bg-accent"></div>
             </div>
             <div class="md:w-5/12 pl-8 space-y-2">
-              <span class="text-emerald-400 font-mono text-[10px] uppercase font-bold tracking-[0.2em]">Phase 04</span>
-              <h3 class="text-xl font-semibold text-white">Launch</h3>
-              <p class="text-xs text-textMuted leading-[1.6] font-light">We deploy, monitor and hand over. You receive the repository, credentials and documentation on day one.</p>
-              <ul class="text-[11px] font-mono text-white/80 space-y-1 pt-2">
-                <li>&bull; Production deployment and monitoring</li>
-                <li>&bull; Source code and full ownership transfer</li>
-                <li>&bull; Handover session and written runbook</li>
+              <span class="text-accent font-mono text-xs uppercase font-bold tracking-[0.2em]">Phase 04</span>
+              <h3 class="text-xl font-semibold text-white">Deployment & Handover</h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-[1.6] font-light">We launch, configure production
+                infrastructure, and transfer complete IP, repository access, and operational runbooks on day one.</p>
+              <ul class="text-xs font-mono text-white/90 space-y-1 pt-2">
+                <li>&bull; Live production deployment & uptime setup</li>
+                <li>&bull; Full repository source code & IP transfer</li>
+                <li>&bull; Walkthrough onboarding & technical runbook</li>
               </ul>
             </div>
           </div>
@@ -433,47 +607,62 @@
     <!-- ==================== SECTION 7: ENGAGEMENTS ==================== -->
     <section id="engagements" class="py-32 px-6 border-t border-white/5 relative">
       <div class="max-w-7xl mx-auto space-y-16">
-        
+
         <div class="text-center space-y-4 max-w-3xl mx-auto">
-          <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-accent font-bold">Engagements</span>
-          <h2 class="text-3xl sm:text-5xl font-semibold text-white tracking-[-0.025em]">Three ways to work with us</h2>
-          <p class="text-textMuted text-base font-light leading-[1.6]">
-            Pick the shape that matches the work. We will tell you if you have picked the wrong one.
+          <h2 class="text-3xl sm:text-5xl font-semibold text-white tracking-[-0.025em]">Ideal Client & Partnership Fit
+          </h2>
+          <p class="text-slate-300 text-base font-light leading-[1.6]">
+            We evaluate client alignment upfront to ensure projects deliver exceptional business outcomes. Discover how
+            we partner:
           </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div class="glass-panel p-6 rounded-2xl border border-white/10 space-y-3">
+          <div
+            class="glass-panel p-6 rounded-2xl border border-white/10 space-y-3 hover:border-accent/30 transition-all">
             <span class="text-[10px] font-mono text-accent uppercase tracking-[0.2em] font-bold">Fit 01</span>
             <h3 class="text-base font-semibold text-white">Small and growing teams</h3>
-            <p class="text-xs text-textMuted leading-[1.6] font-light">Startups and small businesses that need software built properly, without agency overhead.</p>
+            <p class="text-xs sm:text-sm text-slate-300 leading-[1.6] font-light">Startups and established businesses
+              seeking reliable engineering execution without unnecessary agency overhead.</p>
           </div>
 
-          <div class="glass-panel p-6 rounded-2xl border border-white/10 space-y-3">
-            <span class="text-[10px] font-mono text-purple-400 uppercase tracking-[0.2em] font-bold">Fit 02</span>
+          <div
+            class="glass-panel p-6 rounded-2xl border border-white/10 space-y-3 hover:border-accent/30 transition-all">
+            <span class="text-[10px] font-mono text-accent uppercase tracking-[0.2em] font-bold">Fit 02</span>
             <h3 class="text-base font-semibold text-white">European businesses looking east</h3>
-            <p class="text-xs text-textMuted leading-[1.6] font-light">Companies in Germany and the Netherlands wanting overlap hours and GDPR handled.</p>
+            <p class="text-xs sm:text-sm text-slate-300 leading-[1.6] font-light">Companies in Germany and the
+              Netherlands benefiting from 5-hour daily working overlap and strict GDPR compliance.</p>
           </div>
 
-          <div class="glass-panel p-6 rounded-2xl border border-white/10 space-y-3">
-            <span class="text-[10px] font-mono text-accentGlow uppercase tracking-[0.2em] font-bold">Fit 03</span>
-            <h3 class="text-base font-semibold text-white">Outdated or missing systems</h3>
-            <p class="text-xs text-textMuted leading-[1.6] font-light">No website yet, or one that no longer represents the business you have become.</p>
+          <div
+            class="glass-panel p-6 rounded-2xl border border-white/10 space-y-3 hover:border-accent/30 transition-all">
+            <span class="text-[10px] font-mono text-accent uppercase tracking-[0.2em] font-bold">Fit 03</span>
+            <h3 class="text-base font-semibold text-white">Legacy system modernizations</h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-[1.6] font-light">Businesses replacing outdated
+              software, slow websites, or spreadsheet tools with modern custom web solutions.</p>
           </div>
 
-          <div class="glass-panel p-6 rounded-2xl border border-white/10 space-y-3">
-            <span class="text-[10px] font-mono text-emerald-400 uppercase tracking-[0.2em] font-bold">Fit 04</span>
-            <h3 class="text-base font-semibold text-white">Teams that value straight answers</h3>
-            <p class="text-xs text-textMuted leading-[1.6] font-light">A partner who gives real timelines and real costs, then holds to both.</p>
+          <div
+            class="glass-panel p-6 rounded-2xl border border-white/10 space-y-3 hover:border-accent/30 transition-all">
+            <span class="text-[10px] font-mono text-accent uppercase tracking-[0.2em] font-bold">Fit 04</span>
+            <h3 class="text-base font-semibold text-white">Teams valuing transparency</h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-[1.6] font-light">Partners who value realistic
+              timelines, written contracts, fixed guarantees, and direct communication.</p>
           </div>
         </div>
 
         <div class="glass-panel p-8 rounded-3xl border border-red-500/20 max-w-4xl mx-auto space-y-4">
-          <span class="text-[10px] font-mono text-red-400 uppercase tracking-[0.2em] font-bold">&cross; Probably not a fit</span>
-          <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-textMuted font-light">
-            <li class="flex items-center space-x-2"><span class="text-red-400">&bull;</span><span>Lowest hourly rate is the deciding factor</span></li>
-            <li class="flex items-center space-x-2"><span class="text-red-400">&bull;</span><span>Work needing to start before scope is written</span></li>
-            <li class="flex items-center space-x-2"><span class="text-red-400">&bull;</span><span>Rescue jobs on missed deadlines</span></li>
+          <span class="text-xs font-mono text-red-400 uppercase tracking-[0.2em] font-bold">&cross; Not a fit for our
+            engagement model</span>
+          <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs sm:text-sm text-slate-300 font-light">
+            <li class="flex items-center space-x-2"><span class="text-red-400">&bull;</span><span>Projects choosing
+                software partners based strictly on lowest hourly rates</span></li>
+            <li class="flex items-center space-x-2"><span class="text-red-400">&bull;</span><span>Projects demanding
+                immediate coding before written scope discovery</span></li>
+            <li class="flex items-center space-x-2"><span class="text-red-400">&bull;</span><span>Emergency rescue jobs
+                resulting from unmanaged agency deadlines</span></li>
+            <li class="flex items-center space-x-2"><span class="text-red-400">&bull;</span><span>Requests asking for
+                un-scoped work additions without timeline shifts</span></li>
           </ul>
         </div>
 
@@ -483,64 +672,80 @@
     <!-- ==================== SECTION 8: ABOUT & VALUES ==================== -->
     <section id="about" class="py-32 px-6 border-t border-white/5 relative">
       <div class="max-w-7xl mx-auto space-y-16">
-        
+
         <div class="text-center space-y-4 max-w-3xl mx-auto">
-          <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-accent font-bold">About</span>
           <h2 class="text-3xl sm:text-5xl font-semibold text-white tracking-[-0.025em]">About Spark Point Infotech</h2>
-          <p class="text-textMuted text-base font-light leading-[1.6]">
-            A software development company building websites, web applications and mobile apps for small and mid-sized businesses in India, Germany and the Netherlands.
+          <p class="text-slate-300 text-base sm:text-lg font-light leading-[1.6]">
+            A specialized software engineering company building custom websites, web applications, and mobile products
+            for businesses across India, Germany, and the Netherlands.
           </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div class="glass-panel p-8 rounded-3xl border border-white/10 space-y-3">
-            <span class="text-[10px] font-mono text-accent uppercase tracking-[0.2em] font-bold">Vision</span>
+          <div
+            class="glass-panel p-8 rounded-3xl border border-white/10 space-y-3 hover:border-accent/30 transition-all">
+            <span class="text-xs font-mono text-accent uppercase tracking-[0.2em] font-bold">Our Vision</span>
             <h3 class="text-xl font-semibold text-white">To become a trusted international technology partner</h3>
-            <p class="text-xs text-textMuted leading-[1.6] font-light">Known for delivering honest, high-quality software from India to the world.</p>
+            <p class="text-xs sm:text-sm text-slate-300 leading-[1.6] font-light">Known globally for engineering
+              excellence, honest communication, predictable pricing, and high-performance software delivered from India
+              to clients worldwide.</p>
           </div>
 
-          <div class="glass-panel p-8 rounded-3xl border border-white/10 space-y-3">
-            <span class="text-[10px] font-mono text-purple-400 uppercase tracking-[0.2em] font-bold">Mission</span>
-            <h3 class="text-xl font-semibold text-white">To help businesses grow through well-supported software</h3>
-            <p class="text-xs text-textMuted leading-[1.6] font-light">Delivered by a team that treats every client project as its own.</p>
+          <div
+            class="glass-panel p-8 rounded-3xl border border-white/10 space-y-3 hover:border-accent/30 transition-all">
+            <span class="text-xs font-mono text-accent uppercase tracking-[0.2em] font-bold">Our Mission</span>
+            <h3 class="text-xl font-semibold text-white">To empower business growth through well-engineered software
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-[1.6] font-light">Delivered by a dedicated engineering
+              team that treats every client codebase with long-term ownership, robust architecture, and ongoing care.
+            </p>
           </div>
         </div>
 
         <div class="space-y-6">
           <div class="text-center">
-            <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-accent font-bold">Values</span>
-            <h3 class="text-2xl font-semibold text-white">What we hold to</h3>
+            <h3 class="text-2xl sm:text-3xl font-semibold text-white">What we hold to</h3>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            <div class="glass-panel p-6 rounded-2xl border border-white/10 space-y-2">
+            <div
+              class="glass-panel p-6 rounded-2xl border border-white/10 space-y-2 hover:border-accent/30 transition-all">
               <span class="text-[10px] font-mono text-accent font-bold uppercase tracking-[0.2em]">01 / Quality</span>
-              <h4 class="text-base font-semibold text-white">Quality</h4>
-              <p class="text-xs text-textMuted leading-[1.6] font-light">Fewer projects done properly beat many done poorly.</p>
+              <h4 class="text-base font-semibold text-white">Quality First</h4>
+              <p class="text-xs text-slate-300 leading-[1.6] font-light">Fewer projects built to high specifications
+                beat dozens of rushed deliverables.</p>
             </div>
 
-            <div class="glass-panel p-6 rounded-2xl border border-white/10 space-y-2">
-              <span class="text-[10px] font-mono text-purple-400 font-bold uppercase tracking-[0.2em]">02 / Honesty</span>
-              <h4 class="text-base font-semibold text-white">Honesty</h4>
-              <p class="text-xs text-textMuted leading-[1.6] font-light">Realistic timelines and bad news delivered early.</p>
+            <div
+              class="glass-panel p-6 rounded-2xl border border-white/10 space-y-2 hover:border-accent/30 transition-all">
+              <span class="text-[10px] font-mono text-accent font-bold uppercase tracking-[0.2em]">02 / Honesty</span>
+              <h4 class="text-base font-semibold text-white">Direct Honesty</h4>
+              <p class="text-xs text-slate-300 leading-[1.6] font-light">Realistic milestone timelines, transparent cost
+                breakdowns, and early reporting.</p>
             </div>
 
-            <div class="glass-panel p-6 rounded-2xl border border-white/10 space-y-2">
-              <span class="text-[10px] font-mono text-accentGlow font-bold uppercase tracking-[0.2em]">03 / Ownership</span>
-              <h4 class="text-base font-semibold text-white">Ownership</h4>
-              <p class="text-xs text-textMuted leading-[1.6] font-light">Accountable for outcomes, not just task closing.</p>
+            <div
+              class="glass-panel p-6 rounded-2xl border border-white/10 space-y-2 hover:border-accent/30 transition-all">
+              <span class="text-[10px] font-mono text-accent font-bold uppercase tracking-[0.2em]">03 / Ownership</span>
+              <h4 class="text-base font-semibold text-white">True Ownership</h4>
+              <p class="text-xs text-slate-300 leading-[1.6] font-light">Accountable for real-world software performance
+                and business outcomes.</p>
             </div>
 
-            <div class="glass-panel p-6 rounded-2xl border border-white/10 space-y-2">
-              <span class="text-[10px] font-mono text-emerald-400 font-bold uppercase tracking-[0.2em]">04 / Learning</span>
-              <h4 class="text-base font-semibold text-white">Learning</h4>
-              <p class="text-xs text-textMuted leading-[1.6] font-light">Continuous skill investment in our team.</p>
+            <div
+              class="glass-panel p-6 rounded-2xl border border-white/10 space-y-2 hover:border-accent/30 transition-all">
+              <span class="text-[10px] font-mono text-accent font-bold uppercase tracking-[0.2em]">04 / Learning</span>
+              <h4 class="text-base font-semibold text-white">Constant Mastery</h4>
+              <p class="text-xs text-slate-300 leading-[1.6] font-light">Continuous investment in modern frameworks,
+                cloud tools, and engineering standards.</p>
             </div>
 
-            <div class="glass-panel p-6 rounded-2xl border border-white/10 space-y-2">
-              <span class="text-[10px] font-mono text-indigo-400 font-bold uppercase tracking-[0.2em]">05 / Respect</span>
-              <h4 class="text-base font-semibold text-white">Respect</h4>
-              <p class="text-xs text-textMuted leading-[1.6] font-light">For clients, colleagues and candidates at every stage.</p>
+            <div
+              class="glass-panel p-6 rounded-2xl border border-white/10 space-y-2 hover:border-accent/30 transition-all">
+              <span class="text-[10px] font-mono text-accent font-bold uppercase tracking-[0.2em]">05 / Respect</span>
+              <h4 class="text-base font-semibold text-white">Mutual Respect</h4>
+              <p class="text-xs text-slate-300 leading-[1.6] font-light">Valuing every client's time, goals, budget
+                commitments, and feedback at every stage.</p>
             </div>
           </div>
         </div>
@@ -548,117 +753,169 @@
       </div>
     </section>
 
-    <!-- ==================== SECTION 9: COMPLETE FAQ (All 10 Authentic Questions) ==================== -->
+    <!-- ==================== SECTION 9: COMPLETE FAQ (Increased Answer Font Size) ==================== -->
     <section id="faq" class="py-32 px-6 border-t border-white/5 relative">
       <div class="max-w-4xl mx-auto space-y-16">
-        
+
         <div class="text-center space-y-4 max-w-2xl mx-auto">
-          <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-accent font-bold">FAQ</span>
           <h2 class="text-3xl sm:text-5xl font-semibold text-white tracking-[-0.025em]">Frequently asked questions</h2>
-          <p class="text-textMuted text-base font-light leading-[1.6]">
-            The things people want to know before they send an enquiry — pricing, ownership, timelines and how working across time zones actually goes.
+          <p class="text-slate-300 text-base font-light leading-[1.6]">
+            Everything you need to know before initiating an inquiry — pricing model, code ownership, project timelines,
+            time zone collaboration, and GDPR compliance.
           </p>
         </div>
 
         <div class="space-y-4">
-          
+
           <div class="faq-item glass-panel rounded-2xl p-6 border border-white/10 cursor-pointer transition-all">
             <div class="flex items-center justify-between">
-              <h3 class="text-base font-semibold text-white">What does Spark Point Infotech do?</h3>
-              <svg class="faq-icon w-5 h-5 text-white/50 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+              <h3 class="text-base sm:text-lg font-semibold text-white">What does Spark Point Infotech do?</h3>
+              <svg class="faq-icon w-5 h-5 text-white/50 transition-transform duration-300" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
             </div>
-            <div class="faq-answer pt-4 text-xs text-textMuted leading-[1.6] font-light">
-              Spark Point Infotech is a software development company. It builds websites, custom web applications, and iOS and Android mobile apps for small and mid-sized businesses, and provides UI/UX design and ongoing maintenance. The company works with clients in India, Germany and the Netherlands.
+            <div class="faq-answer pt-4 text-sm sm:text-base text-slate-200 leading-relaxed font-normal">
+              Spark Point Infotech is an international software development company. We engineer custom marketing
+              websites, web applications, cross-platform mobile apps (iOS & Android), UI/UX design systems, and cloud
+              API backends. We serve clients across India, Germany, and the Netherlands.
             </div>
           </div>
 
           <div class="faq-item glass-panel rounded-2xl p-6 border border-white/10 cursor-pointer transition-all">
             <div class="flex items-center justify-between">
-              <h3 class="text-base font-semibold text-white">How much does a website or web application cost?</h3>
-              <svg class="faq-icon w-5 h-5 text-white/50 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+              <h3 class="text-base sm:text-lg font-semibold text-white">How much does a website or web application cost?
+              </h3>
+              <svg class="faq-icon w-5 h-5 text-white/50 transition-transform duration-300" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
             </div>
-            <div class="faq-answer pt-4 text-xs text-textMuted leading-[1.6] font-light">
-              Spark Point Infotech quotes a fixed price for every project, but only after a paid discovery phase. Discovery produces a written scope, a firm price and a dated schedule, typically within two weeks. Pricing depends on the number of screens, integrations and user roles.
-            </div>
-          </div>
-
-          <div class="faq-item glass-panel rounded-2xl p-6 border border-white/10 cursor-pointer transition-all">
-            <div class="flex items-center justify-between">
-              <h3 class="text-base font-semibold text-white">How long does a software project take?</h3>
-              <svg class="faq-icon w-5 h-5 text-white/50 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-            </div>
-            <div class="faq-answer pt-4 text-xs text-textMuted leading-[1.6] font-light">
-              It depends on scope. Spark Point Infotech commits to a schedule only once that scope is known. Rather than quote a number that cannot hold, the paid discovery phase produces a dated, phase-by-phase schedule for your specific project. Work then runs in two-week increments.
+            <div class="faq-answer pt-4 text-sm sm:text-base text-slate-200 leading-relaxed font-normal">
+              We provide fixed-price quotes for every engagement after completing a paid discovery phase. Discovery
+              delivers a detailed written specification, fixed price, and dated milestone schedule. Pricing depends on
+              feature scope, number of screens, custom role permissions, and API integrations.
             </div>
           </div>
 
           <div class="faq-item glass-panel rounded-2xl p-6 border border-white/10 cursor-pointer transition-all">
             <div class="flex items-center justify-between">
-              <h3 class="text-base font-semibold text-white">Do you work with companies in Germany and the Netherlands?</h3>
-              <svg class="faq-icon w-5 h-5 text-white/50 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+              <h3 class="text-base sm:text-lg font-semibold text-white">How long does a software project take?</h3>
+              <svg class="faq-icon w-5 h-5 text-white/50 transition-transform duration-300" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
             </div>
-            <div class="faq-answer pt-4 text-xs text-textMuted leading-[1.6] font-light">
-              Yes. Spark Point Infotech works with businesses in Germany and the Netherlands alongside its Indian clients. Contracts and correspondence are in English, invoicing supports EUR, and we follow EU data protection requirements for projects handling EU personal data.
-            </div>
-          </div>
-
-          <div class="faq-item glass-panel rounded-2xl p-6 border border-white/10 cursor-pointer transition-all">
-            <div class="flex items-center justify-between">
-              <h3 class="text-base font-semibold text-white">How do you handle the time difference with Europe?</h3>
-              <svg class="faq-icon w-5 h-5 text-white/50 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-            </div>
-            <div class="faq-answer pt-4 text-xs text-textMuted leading-[1.6] font-light">
-              IST is 3.5 to 4.5 hours ahead of European CET, leaving a working overlap of roughly five hours every afternoon. All calls and reviews are scheduled inside that window, so European clients never take a meeting outside business hours.
+            <div class="faq-answer pt-4 text-sm sm:text-base text-slate-200 leading-relaxed font-normal">
+              Timelines vary by project complexity. Rather than making estimates over phone calls, discovery yields a
+              firm timeline with dated milestone releases. Development executes in bi-weekly sprints, providing working
+              staging previews every two weeks.
             </div>
           </div>
 
           <div class="faq-item glass-panel rounded-2xl p-6 border border-white/10 cursor-pointer transition-all">
             <div class="flex items-center justify-between">
-              <h3 class="text-base font-semibold text-white">Who owns the code and intellectual property?</h3>
-              <svg class="faq-icon w-5 h-5 text-white/50 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+              <h3 class="text-base sm:text-lg font-semibold text-white">Do you work with companies in Germany and the
+                Netherlands?</h3>
+              <svg class="faq-icon w-5 h-5 text-white/50 transition-transform duration-300" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
             </div>
-            <div class="faq-answer pt-4 text-xs text-textMuted leading-[1.6] font-light">
-              The client owns all of it. Full ownership of source code, designs and IP is transferred on final payment, and we hand over the repository, credentials and documentation at launch.
-            </div>
-          </div>
-
-          <div class="faq-item glass-panel rounded-2xl p-6 border border-white/10 cursor-pointer transition-all">
-            <div class="flex items-center justify-between">
-              <h3 class="text-base font-semibold text-white">Is the software GDPR compliant?</h3>
-              <svg class="faq-icon w-5 h-5 text-white/50 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-            </div>
-            <div class="faq-answer pt-4 text-xs text-textMuted leading-[1.6] font-light">
-              Spark Point Infotech builds to GDPR requirements for every client with EU users — covering EU-region hosting, signed DPA, consent handling, data export routines, and documented retention periods.
+            <div class="faq-answer pt-4 text-sm sm:text-base text-slate-200 leading-relaxed font-normal">
+              Yes. We regularly work with businesses in Germany and the Netherlands alongside our Indian clients.
+              Contracts and communications are conducted in fluent English, invoices support EUR payments, and projects
+              adhere to strict EU data protection standards.
             </div>
           </div>
 
           <div class="faq-item glass-panel rounded-2xl p-6 border border-white/10 cursor-pointer transition-all">
             <div class="flex items-center justify-between">
-              <h3 class="text-base font-semibold text-white">What technologies do you build with?</h3>
-              <svg class="faq-icon w-5 h-5 text-white/50 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+              <h3 class="text-base sm:text-lg font-semibold text-white">How do you handle the time difference with
+                Europe?</h3>
+              <svg class="faq-icon w-5 h-5 text-white/50 transition-transform duration-300" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
             </div>
-            <div class="faq-answer pt-4 text-xs text-textMuted leading-[1.6] font-light">
-              We choose technology per project rather than fitting every client to one stack. The choice is made during discovery and written into the scope document before any code is built.
-            </div>
-          </div>
-
-          <div class="faq-item glass-panel rounded-2xl p-6 border border-white/10 cursor-pointer transition-all">
-            <div class="flex items-center justify-between">
-              <h3 class="text-base font-semibold text-white">What happens after the software launches?</h3>
-              <svg class="faq-icon w-5 h-5 text-white/50 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-            </div>
-            <div class="faq-answer pt-4 text-xs text-textMuted leading-[1.6] font-light">
-              Every project includes thirty days of post-launch support at no extra cost. After that, clients can move to a monthly care plan covering security patching, dependency updates, uptime monitoring, and backup verification.
+            <div class="faq-answer pt-4 text-sm sm:text-base text-slate-200 leading-relaxed font-normal">
+              Indian Standard Time (IST) provides ~5 hours of direct working overlap with European Central Time (CET)
+              every afternoon. All progress syncs, demos, and reviews take place comfortably within normal European
+              business hours.
             </div>
           </div>
 
           <div class="faq-item glass-panel rounded-2xl p-6 border border-white/10 cursor-pointer transition-all">
             <div class="flex items-center justify-between">
-              <h3 class="text-base font-semibold text-white">How do we start a project with Spark Point Infotech?</h3>
-              <svg class="faq-icon w-5 h-5 text-white/50 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+              <h3 class="text-base sm:text-lg font-semibold text-white">Who owns the code and intellectual property?
+              </h3>
+              <svg class="faq-icon w-5 h-5 text-white/50 transition-transform duration-300" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
             </div>
-            <div class="faq-answer pt-4 text-xs text-textMuted leading-[1.6] font-light">
-              Send the project details through the enquiry form on this page or message the team on WhatsApp. We reply within one business day and arrange a call.
+            <div class="faq-answer pt-4 text-sm sm:text-base text-slate-200 leading-relaxed font-normal">
+              You own 100% of the software. Complete ownership of all source code, Figma design assets, database
+              schemas, and intellectual property is transferred upon project completion and launch.
+            </div>
+          </div>
+
+          <div class="faq-item glass-panel rounded-2xl p-6 border border-white/10 cursor-pointer transition-all">
+            <div class="flex items-center justify-between">
+              <h3 class="text-base sm:text-lg font-semibold text-white">Is the software GDPR compliant?</h3>
+              <svg class="faq-icon w-5 h-5 text-white/50 transition-transform duration-300" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </div>
+            <div class="faq-answer pt-4 text-sm sm:text-base text-slate-200 leading-relaxed font-normal">
+              Yes. For clients serving European users, we engineer software strictly to GDPR standards — including
+              EU-hosted servers, signed Data Processing Agreements (DPA), cookie consent workflows, and automated user
+              data export/deletion routines.
+            </div>
+          </div>
+
+          <div class="faq-item glass-panel rounded-2xl p-6 border border-white/10 cursor-pointer transition-all">
+            <div class="flex items-center justify-between">
+              <h3 class="text-base sm:text-lg font-semibold text-white">What technologies do you build with?</h3>
+              <svg class="faq-icon w-5 h-5 text-white/50 transition-transform duration-300" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </div>
+            <div class="faq-answer pt-4 text-sm sm:text-base text-slate-200 leading-relaxed font-normal">
+              We select optimal tech stacks based on your project goals — typically modern React/Next.js, Node.js,
+              TypeScript, PostgreSQL, Flutter, AWS, and Tailwind CSS. All stack choices are finalized during discovery.
+            </div>
+          </div>
+
+          <div class="faq-item glass-panel rounded-2xl p-6 border border-white/10 cursor-pointer transition-all">
+            <div class="flex items-center justify-between">
+              <h3 class="text-base sm:text-lg font-semibold text-white">What happens after the software launches?</h3>
+              <svg class="faq-icon w-5 h-5 text-white/50 transition-transform duration-300" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </div>
+            <div class="faq-answer pt-4 text-sm sm:text-base text-slate-200 leading-relaxed font-normal">
+              Every project includes 30 days of post-launch warranty support at no additional cost. Following warranty,
+              clients can enroll in monthly care plans covering security patches, dependency upgrades, uptime
+              monitoring, and backup validation.
+            </div>
+          </div>
+
+          <div class="faq-item glass-panel rounded-2xl p-6 border border-white/10 cursor-pointer transition-all">
+            <div class="flex items-center justify-between">
+              <h3 class="text-base sm:text-lg font-semibold text-white">How do we start a project with Spark Point
+                Infotech?</h3>
+              <svg class="faq-icon w-5 h-5 text-white/50 transition-transform duration-300" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </div>
+            <div class="faq-answer pt-4 text-sm sm:text-base text-slate-200 leading-relaxed font-normal">
+              Simply fill out the inquiry form below or click the WhatsApp button to message us directly. We respond
+              within one business day to discuss your project requirements and schedule an introductory discovery call.
             </div>
           </div>
 
@@ -667,110 +924,182 @@
       </div>
     </section>
 
-    <!-- ==================== SECTION 10: CAREERS / TALENT REGISTRY ==================== -->
+    <!-- ==================== SECTION 10: CAREERS / TALENT REGISTRY (Expanded Fields) ==================== -->
     <section id="careers" class="py-32 px-6 border-t border-white/5 relative">
       <div class="max-w-4xl mx-auto space-y-12">
-        
+
         <div class="text-center space-y-4 max-w-2xl mx-auto">
-          <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-purple-400 font-bold">Careers</span>
-          <h2 class="text-3xl sm:text-5xl font-semibold text-white tracking-[-0.025em]">We're building the team behind Spark Point Infotech</h2>
-          <p class="text-textMuted text-base font-light leading-[1.6]">
-            We are not hiring yet, and we would rather say that plainly than collect applications for roles that do not exist. Leave your details and we will contact you when one opens that fits what you do.
+          <h2 class="text-3xl sm:text-5xl font-semibold text-white tracking-[-0.025em]">We're building the engineering
+            team at Spark Point Infotech</h2>
+          <p class="text-slate-300 text-base font-light leading-[1.6]">
+            While we build out upcoming project pipelines, register your candidate profile with our talent registry.
+            When specialized engineering or design roles open, we reach out directly.
           </p>
         </div>
 
-        <form id="talent-form" class="glass-panel p-8 rounded-3xl border border-white/10 space-y-4 max-w-2xl mx-auto shadow-2xl">
+        <form id="talent-form"
+          class="glass-panel p-6 sm:p-10 rounded-3xl border border-white/10 space-y-5 max-w-2xl mx-auto shadow-2xl">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div class="space-y-1">
-              <label for="talent-name" class="text-[10px] font-mono text-white/70 uppercase tracking-[0.2em] font-bold">Full Name</label>
-              <input type="text" id="talent-name" required placeholder="Your full name" class="w-full px-4 py-2.5 rounded-xl bg-black/50 border border-white/10 text-white text-xs focus:outline-none focus:border-accent">
+              <label for="talent-name"
+                class="text-[10px] font-mono text-white/80 uppercase tracking-[0.2em] font-bold">Full Name *</label>
+              <input type="text" id="talent-name" required placeholder="e.g. Rahul Sharma"
+                class="w-full px-4 py-2.5 rounded-xl bg-black/50 border border-white/10 text-white text-xs sm:text-sm focus:outline-none focus:border-accent">
             </div>
             <div class="space-y-1">
-              <label for="talent-email" class="text-[10px] font-mono text-white/70 uppercase tracking-[0.2em] font-bold">Email Address</label>
-              <input type="email" id="talent-email" required placeholder="you@email.com" class="w-full px-4 py-2.5 rounded-xl bg-black/50 border border-white/10 text-white text-xs focus:outline-none focus:border-accent">
+              <label for="talent-email"
+                class="text-[10px] font-mono text-white/80 uppercase tracking-[0.2em] font-bold">Email Address *</label>
+              <input type="email" id="talent-email" required placeholder="rahul@example.com"
+                class="w-full px-4 py-2.5 rounded-xl bg-black/50 border border-white/10 text-white text-xs sm:text-sm focus:outline-none focus:border-accent">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="space-y-1">
+              <label for="talent-phone"
+                class="text-[10px] font-mono text-white/80 uppercase tracking-[0.2em] font-bold">Phone / WhatsApp
+                *</label>
+              <input type="tel" id="talent-phone" required placeholder="+91 98765 43210"
+                class="w-full px-4 py-2.5 rounded-xl bg-black/50 border border-white/10 text-white text-xs sm:text-sm focus:outline-none focus:border-accent">
+            </div>
+            <div class="space-y-1">
+              <label for="talent-role"
+                class="text-[10px] font-mono text-white/80 uppercase tracking-[0.2em] font-bold">Primary Expertise
+                *</label>
+              <input type="text" id="talent-role" required placeholder="e.g. Senior Full Stack / Flutter / UI UX"
+                class="w-full px-4 py-2.5 rounded-xl bg-black/50 border border-white/10 text-white text-xs sm:text-sm focus:outline-none focus:border-accent">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="space-y-1">
+              <label for="talent-exp"
+                class="text-[10px] font-mono text-white/80 uppercase tracking-[0.2em] font-bold">Years of Exp</label>
+              <select id="talent-exp"
+                class="w-full px-4 py-2.5 rounded-xl bg-black/50 border border-white/10 text-white text-xs sm:text-sm focus:outline-none focus:border-accent">
+                <option value="1-3">1 - 3 Years</option>
+                <option value="3-5">3 - 5 Years</option>
+                <option value="5-8">5 - 8 Years</option>
+                <option value="8+">8+ Years</option>
+              </select>
+            </div>
+            <div class="space-y-1">
+              <label for="talent-location"
+                class="text-[10px] font-mono text-white/80 uppercase tracking-[0.2em] font-bold">Current
+                Location</label>
+              <input type="text" id="talent-location" placeholder="e.g. Indore / Remote"
+                class="w-full px-4 py-2.5 rounded-xl bg-black/50 border border-white/10 text-white text-xs sm:text-sm focus:outline-none focus:border-accent">
+            </div>
+            <div class="space-y-1">
+              <label for="talent-notice"
+                class="text-[10px] font-mono text-white/80 uppercase tracking-[0.2em] font-bold">Notice Period</label>
+              <select id="talent-notice"
+                class="w-full px-4 py-2.5 rounded-xl bg-black/50 border border-white/10 text-white text-xs sm:text-sm focus:outline-none focus:border-accent">
+                <option value="immediate">Immediate</option>
+                <option value="15days">15 Days</option>
+                <option value="30days">30 Days</option>
+                <option value="60days">60+ Days</option>
+              </select>
             </div>
           </div>
 
           <div class="space-y-1">
-            <label for="talent-role" class="text-[10px] font-mono text-white/70 uppercase tracking-[0.2em] font-bold">Primary Expertise</label>
-            <input type="text" id="talent-role" required placeholder="e.g. Senior Frontend / Full Stack / iOS Engineer" class="w-full px-4 py-2.5 rounded-xl bg-black/50 border border-white/10 text-white text-xs focus:outline-none focus:border-accent">
+            <label for="talent-resume"
+              class="text-[10px] font-mono text-white/80 uppercase tracking-[0.2em] font-bold">Resume / Portfolio /
+              GitHub Link</label>
+            <input type="text" id="talent-resume" placeholder="https://github.com/yourhandle or Portfolio URL"
+              class="w-full px-4 py-2.5 rounded-xl bg-black/50 border border-white/10 text-white text-xs sm:text-sm focus:outline-none focus:border-accent">
+            <span class="text-[10px] text-white/40 block pt-1">Stored securely and deleted after 12 months.</span>
           </div>
 
-          <div class="space-y-1">
-            <label for="talent-resume" class="text-[10px] font-mono text-white/70 uppercase tracking-[0.2em] font-bold">Resume / Portfolio Link (Optional)</label>
-            <input type="text" id="talent-resume" placeholder="Link to PDF resume or GitHub / Portfolio" class="w-full px-4 py-2.5 rounded-xl bg-black/50 border border-white/10 text-white text-xs focus:outline-none focus:border-accent">
-            <span class="text-[10px] text-white/40 block pt-1">Stored privately and deleted after 12 months.</span>
-          </div>
-
-          <button type="submit" class="w-full py-3 rounded-full text-xs font-semibold btn-primary">
-            Register for future roles
+          <button type="submit" class="w-full py-3.5 rounded-full text-xs sm:text-sm font-semibold btn-primary">
+            Register for future engineering roles
           </button>
 
-          <div id="talent-status" class="hidden text-xs text-center text-emerald-400 font-mono pt-2">
-            &check; Thank you! Your details have been registered safely.
+          <div id="talent-status" class="hidden text-xs sm:text-sm text-center text-emerald-400 font-mono pt-2">
+            &check; Thank you! Your talent profile has been securely registered.
           </div>
         </form>
 
       </div>
     </section>
 
-    <!-- ==================== SECTION 11: CONTACT FORM & CTA DOORS ==================== -->
+    <!-- ==================== SECTION 11: CONTACT FORM (Expanded Fields & Scrollbar Suppression) ==================== -->
     <section id="contact" class="relative">
-      
-      <div id="cta-door-wrapper" class="relative h-[300vh]">
+
+      <div id="cta-door-wrapper" class="relative h-[180vh]">
         <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
-          
-          <div class="absolute inset-0 bg-gradient-to-b from-bgDark via-surfaceDark to-black flex flex-col items-center justify-center px-6 text-center z-0 overflow-y-auto py-16">
-            
+
+          <div class="absolute inset-0 bg-gradient-to-b from-bgDark via-surfaceDark to-black flex flex-col items-center justify-center px-6 text-center z-0 overflow-y-auto py-12">
+
             <div id="cta-canvas" class="absolute inset-0 pointer-events-none z-0"></div>
 
-            <div class="relative z-10 max-w-3xl w-full space-y-6 pointer-events-auto">
-              
-              <div class="inline-flex items-center space-x-2 px-4 py-1 rounded-full bg-accent/15 border border-accent/30 text-accent text-[10px] font-mono font-bold tracking-[0.2em] uppercase">
-                <span class="w-2 h-2 rounded-full bg-accent animate-ping"></span>
-                <span>START A PROJECT</span>
-              </div>
+            <div class="relative z-10 max-w-3xl w-full space-y-5 pointer-events-auto">
 
               <h2 class="text-3xl sm:text-5xl font-semibold text-white tracking-[-0.025em]">
                 Tell us what you're <span class="bg-gradient-to-r from-accent via-purple-300 to-accentGlow bg-clip-text text-transparent">building</span>
               </h2>
 
-              <p class="text-xs sm:text-sm text-textMuted max-w-xl mx-auto font-light leading-[1.6]">
-                Send the details and we'll reply within one business day with honest next steps — including telling you if we're not the right fit.
+              <p class="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto font-light leading-[1.6]">
+                Share your project details and we will reply within one business day with clear, transparent next steps — including telling you directly if another team fits better.
               </p>
 
-              <!-- Authentic Contact Form -->
+              <!-- Expanded Contact Form -->
               <form id="contact-form" class="glass-panel p-6 sm:p-8 rounded-3xl border border-white/10 text-left space-y-4 shadow-2xl max-w-2xl mx-auto">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div class="space-y-1">
-                    <label for="form-name" class="text-[10px] font-mono text-white/70 uppercase tracking-[0.2em] font-bold">Your Name</label>
-                    <input type="text" id="form-name" required placeholder="e.g. Alex Morgan" class="w-full px-4 py-2.5 rounded-xl bg-black/50 border border-white/10 text-white text-xs focus:outline-none focus:border-accent transition-colors">
+                    <label for="form-name" class="text-[10px] font-mono text-white/80 uppercase tracking-[0.2em] font-bold">Your Name *</label>
+                    <input type="text" id="form-name" required placeholder="e.g. Alex Morgan" class="w-full px-4 py-2 rounded-xl bg-black/50 border border-white/10 text-white text-xs sm:text-sm focus:outline-none focus:border-accent transition-colors">
                   </div>
                   <div class="space-y-1">
-                    <label for="form-email" class="text-[10px] font-mono text-white/70 uppercase tracking-[0.2em] font-bold">Email Address</label>
-                    <input type="email" id="form-email" required placeholder="alex@company.com" class="w-full px-4 py-2.5 rounded-xl bg-black/50 border border-white/10 text-white text-xs focus:outline-none focus:border-accent transition-colors">
+                    <label for="form-email" class="text-[10px] font-mono text-white/80 uppercase tracking-[0.2em] font-bold">Email Address *</label>
+                    <input type="email" id="form-email" required placeholder="alex@company.com" class="w-full px-4 py-2 rounded-xl bg-black/50 border border-white/10 text-white text-xs sm:text-sm focus:outline-none focus:border-accent transition-colors">
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div class="space-y-1">
+                    <label for="form-phone" class="text-[10px] font-mono text-white/80 uppercase tracking-[0.2em] font-bold">Phone / WhatsApp *</label>
+                    <input type="tel" id="form-phone" required placeholder="+91 98765 43210" class="w-full px-4 py-2 rounded-xl bg-black/50 border border-white/10 text-white text-xs sm:text-sm focus:outline-none focus:border-accent transition-colors">
+                  </div>
+                  <div class="space-y-1">
+                    <label for="form-company" class="text-[10px] font-mono text-white/80 uppercase tracking-[0.2em] font-bold">Company / Website</label>
+                    <input type="text" id="form-company" placeholder="e.g. Acme Corp / acme.com" class="w-full px-4 py-2 rounded-xl bg-black/50 border border-white/10 text-white text-xs sm:text-sm focus:outline-none focus:border-accent transition-colors">
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div class="space-y-1">
+                    <label for="form-service" class="text-[10px] font-mono text-white/80 uppercase tracking-[0.2em] font-bold">Service Required</label>
+                    <select id="form-service" class="w-full px-4 py-2 rounded-xl bg-black/50 border border-white/10 text-white text-xs sm:text-sm focus:outline-none focus:border-accent transition-colors">
+                      <option value="website">Website development (Fast SEO & CMS)</option>
+                      <option value="web-app">Custom web application (Dashboards & Portals)</option>
+                      <option value="mobile">Mobile app development (iOS & Android)</option>
+                      <option value="uiux">UI/UX design (Figma Design System)</option>
+                      <option value="cloud">Cloud Architecture & API Gateways</option>
+                      <option value="maintenance">Maintenance & Support Care Plan</option>
+                    </select>
+                  </div>
+
+                  <div class="space-y-1">
+                    <label for="form-budget" class="text-[10px] font-mono text-white/80 uppercase tracking-[0.2em] font-bold">Estimated Budget Range</label>
+                    <select id="form-budget" class="w-full px-4 py-2 rounded-xl bg-black/50 border border-white/10 text-white text-xs sm:text-sm focus:outline-none focus:border-accent transition-colors">
+                      <option value="5k-15k">$5,000 - $15,000</option>
+                      <option value="15k-35k">$15,000 - $35,000</option>
+                      <option value="35k+">$35,000+</option>
+                      <option value="exploratory">Exploratory / Scope Pending</option>
+                    </select>
                   </div>
                 </div>
 
                 <div class="space-y-1">
-                  <label for="form-service" class="text-[10px] font-mono text-white/70 uppercase tracking-[0.2em] font-bold">Service Required</label>
-                  <select id="form-service" class="w-full px-4 py-2.5 rounded-xl bg-black/50 border border-white/10 text-white text-xs focus:outline-none focus:border-accent transition-colors">
-                    <option value="website">Website development (Fast SEO & CMS)</option>
-                    <option value="web-app">Custom web application (Dashboards & Portals)</option>
-                    <option value="mobile">Mobile app development (iOS & Android)</option>
-                    <option value="uiux">UI/UX design (Figma Component System)</option>
-                    <option value="maintenance">Maintenance and support</option>
-                  </select>
+                  <label for="form-message" class="text-[10px] font-mono text-white/80 uppercase tracking-[0.2em] font-bold">Project Overview & Goals *</label>
+                  <textarea id="form-message" rows="3" required placeholder="Describe your software goals, key user workflows, and target launch timeline..." class="w-full px-4 py-2 rounded-xl bg-black/50 border border-white/10 text-white text-xs sm:text-sm focus:outline-none focus:border-accent transition-colors"></textarea>
                 </div>
 
-                <div class="space-y-1">
-                  <label for="form-message" class="text-[10px] font-mono text-white/70 uppercase tracking-[0.2em] font-bold">Project Details</label>
-                  <textarea id="form-message" rows="3" required placeholder="Tell us what the software has to do..." class="w-full px-4 py-2.5 rounded-xl bg-black/50 border border-white/10 text-white text-xs focus:outline-none focus:border-accent transition-colors"></textarea>
-                </div>
-
-                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
-                  <button type="submit" class="w-full sm:w-auto px-8 py-3 rounded-full text-xs font-semibold btn-primary">
-                    Send enquiry
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-1">
+                  <button type="submit" class="w-full sm:w-auto px-8 py-3 rounded-full text-xs sm:text-sm font-semibold btn-primary">
+                    Send project enquiry
                   </button>
 
                   <a href="https://wa.me/917024105119?text=Hi%20Spark%20Point%20Infotech%20%E2%80%94%20I'd%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-emerald-400 hover:underline flex items-center space-x-1.5">
@@ -779,7 +1108,7 @@
                   </a>
                 </div>
 
-                <div id="form-status" class="hidden text-xs text-center text-accent font-mono pt-2">
+                <div id="form-status" class="hidden text-xs sm:text-sm text-center text-accent font-mono pt-2">
                   &check; Thank you! Your enquiry has been received. We will reply within one business day.
                 </div>
               </form>
@@ -787,90 +1116,99 @@
             </div>
           </div>
 
-          <div id="cta-door-left" class="cta-door-panel absolute left-0 top-0 bottom-0 w-1/2 bg-surfaceDark/95 backdrop-blur-[24px] border-r border-white/10 z-20 flex flex-col justify-center items-end pr-12 text-right pointer-events-none bg-noise">
-            <div class="max-w-xs space-y-2 opacity-80">
-              <span class="text-[10px] font-mono text-accent uppercase tracking-[0.2em] font-bold">Spark Point Infotech</span>
-              <h3 class="text-xl text-white font-semibold">Fixed Price & Dated Schedule</h3>
-              <p class="text-xs text-white/60 font-light">Drawn before it's built.</p>
+          <div id="cta-door-left" class="cta-door-panel absolute left-0 top-0 bottom-0 w-1/2 bg-surfaceDark/95 backdrop-blur-[24px] border-r border-white/10 z-20 flex flex-col justify-center items-end pr-3 sm:pr-12 text-right pointer-events-none bg-noise">
+            <div class="max-w-[140px] sm:max-w-xs space-y-1 sm:space-y-2 opacity-80">
+              <span class="text-[9px] sm:text-xs font-mono text-accent uppercase tracking-[0.15em] sm:tracking-[0.2em] font-bold">Spark Point Infotech</span>
+              <h3 class="text-xs sm:text-xl text-white font-semibold leading-tight">Fixed Price & Dated Schedule</h3>
+              <p class="text-[10px] sm:text-xs text-slate-300 font-light">Drawn before it's built.</p>
             </div>
           </div>
 
-          <div id="cta-door-right" class="cta-door-panel absolute right-0 top-0 bottom-0 w-1/2 bg-surfaceDark/95 backdrop-blur-[24px] border-l border-white/10 z-20 flex flex-col justify-center items-start pl-12 pointer-events-none bg-noise">
-            <div class="max-w-xs space-y-2 opacity-80">
-              <span class="text-[10px] font-mono text-accentGlow uppercase tracking-[0.2em] font-bold">Daily Overlap with Europe</span>
-              <h3 class="text-xl text-white font-semibold">India &bull; Germany &bull; Netherlands</h3>
-              <p class="text-xs text-white/60 font-light">~5 hours of shared working time daily.</p>
+          <div id="cta-door-right" class="cta-door-panel absolute right-0 top-0 bottom-0 w-1/2 bg-surfaceDark/95 backdrop-blur-[24px] border-l border-white/10 z-20 flex flex-col justify-center items-start pl-3 sm:pl-12 pointer-events-none bg-noise">
+            <div class="max-w-[140px] sm:max-w-xs space-y-1 sm:space-y-2 opacity-80">
+              <span class="text-[9px] sm:text-xs font-mono text-accent uppercase tracking-[0.15em] sm:tracking-[0.2em] font-bold">Daily Overlap with Europe</span>
+              <h3 class="text-xs sm:text-xl text-white font-semibold leading-tight">India &bull; Germany &bull; Netherlands</h3>
+              <p class="text-[10px] sm:text-xs text-slate-300 font-light">~5 hours shared daily time.</p>
             </div>
           </div>
 
         </div>
       </div>
+    </section>
 
-      <!-- Complete Footer matching sparkpointinfotech.com -->
-      <footer class="border-t border-white/10 py-16 px-6 bg-black text-xs text-white/60">
-        <div class="max-w-7xl mx-auto space-y-10">
-          <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-            
-            <div class="space-y-3">
-              <img src="/spi-logo.png" alt="Spark Point Infotech Logo" class="h-14 sm:h-16 w-auto max-w-[240px] object-contain drop-shadow-md">
-              <p class="text-xs text-white/50 leading-[1.6] font-light">
-                Websites, web applications and mobile apps built to a written specification — fixed scope, fixed price, dates that hold.
-              </p>
-              <div class="text-[11px] font-mono text-white/70 space-y-1">
-                <div><a href="mailto:info@sparkpointinfotech.com" class="hover:text-accent">info@sparkpointinfotech.com</a></div>
-                <div><a href="https://wa.me/917024105119" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">+91 70241 05119</a></div>
-              </div>
+    <!-- Complete Footer matching sparkpointinfotech.com -->
+    <footer class="relative z-30 border-t border-white/10 py-16 px-6 bg-black text-xs text-white/60">
+      <div class="max-w-7xl mx-auto space-y-10">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+
+          <div class="space-y-3">
+            <img src="/spi-logo.png" alt="Spark Point Infotech Logo" class="h-14 sm:h-16 w-auto max-w-[240px] object-contain drop-shadow-md">
+            <p class="text-xs text-slate-300 leading-[1.6] font-light">
+              Websites, web applications and mobile apps built to a written specification — fixed scope, fixed price, dates that hold.
+            </p>
+            <div class="text-[11px] font-mono text-white/70 space-y-1">
+              <div><a href="mailto:info@sparkpointinfotech.com" class="hover:text-accent">info@sparkpointinfotech.com</a></div>
+              <div><a href="https://wa.me/917024105119" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">+91 70241 05119</a></div>
             </div>
-
-            <div class="space-y-2">
-              <span class="text-[10px] font-mono text-accent uppercase tracking-[0.2em] font-bold">Services</span>
-              <ul class="space-y-1.5 text-xs text-white/70 font-light">
-                <li><a href="#services" class="hover:text-white transition-colors">Website development</a></li>
-                <li><a href="#services" class="hover:text-white transition-colors">Custom web applications</a></li>
-                <li><a href="#services" class="hover:text-white transition-colors">Mobile app development</a></li>
-                <li><a href="#services" class="hover:text-white transition-colors">UI/UX design</a></li>
-                <li><a href="#services" class="hover:text-white transition-colors">Maintenance and support</a></li>
-              </ul>
-            </div>
-
-            <div class="space-y-2">
-              <span class="text-[10px] font-mono text-purple-400 uppercase tracking-[0.2em] font-bold">Company</span>
-              <ul class="space-y-1.5 text-xs text-white/70 font-light">
-                <li><a href="#services" class="hover:text-white transition-colors">Services</a></li>
-                <li><a href="#industries" class="hover:text-white transition-colors">Industries</a></li>
-                <li><a href="#process" class="hover:text-white transition-colors">How we work</a></li>
-                <li><a href="#engagements" class="hover:text-white transition-colors">Engagements</a></li>
-                <li><a href="#about" class="hover:text-white transition-colors">About</a></li>
-                <li><a href="#faq" class="hover:text-white transition-colors">FAQ</a></li>
-                <li><a href="#careers" class="hover:text-white transition-colors">Careers</a></li>
-                <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
-              </ul>
-            </div>
-
-            <div class="space-y-2">
-              <span class="text-[10px] font-mono text-accentGlow uppercase tracking-[0.2em] font-bold">Serving</span>
-              <p class="text-xs text-white/80 font-mono font-bold">India &bull; Germany &bull; Netherlands</p>
-              <p class="text-xs text-white/50 leading-[1.6] font-light">
-                Daily overlap with Europe. Roughly five hours of shared working time every day. European clients never take a call outside business hours.
-              </p>
-            </div>
-
           </div>
 
-          <div class="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-mono text-white/40">
-            <span>&copy; 2026 Spark Point Infotech. All rights reserved.</span>
-            <div class="flex space-x-6">
-              <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
-            </div>
+          <div class="space-y-2">
+            <span class="text-xs font-mono text-accent uppercase tracking-[0.2em] font-bold">Services</span>
+            <ul class="space-y-1.5 text-xs text-slate-300 font-light">
+              <li><a href="#services" class="hover:text-white transition-colors">Website development</a></li>
+              <li><a href="#services" class="hover:text-white transition-colors">Custom web applications</a></li>
+              <li><a href="#services" class="hover:text-white transition-colors">Mobile app development</a></li>
+              <li><a href="#services" class="hover:text-white transition-colors">UI/UX design</a></li>
+              <li><a href="#services" class="hover:text-white transition-colors">Maintenance and support</a></li>
+              <li><a href="#services" class="hover:text-white transition-colors">Cloud Architecture & APIs</a></li>
+            </ul>
+          </div>
+
+          <div class="space-y-2">
+            <span class="text-xs font-mono text-accent uppercase tracking-[0.2em] font-bold">Company</span>
+            <ul class="space-y-1.5 text-xs text-slate-300 font-light">
+              <li><a href="#services" class="hover:text-white transition-colors">Services</a></li>
+              <li><a href="#industries" class="hover:text-white transition-colors">Industries</a></li>
+              <li><a href="#process" class="hover:text-white transition-colors">How we work</a></li>
+              <li><a href="#engagements" class="hover:text-white transition-colors">Engagements</a></li>
+              <li><a href="#about" class="hover:text-white transition-colors">About</a></li>
+              <li><a href="#faq" class="hover:text-white transition-colors">FAQ</a></li>
+              <li><a href="#careers" class="hover:text-white transition-colors">Careers</a></li>
+              <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="space-y-2">
+            <span class="text-xs font-mono text-accent uppercase tracking-[0.2em] font-bold">Serving</span>
+            <p class="text-xs text-white/80 font-mono font-bold">India &bull; Germany &bull; Netherlands</p>
+            <p class="text-xs text-slate-300 leading-[1.6] font-light">
+              Daily overlap with Europe. Roughly five hours of shared working time every day. European clients never take a call outside business hours.
+            </p>
+          </div>
+
+        </div>
+
+        <div class="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-mono text-white/40">
+          <span>&copy; 2026 Spark Point Infotech. All rights reserved.</span>
+          <div class="flex space-x-6">
+            <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
           </div>
         </div>
-      </footer>
-
-    </section>
+      </div>
+    </footer>
 
   </main>
 
+  <!-- Floating WhatsApp Action Button -->
+  <a href="https://wa.me/917024105119?text=Hi%20Spark%20Point%20Infotech%20%E2%80%94%20I'd%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-[90] flex items-center space-x-2.5 bg-emerald-500 hover:bg-emerald-400 text-white px-4 py-3 rounded-full floating-whatsapp shadow-[0_10px_30px_rgba(16,185,129,0.5)] group transition-all" title="Chat on WhatsApp">
+    <svg class="w-5 h-5 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+      <path d="M12.031 0C5.384 0 0 5.384 0 12.031c0 2.125.553 4.2 1.606 6.027L.031 24l6.096-1.597c1.764.962 3.76 1.47 5.904 1.47 6.647 0 12.031-5.385 12.031-12.031S18.678 0 12.031 0zm0 21.905c-1.815 0-3.593-.487-5.143-1.408l-.368-.219-3.618.948.966-3.527-.24-.383a9.92 9.92 0 0 1-1.523-5.285c0-5.485 4.464-9.949 9.949-9.949 5.484 0 9.949 4.464 9.949 9.949 0 5.485-4.465 9.949-9.949 9.949z"/>
+    </svg>
+    <span class="text-xs font-semibold font-mono tracking-wider">WhatsApp Us</span>
+  </a>
+
   <script type="module" src="/src/main.js"></script>
 </body>
+
 </html>

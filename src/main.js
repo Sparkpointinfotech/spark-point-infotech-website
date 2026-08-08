@@ -5,6 +5,9 @@ import './style.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Configure GSAP ticker for 60 FPS performance optimization
+gsap.ticker.fps(60);
+
 // ==========================================
 // 1. INITIALIZER LOADING SCREEN
 // ==========================================
@@ -15,7 +18,7 @@ function initLoadingScreen() {
   let progress = 0;
 
   const interval = setInterval(() => {
-    progress += Math.floor(Math.random() * 6) + 3;
+    progress += Math.floor(Math.random() * 8) + 5;
     if (progress >= 100) {
       progress = 100;
       clearInterval(interval);
@@ -27,12 +30,12 @@ function initLoadingScreen() {
           loadingScreen.style.opacity = '0';
           loadingScreen.style.pointerEvents = 'none';
         }
-      }, 500);
+      }, 400);
     } else {
       if (loadingBar) loadingBar.style.width = `${progress}%`;
       if (loadingPercent) loadingPercent.innerText = `${progress}%`;
     }
-  }, 40);
+  }, 35);
 }
 
 // ==========================================
@@ -56,11 +59,11 @@ function createRoundedCornerShape(width, height, radius) {
   return shape;
 }
 
-// Dynamic 2K Canvas Texture for Screen Display
+// Optimized Screen Texture (512 x 1024 for 75% memory reduction & 60 FPS smoothness)
 function createDynamicScreenTexture() {
   const canvas = document.createElement('canvas');
-  canvas.width = 1024;
-  canvas.height = 2048;
+  canvas.width = 512;
+  canvas.height = 1024;
   const ctx = canvas.getContext('2d');
 
   function renderTexture() {
@@ -70,83 +73,83 @@ function createDynamicScreenTexture() {
 
     // iOS Status Bar
     ctx.fillStyle = '#FFFFFF';
-    ctx.font = 'bold 36px Inter, sans-serif';
-    ctx.fillText('9:41', 60, 65);
+    ctx.font = 'bold 18px Inter, sans-serif';
+    ctx.fillText('9:41', 30, 32);
 
     ctx.strokeStyle = '#FFFFFF';
-    ctx.lineWidth = 3;
-    ctx.strokeRect(900, 42, 50, 26);
-    ctx.fillRect(905, 47, 36, 16);
-    ctx.fillRect(952, 50, 4, 10);
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(450, 21, 25, 13);
+    ctx.fillRect(452, 23, 18, 9);
+    ctx.fillRect(476, 25, 2, 5);
 
     // Header Gradient
-    const grad = ctx.createLinearGradient(0, 100, 0, 320);
+    const grad = ctx.createLinearGradient(0, 50, 0, 160);
     grad.addColorStop(0, 'rgba(139, 92, 246, 0.4)');
     grad.addColorStop(1, 'rgba(10, 6, 20, 0.9)');
     ctx.fillStyle = grad;
-    ctx.fillRect(0, 100, canvas.width, 220);
+    ctx.fillRect(0, 50, canvas.width, 110);
 
     ctx.fillStyle = '#FFFFFF';
-    ctx.font = 'bold 52px Inter, sans-serif';
-    ctx.fillText('Spark Point Infotech', 60, 185);
+    ctx.font = 'bold 26px Inter, sans-serif';
+    ctx.fillText('Spark Point Infotech', 30, 92);
 
     ctx.fillStyle = '#A855F7';
-    ctx.font = 'bold 26px monospace';
-    ctx.fillText('SOFTWARE DEVELOPMENT COMPANY', 60, 235);
+    ctx.font = 'bold 13px monospace';
+    ctx.fillText('SOFTWARE DEVELOPMENT COMPANY', 30, 118);
 
     ctx.fillStyle = '#9CA3AF';
-    ctx.font = '26px Inter, sans-serif';
-    ctx.fillText('India • Germany • Netherlands', 60, 280);
+    ctx.font = '13px Inter, sans-serif';
+    ctx.fillText('India • Germany • Netherlands', 30, 140);
 
     // Hero Card
     ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
     ctx.strokeStyle = 'rgba(168, 85, 247, 0.35)';
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 1.5;
     ctx.beginPath();
-    ctx.roundRect(40, 340, 944, 380, 28);
+    ctx.roundRect(20, 170, 472, 190, 14);
     ctx.fill();
     ctx.stroke();
 
     ctx.fillStyle = '#8B5CF6';
-    ctx.font = 'bold 24px monospace';
-    ctx.fillText('• WRITTEN SPECIFICATION LOCK', 80, 400);
+    ctx.font = 'bold 12px monospace';
+    ctx.fillText('• WRITTEN SPECIFICATION LOCK', 40, 200);
 
     ctx.fillStyle = '#FFFFFF';
-    ctx.font = 'bold 42px Inter, sans-serif';
-    ctx.fillText('Software built to written spec', 80, 465);
+    ctx.font = 'bold 21px Inter, sans-serif';
+    ctx.fillText('Software built to written spec', 40, 232);
 
     ctx.fillStyle = '#EAEAEA';
-    ctx.font = '30px Inter, sans-serif';
-    ctx.fillText('Every project starts with a written scope,', 80, 525);
-    ctx.fillText('a fixed price and a dated schedule.', 80, 570);
+    ctx.font = '15px Inter, sans-serif';
+    ctx.fillText('Every project starts with a written scope,', 40, 262);
+    ctx.fillText('a fixed price and a dated schedule.', 40, 285);
 
     // Badges
     ctx.fillStyle = 'rgba(139, 92, 246, 0.15)';
     ctx.beginPath();
-    ctx.roundRect(80, 615, 380, 65, 16);
+    ctx.roundRect(40, 308, 190, 32, 8);
     ctx.fill();
     ctx.fillStyle = '#A855F7';
-    ctx.font = 'bold 24px monospace';
-    ctx.fillText('FIXED GUARANTEE', 110, 656);
+    ctx.font = 'bold 12px monospace';
+    ctx.fillText('FIXED GUARANTEE', 55, 328);
 
     ctx.fillStyle = 'rgba(16, 185, 129, 0.15)';
     ctx.beginPath();
-    ctx.roundRect(480, 615, 460, 65, 16);
+    ctx.roundRect(240, 308, 230, 32, 8);
     ctx.fill();
     ctx.fillStyle = '#10B981';
-    ctx.font = 'bold 24px monospace';
-    ctx.fillText('• SUB-2s LOAD TIME', 510, 656);
+    ctx.font = 'bold 12px monospace';
+    ctx.fillText('• SUB-2s LOAD TIME', 255, 328);
 
     // Services List
     ctx.fillStyle = 'rgba(255, 255, 255, 0.03)';
     ctx.beginPath();
-    ctx.roundRect(40, 750, 944, 600, 28);
+    ctx.roundRect(20, 375, 472, 300, 14);
     ctx.fill();
     ctx.stroke();
 
     ctx.fillStyle = '#FFFFFF';
-    ctx.font = 'bold 36px Inter, sans-serif';
-    ctx.fillText('Five Core Services', 80, 815);
+    ctx.font = 'bold 18px Inter, sans-serif';
+    ctx.fillText('Five Core Services', 40, 408);
 
     const services = [
       { name: 'Website development', detail: 'Sub-2s load time, SEO & CMS' },
@@ -157,59 +160,61 @@ function createDynamicScreenTexture() {
     ];
 
     services.forEach((s, idx) => {
-      const y = 875 + idx * 95;
+      const y = 438 + idx * 47;
       ctx.fillStyle = idx % 2 === 0 ? '#8B5CF6' : '#A855F7';
       ctx.beginPath();
-      ctx.arc(95, y + 12, 10, 0, Math.PI * 2);
+      ctx.arc(48, y + 6, 5, 0, Math.PI * 2);
       ctx.fill();
 
       ctx.fillStyle = '#FFFFFF';
-      ctx.font = 'bold 30px Inter, sans-serif';
-      ctx.fillText(s.name, 130, y + 20);
+      ctx.font = 'bold 15px Inter, sans-serif';
+      ctx.fillText(s.name, 65, y + 10);
 
       ctx.fillStyle = '#9CA3AF';
-      ctx.font = '24px Inter, sans-serif';
-      ctx.fillText(s.detail, 130, y + 52);
+      ctx.font = '12px Inter, sans-serif';
+      ctx.fillText(s.detail, 65, y + 26);
     });
 
     // Console Log
     ctx.fillStyle = 'rgba(10, 6, 20, 0.85)';
     ctx.beginPath();
-    ctx.roundRect(40, 1380, 944, 560, 28);
+    ctx.roundRect(20, 690, 472, 280, 14);
     ctx.fill();
     ctx.strokeStyle = 'rgba(139, 92, 246, 0.2)';
     ctx.stroke();
 
     ctx.fillStyle = '#A855F7';
-    ctx.font = '26px monospace';
-    ctx.fillText('const project = await SparkPoint.start({', 80, 1440);
-    ctx.fillText('  scope: "Written Specification",', 80, 1490);
-    ctx.fillText('  pricing: "Fixed Guarantee",', 80, 1540);
-    ctx.fillText('  schedule: "Dated Milestone Delivery"', 80, 1590);
-    ctx.fillText('});', 80, 1640);
+    ctx.font = '13px monospace';
+    ctx.fillText('const project = await SparkPoint.start({', 40, 720);
+    ctx.fillText('  scope: "Written Specification",', 40, 745);
+    ctx.fillText('  pricing: "Fixed Guarantee",', 40, 770);
+    ctx.fillText('  schedule: "Dated Milestone Delivery"', 40, 795);
+    ctx.fillText('});', 40, 820);
 
     ctx.fillStyle = '#10B981';
-    ctx.font = 'bold 28px monospace';
-    ctx.fillText('> BUILD STATUS: 100% VERIFIED', 80, 1770);
-    ctx.fillText('> REPOSITORY TRANSFER: DAY ONE READY', 80, 1820);
+    ctx.font = 'bold 14px monospace';
+    ctx.fillText('> BUILD STATUS: 100% VERIFIED', 40, 885);
+    ctx.fillText('> REPOSITORY TRANSFER: DAY ONE READY', 40, 910);
 
     // iOS Home Bar
     ctx.fillStyle = '#FFFFFF';
     ctx.beginPath();
-    ctx.roundRect(372, 2010, 280, 10, 5);
+    ctx.roundRect(186, 1005, 140, 5, 2.5);
     ctx.fill();
   }
 
   renderTexture();
   const texture = new THREE.CanvasTexture(canvas);
+  texture.generateMipmaps = true;
+  texture.minFilter = THREE.LinearMipmapLinearFilter;
+  texture.magFilter = THREE.LinearFilter;
   texture.needsUpdate = true;
   return { texture, canvas, renderTexture };
 }
 
-// Authentic iPhone Mesh with CURVED SCREEN MESH
+// Authentic iPhone Mesh with Optimized Geometry & Performance
 function createAuthenticIPhoneMesh() {
   const phoneGroup = new THREE.Group();
-  phoneGroup.style = { willChange: 'transform' };
 
   const width = 3.2;
   const height = 6.6;
@@ -222,28 +227,25 @@ function createAuthenticIPhoneMesh() {
     steps: 1,
     depth: depth,
     bevelEnabled: true,
-    bevelThickness: 0.07,
-    bevelSize: 0.07,
-    bevelSegments: 5
+    bevelThickness: 0.06,
+    bevelSize: 0.06,
+    bevelSegments: 3
   };
   const bodyGeo = new THREE.ExtrudeGeometry(bodyShape, extrudeSettings);
   bodyGeo.center();
 
   const titaniumMat = new THREE.MeshStandardMaterial({
     color: 0x1f1533,
-    metalness: 0.95,
-    roughness: 0.18,
-    envMapIntensity: 2.0
+    metalness: 0.9,
+    roughness: 0.2
   });
 
   const bodyMesh = new THREE.Mesh(bodyGeo, titaniumMat);
-  bodyMesh.castShadow = true;
-  bodyMesh.receiveShadow = true;
   phoneGroup.add(bodyMesh);
 
   // 2. Antenna Bands
   const bandMat = new THREE.MeshBasicMaterial({ color: 0x4a3b6e });
-  const bandGeo = new THREE.BoxGeometry(width + 0.16, 0.03, depth + 0.16);
+  const bandGeo = new THREE.BoxGeometry(width + 0.14, 0.03, depth + 0.14);
   
   const bandTop = new THREE.Mesh(bandGeo, bandMat);
   bandTop.position.set(0, 2.2, 0);
@@ -256,12 +258,12 @@ function createAuthenticIPhoneMesh() {
   // 3. Front Display Screen & Bezel with CURVED EDGES
   const screenBezelShape = createRoundedCornerShape(width - 0.08, height - 0.08, radius - 0.04);
   const screenBezelGeo = new THREE.ShapeGeometry(screenBezelShape);
-  const screenBezelMat = new THREE.MeshStandardMaterial({ color: 0x05030a, roughness: 0.1 });
+  const screenBezelMat = new THREE.MeshBasicMaterial({ color: 0x05030a });
   const screenBezelMesh = new THREE.Mesh(screenBezelGeo, screenBezelMat);
-  screenBezelMesh.position.set(0, 0, depth / 2 + 0.072);
+  screenBezelMesh.position.set(0, 0, depth / 2 + 0.065);
   phoneGroup.add(screenBezelMesh);
 
-  // Dynamic Screen Mesh with Exact Rounded Curved Corners
+  // Dynamic Screen Mesh
   const { texture: screenTexture } = createDynamicScreenTexture();
   const screenShape = createRoundedCornerShape(width - 0.22, height - 0.22, radius - 0.11);
   const screenGeo = new THREE.ShapeGeometry(screenShape);
@@ -278,7 +280,7 @@ function createAuthenticIPhoneMesh() {
 
   const screenMat = new THREE.MeshBasicMaterial({ map: screenTexture });
   const screenMesh = new THREE.Mesh(screenGeo, screenMat);
-  screenMesh.position.set(0, 0, depth / 2 + 0.075);
+  screenMesh.position.set(0, 0, depth / 2 + 0.068);
   phoneGroup.add(screenMesh);
 
   // 4. Dynamic Island Notch
@@ -286,13 +288,13 @@ function createAuthenticIPhoneMesh() {
   const islandGeo = new THREE.ShapeGeometry(islandShape);
   const islandMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
   const islandMesh = new THREE.Mesh(islandGeo, islandMat);
-  islandMesh.position.set(0, 2.85, depth / 2 + 0.078);
+  islandMesh.position.set(0, 2.85, depth / 2 + 0.071);
   phoneGroup.add(islandMesh);
 
-  const cameraDotGeo = new THREE.CircleGeometry(0.04, 16);
+  const cameraDotGeo = new THREE.CircleGeometry(0.04, 12);
   const cameraDotMat = new THREE.MeshBasicMaterial({ color: 0x111122 });
   const cameraDot = new THREE.Mesh(cameraDotGeo, cameraDotMat);
-  cameraDot.position.set(-0.2, 2.85, depth / 2 + 0.08);
+  cameraDot.position.set(-0.2, 2.85, depth / 2 + 0.073);
   phoneGroup.add(cameraDot);
 
   // 5. Rear Camera Bump
@@ -301,11 +303,11 @@ function createAuthenticIPhoneMesh() {
   const bumpShape = createRoundedCornerShape(bumpWidth, bumpHeight, 0.3);
   const bumpExtrude = {
     steps: 1,
-    depth: 0.12,
+    depth: 0.1,
     bevelEnabled: true,
-    bevelThickness: 0.03,
-    bevelSize: 0.03,
-    bevelSegments: 3
+    bevelThickness: 0.02,
+    bevelSize: 0.02,
+    bevelSegments: 2
   };
   const bumpGeo = new THREE.ExtrudeGeometry(bumpShape, bumpExtrude);
   const bumpMat = new THREE.MeshStandardMaterial({
@@ -314,32 +316,25 @@ function createAuthenticIPhoneMesh() {
     roughness: 0.25
   });
   const bumpMesh = new THREE.Mesh(bumpGeo, bumpMat);
-  bumpMesh.position.set(-0.75, 2.05, -depth / 2 - 0.08);
+  bumpMesh.position.set(-0.75, 2.05, -depth / 2 - 0.06);
   phoneGroup.add(bumpMesh);
 
   function createCameraLens(x, y) {
     const lensGroup = new THREE.Group();
 
-    const ringGeo = new THREE.CylinderGeometry(0.24, 0.24, 0.08, 32);
+    const ringGeo = new THREE.CylinderGeometry(0.24, 0.24, 0.08, 20);
     const ringMat = new THREE.MeshStandardMaterial({ color: 0x8B5CF6, metalness: 0.95, roughness: 0.1 });
     const ringMesh = new THREE.Mesh(ringGeo, ringMat);
     ringMesh.rotation.x = Math.PI / 2;
     lensGroup.add(ringMesh);
 
-    const glassGeo = new THREE.CylinderGeometry(0.18, 0.18, 0.085, 32);
+    const glassGeo = new THREE.CylinderGeometry(0.18, 0.18, 0.085, 20);
     const glassMat = new THREE.MeshStandardMaterial({ color: 0x050510, roughness: 0.05, metalness: 0.2 });
     const glassMesh = new THREE.Mesh(glassGeo, glassMat);
     glassMesh.rotation.x = Math.PI / 2;
     lensGroup.add(glassMesh);
 
-    const optGeo = new THREE.CircleGeometry(0.12, 16);
-    const optMat = new THREE.MeshBasicMaterial({ color: 0xA855F7, transparent: true, opacity: 0.6 });
-    const optMesh = new THREE.Mesh(optGeo, optMat);
-    optMesh.position.set(0, 0, -0.045);
-    optMesh.rotation.y = Math.PI;
-    lensGroup.add(optMesh);
-
-    lensGroup.position.set(x, y, -depth / 2 - 0.16);
+    lensGroup.position.set(x, y, -depth / 2 - 0.12);
     return lensGroup;
   }
 
@@ -347,52 +342,23 @@ function createAuthenticIPhoneMesh() {
   phoneGroup.add(createCameraLens(-1.05, 1.75));
   phoneGroup.add(createCameraLens(-0.45, 2.05));
 
-  const flashGeo = new THREE.CircleGeometry(0.08, 16);
+  const flashGeo = new THREE.CircleGeometry(0.08, 12);
   const flashMat = new THREE.MeshBasicMaterial({ color: 0xfff0cc });
   const flashMesh = new THREE.Mesh(flashGeo, flashMat);
-  flashMesh.position.set(-0.45, 2.42, -depth / 2 - 0.145);
+  flashMesh.position.set(-0.45, 2.42, -depth / 2 - 0.11);
   flashMesh.rotation.y = Math.PI;
   phoneGroup.add(flashMesh);
 
-  const lidarGeo = new THREE.CircleGeometry(0.06, 16);
-  const lidarMat = new THREE.MeshBasicMaterial({ color: 0x111118 });
-  const lidarMesh = new THREE.Mesh(lidarGeo, lidarMat);
-  lidarMesh.position.set(-0.45, 1.68, -depth / 2 - 0.145);
-  lidarMesh.rotation.y = Math.PI;
-  phoneGroup.add(lidarMesh);
-
-  // 6. Buttons
-  const buttonMat = new THREE.MeshStandardMaterial({ color: 0x4a3b6e, metalness: 0.9, roughness: 0.2 });
-
-  const volUpGeo = new THREE.BoxGeometry(0.06, 0.45, 0.08);
-  const volUp = new THREE.Mesh(volUpGeo, buttonMat);
-  volUp.position.set(-width / 2 - 0.05, 1.2, 0);
-  phoneGroup.add(volUp);
-
-  const volDown = new THREE.Mesh(volUpGeo, buttonMat);
-  volDown.position.set(-width / 2 - 0.05, 0.6, 0);
-  phoneGroup.add(volDown);
-
-  const actionGeo = new THREE.BoxGeometry(0.06, 0.25, 0.08);
-  const actionBtn = new THREE.Mesh(actionGeo, buttonMat);
-  actionBtn.position.set(-width / 2 - 0.05, 1.7, 0);
-  phoneGroup.add(actionBtn);
-
-  const powerGeo = new THREE.BoxGeometry(0.06, 0.7, 0.08);
-  const powerBtn = new THREE.Mesh(powerGeo, buttonMat);
-  powerBtn.position.set(width / 2 + 0.05, 1.0, 0);
-  phoneGroup.add(powerBtn);
-
-  // Outer Glow Sprite
+  // 6. Outer Glow Sprite
   const glowCanvas = document.createElement('canvas');
-  glowCanvas.width = 128;
-  glowCanvas.height = 128;
+  glowCanvas.width = 64;
+  glowCanvas.height = 64;
   const gCtx = glowCanvas.getContext('2d');
-  const radGrad = gCtx.createRadialGradient(64, 64, 0, 64, 64, 64);
-  radGrad.addColorStop(0, 'rgba(168, 85, 247, 0.7)');
+  const radGrad = gCtx.createRadialGradient(32, 32, 0, 32, 32, 32);
+  radGrad.addColorStop(0, 'rgba(168, 85, 247, 0.6)');
   radGrad.addColorStop(1, 'rgba(168, 85, 247, 0)');
   gCtx.fillStyle = radGrad;
-  gCtx.fillRect(0, 0, 128, 128);
+  gCtx.fillRect(0, 0, 64, 64);
 
   const glowTex = new THREE.CanvasTexture(glowCanvas);
   const spriteMat = new THREE.SpriteMaterial({
@@ -407,11 +373,13 @@ function createAuthenticIPhoneMesh() {
   sprite.position.set(0, 0, -0.2);
   phoneGroup.add(sprite);
 
+  phoneGroup.scale.set(0.72, 0.72, 0.72);
+
   return phoneGroup;
 }
 
 // ==========================================
-// 3. MAIN HERO THREE.JS SCENE
+// 3. MAIN HERO THREE.JS SCENE (Butter-Smooth 60 FPS)
 // ==========================================
 let heroScene, heroCamera, heroRenderer, phoneGroup, ring1, ring2, particlesMesh;
 
@@ -419,37 +387,38 @@ function initHeroThreeCanvas() {
   const container = document.getElementById('canvas-container');
   if (!container) return;
 
+  const maxPixelRatio = Math.min(window.devicePixelRatio, 1.25);
+
   heroScene = new THREE.Scene();
   heroScene.fog = new THREE.FogExp2(0x020202, 0.045);
 
   heroCamera = new THREE.PerspectiveCamera(26, window.innerWidth / window.innerHeight, 0.1, 100);
   heroCamera.position.set(0, 0, 15);
 
-  heroRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  // High performance WebGL renderer with real-time shadow map disabled for 60 FPS
+  heroRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
   heroRenderer.setSize(window.innerWidth, window.innerHeight);
-  heroRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  heroRenderer.shadowMap.enabled = true;
-  heroRenderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  heroRenderer.setPixelRatio(maxPixelRatio);
+  heroRenderer.shadowMap.enabled = false; // Disabled real-time shadow map to eliminate GPU lag!
   container.appendChild(heroRenderer.domElement);
 
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.85);
   heroScene.add(ambientLight);
 
-  const dirLight = new THREE.DirectionalLight(0xffffff, 1.4);
+  const dirLight = new THREE.DirectionalLight(0xffffff, 1.5);
   dirLight.position.set(5, 10, 7);
-  dirLight.castShadow = true;
   heroScene.add(dirLight);
 
-  const pointLight1 = new THREE.PointLight(0x8B5CF6, 3.5, 20);
+  const pointLight1 = new THREE.PointLight(0x8B5CF6, 3, 20);
   pointLight1.position.set(-4, 2, 4);
   heroScene.add(pointLight1);
 
-  const pointLight2 = new THREE.PointLight(0xA855F7, 3, 20);
+  const pointLight2 = new THREE.PointLight(0xA855F7, 2.5, 20);
   pointLight2.position.set(4, -2, 4);
   heroScene.add(pointLight2);
 
-  // Floating Particle Atmosphere
-  const particleCount = 1200;
+  // Optimized Particle Count
+  const particleCount = 500;
   const pGeo = new THREE.BufferGeometry();
   const pPos = new Float32Array(particleCount * 3);
 
@@ -464,8 +433,9 @@ function initHeroThreeCanvas() {
     size: 0.04,
     color: 0xA855F7,
     transparent: true,
-    opacity: 0.65,
-    blending: THREE.AdditiveBlending
+    opacity: 0.6,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
   });
   particlesMesh = new THREE.Points(pGeo, pMat);
   heroScene.add(particlesMesh);
@@ -475,13 +445,13 @@ function initHeroThreeCanvas() {
   heroScene.add(phoneGroup);
 
   // Tech Rings
-  const ringGeo1 = new THREE.TorusGeometry(4.2, 0.015, 16, 100);
+  const ringGeo1 = new THREE.TorusGeometry(4.2, 0.015, 12, 60);
   const ringMat1 = new THREE.MeshBasicMaterial({ color: 0x8B5CF6, transparent: true, opacity: 0.4 });
   ring1 = new THREE.Mesh(ringGeo1, ringMat1);
   ring1.rotation.x = Math.PI / 3;
   heroScene.add(ring1);
 
-  const ringGeo2 = new THREE.TorusGeometry(4.8, 0.012, 16, 100);
+  const ringGeo2 = new THREE.TorusGeometry(4.8, 0.012, 12, 60);
   const ringMat2 = new THREE.MeshBasicMaterial({ color: 0xA855F7, transparent: true, opacity: 0.3 });
   ring2 = new THREE.Mesh(ringGeo2, ringMat2);
   ring2.rotation.y = Math.PI / 4;
@@ -490,17 +460,21 @@ function initHeroThreeCanvas() {
   phoneGroup.rotation.x = 0.12;
   phoneGroup.rotation.y = -0.18;
 
-  window.addEventListener('resize', onWindowResize);
+  window.addEventListener('resize', onWindowResize, { passive: true });
 
   let clock = new THREE.Clock();
 
   function animateHero() {
     requestAnimationFrame(animateHero);
+
+    // Pause WebGL rendering when hero section is out of viewport (after 4.2x viewport scroll)
+    if (window.scrollY > window.innerHeight * 4.2) return;
+
     const elapsedTime = clock.getElapsedTime();
 
     if (particlesMesh) particlesMesh.rotation.y = elapsedTime * 0.03;
-    if (ring1) ring1.rotation.z = elapsedTime * 0.15;
-    if (ring2) ring2.rotation.x = elapsedTime * 0.12;
+    if (ring1) ring1.rotation.z = elapsedTime * 0.12;
+    if (ring2) ring2.rotation.x = elapsedTime * 0.1;
 
     if (heroRenderer && heroScene && heroCamera) {
       heroRenderer.render(heroScene, heroCamera);
@@ -525,6 +499,7 @@ function onWindowResize() {
 }
 
 function setupHeroScrollAnimation() {
+  const heroContent = document.getElementById('hero-content');
   const pop1 = document.getElementById('popover-1');
   const pop2 = document.getElementById('popover-2');
   const pop3 = document.getElementById('popover-3');
@@ -534,27 +509,31 @@ function setupHeroScrollAnimation() {
       trigger: '#hero-section',
       start: 'top top',
       end: 'bottom bottom',
-      scrub: 1,
+      scrub: 0.5, // Reduced scrub lag from 1 to 0.5 for instant responsive feel
     }
   });
+
+  if (heroContent) {
+    tl.to(heroContent, { opacity: 0, y: -30, duration: 0.25 }, 0);
+  }
 
   tl.to(phoneGroup.rotation, { x: 0.22, y: 0.58, z: -0.1, duration: 1 }, 0)
     .to(phoneGroup.position, { x: 1.4, y: 0, z: 1, duration: 1 }, 0)
     .to(heroCamera, { fov: 24, onUpdate: () => heroCamera.updateProjectionMatrix(), duration: 1 }, 0)
-    .to(pop1, { opacity: 1, y: 0, duration: 0.4 }, 0.3)
-    .to(pop1, { opacity: 0, y: -20, duration: 0.3 }, 0.9);
+    .to(pop1, { opacity: 1, y: 0, duration: 0.3 }, 0.2)
+    .to(pop1, { opacity: 0, y: -20, duration: 0.3 }, 1.1);
 
-  tl.to(phoneGroup.rotation, { x: -0.18, y: Math.PI + 0.25, z: 0.12, duration: 1 }, 1)
-    .to(phoneGroup.position, { x: -1.4, y: -0.2, z: 1.5, duration: 1 }, 1)
-    .to(heroCamera, { fov: 23, onUpdate: () => heroCamera.updateProjectionMatrix(), duration: 1 }, 1)
-    .to(pop2, { opacity: 1, y: 0, duration: 0.4 }, 1.3)
-    .to(pop2, { opacity: 0, y: -20, duration: 0.3 }, 1.9);
+  tl.to(phoneGroup.rotation, { x: -0.18, y: Math.PI + 0.25, z: 0.12, duration: 1 }, 1.3)
+    .to(phoneGroup.position, { x: -1.4, y: -0.2, z: 1.5, duration: 1 }, 1.3)
+    .to(heroCamera, { fov: 23, onUpdate: () => heroCamera.updateProjectionMatrix(), duration: 1 }, 1.3)
+    .to(pop2, { opacity: 1, y: 0, duration: 0.3 }, 1.5)
+    .to(pop2, { opacity: 0, y: -20, duration: 0.3 }, 2.4);
 
-  tl.to(phoneGroup.rotation, { x: 0.3, y: Math.PI * 2, z: 0, duration: 1.2 }, 2)
-    .to(phoneGroup.position, { x: 0, y: 1.2, z: 3.5, duration: 1.2 }, 2)
-    .to(heroCamera, { fov: 22, onUpdate: () => heroCamera.updateProjectionMatrix(), duration: 1.2 }, 2)
-    .to(pop3, { opacity: 1, y: 0, duration: 0.4 }, 2.2)
-    .to(pop3, { opacity: 0, y: -20, duration: 0.3 }, 3.0);
+  tl.to(phoneGroup.rotation, { x: 0.3, y: Math.PI * 2, z: 0, duration: 1.2 }, 2.6)
+    .to(phoneGroup.position, { x: 0, y: 1.2, z: 3.5, duration: 1.2 }, 2.6)
+    .to(heroCamera, { fov: 22, onUpdate: () => heroCamera.updateProjectionMatrix(), duration: 1.2 }, 2.6)
+    .to(pop3, { opacity: 1, y: 0, duration: 0.3 }, 2.8)
+    .to(pop3, { opacity: 0, y: -20, duration: 0.3 }, 3.7);
 }
 
 // ==========================================
@@ -566,19 +545,21 @@ function initCtaThreeCanvas() {
   const container = document.getElementById('cta-canvas');
   if (!container) return;
 
+  const maxPixelRatio = Math.min(window.devicePixelRatio, 1.25);
+
   ctaScene = new THREE.Scene();
   ctaCamera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 0.1, 100);
   ctaCamera.position.set(0, 0, 12);
 
-  ctaRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  ctaRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
   ctaRenderer.setSize(window.innerWidth, window.innerHeight);
-  ctaRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  ctaRenderer.setPixelRatio(maxPixelRatio);
   container.appendChild(ctaRenderer.domElement);
 
-  const amb = new THREE.AmbientLight(0xffffff, 0.6);
+  const amb = new THREE.AmbientLight(0xffffff, 0.7);
   ctaScene.add(amb);
 
-  const pLight = new THREE.PointLight(0xA855F7, 4, 15);
+  const pLight = new THREE.PointLight(0xA855F7, 3.5, 15);
   pLight.position.set(0, 0, 6);
   ctaScene.add(pLight);
 
@@ -587,15 +568,31 @@ function initCtaThreeCanvas() {
   ctaScene.add(ctaPhoneGroup);
 
   let mouseX = 0, mouseY = 0;
+  let mouseTicking = false;
+
   window.addEventListener('mousemove', (e) => {
-    mouseX = (e.clientX / window.innerWidth - 0.5) * 0.8;
-    mouseY = (e.clientY / window.innerHeight - 0.5) * 0.8;
-  });
+    if (!mouseTicking) {
+      requestAnimationFrame(() => {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 0.8;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 0.8;
+        mouseTicking = false;
+      });
+      mouseTicking = true;
+    }
+  }, { passive: true });
 
   let clock = new THREE.Clock();
 
   function animateCta() {
     requestAnimationFrame(animateCta);
+
+    // Suppress WebGL rendering when CTA section is far out of viewport
+    const ctaEl = document.getElementById('contact');
+    if (ctaEl) {
+      const rect = ctaEl.getBoundingClientRect();
+      if (rect.bottom < -200 || rect.top > window.innerHeight * 1.5) return;
+    }
+
     const elapsedTime = clock.getElapsedTime();
 
     if (ctaPhoneGroup) {
@@ -613,7 +610,7 @@ function initCtaThreeCanvas() {
 }
 
 // ==========================================
-// 5. KARAOKE SCROLL TEXT EFFECT
+// 5. KARAOKE SCROLL TEXT EFFECT (Throttled & Reflow-Free)
 // ==========================================
 function initKaraokeText() {
   const container = document.getElementById('kakaoke-text');
@@ -627,8 +624,9 @@ function initKaraokeText() {
     .join('');
 
   const wordElements = container.querySelectorAll('.karaoke-word');
+  let ticking = false;
 
-  window.addEventListener('scroll', () => {
+  function updateKaraokeProgress() {
     const rect = container.getBoundingClientRect();
     const windowHeight = window.innerHeight;
     
@@ -644,7 +642,15 @@ function initKaraokeText() {
         el.classList.remove('active');
       }
     });
-  });
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateKaraokeProgress);
+      ticking = true;
+    }
+  }, { passive: true });
 }
 
 // ==========================================
@@ -663,7 +669,7 @@ function initTimelineScrubber() {
       trigger: '#process',
       start: 'top 60%',
       end: 'bottom 70%',
-      scrub: true,
+      scrub: 0.3,
       onUpdate: (self) => {
         const progress = self.progress;
         steps.forEach((step, idx) => {
@@ -682,24 +688,38 @@ function initTimelineScrubber() {
 }
 
 // ==========================================
-// 7. CTA SPLIT DOORS TRANSITION
+// 7. CTA SPLIT DOORS TRANSITION & START PROJECT FUNCTIONALITY
 // ==========================================
 function initCtaDoors() {
   const doorLeft = document.getElementById('cta-door-left');
   const doorRight = document.getElementById('cta-door-right');
+  const wrapper = document.getElementById('cta-door-wrapper');
 
-  if (!doorLeft || !doorRight) return;
+  if (!doorLeft || !doorRight || !wrapper) return;
 
   gsap.timeline({
     scrollTrigger: {
       trigger: '#cta-door-wrapper',
       start: 'top top',
-      end: 'bottom bottom',
-      scrub: 1,
+      end: '80% bottom',
+      scrub: 0.4,
+      invalidateOnRefresh: true
     }
   })
-  .to(doorLeft, { xPercent: -105, ease: 'power2.inOut' }, 0)
-  .to(doorRight, { xPercent: 105, ease: 'power2.inOut' }, 0);
+  .to(doorLeft, { xPercent: -100, ease: 'none' }, 0)
+  .to(doorRight, { xPercent: 100, ease: 'none' }, 0);
+
+  const contactLinks = document.querySelectorAll('a[href="#contact"]');
+  contactLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetScroll = wrapper.offsetTop + (wrapper.offsetHeight * 0.45);
+      window.scrollTo({
+        top: targetScroll,
+        behavior: 'smooth'
+      });
+    });
+  });
 }
 
 // ==========================================
