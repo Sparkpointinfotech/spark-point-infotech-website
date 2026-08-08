@@ -732,12 +732,12 @@ function initCtaDoors() {
   .to(doorLeft, { xPercent: -100, ease: 'none' }, 0)
   .to(doorRight, { xPercent: 100, ease: 'none' }, 0);
 
-  // Fix: When clicking "Start a project" or any #contact link, automatically scroll into open door state
+  // Fix: When clicking "Start a project" or any #contact link, smoothly scroll to the open contact form
   const contactLinks = document.querySelectorAll('a[href="#contact"]');
   contactLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
-      const targetScroll = wrapper.offsetTop + (wrapper.offsetHeight * 0.45);
+      const targetScroll = wrapper.getBoundingClientRect().top + window.scrollY + (window.innerHeight * 0.35);
       window.scrollTo({
         top: targetScroll,
         behavior: 'smooth'
