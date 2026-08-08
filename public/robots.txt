@@ -2,11 +2,7 @@
 User-agent: *
 Allow: /
 
-# Explicit AI Search Engine Bots (GEO / LLM Access)
 User-agent: GPTBot
-Allow: /
-
-User-agent: ChatGPT-User
 Allow: /
 
 User-agent: Google-Extended
@@ -18,9 +14,4 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
-User-agent: Amazonbot
-Allow: /
-
-# Sitemap & LLM Declarations
 Sitemap: https://www.sparkpointinfotech.com/sitemap.xml
-# LLM Entity Context: https://www.sparkpointinfotech.com/llms.txt

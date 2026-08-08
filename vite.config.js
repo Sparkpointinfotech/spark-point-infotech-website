@@ -7,6 +7,13 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    sourcemap: true
+    sourcemap: false,
+    minify: 'esbuild',
+    target: 'es2020',
+    cssMinify: true
+  },
+  esbuild: {
+    drop: ['console', 'debugger'],
+    legalComments: 'none'
   }
 });
