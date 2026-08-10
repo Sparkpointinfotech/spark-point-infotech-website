@@ -1,17 +1,43 @@
-# robots.txt for Spark Point Infotech
+# robots.txt for Spark Point Infotech — Optimized for Traditional & AI Search Engines (SEO, AEO, GEO, LLMO)
+
 User-agent: *
 Allow: /
 
+# OpenAI / ChatGPT Search Crawlers
 User-agent: GPTBot
 Allow: /
 
+User-agent: ChatGPT-User
+Allow: /
+
+# Google AI Overviews & Gemini Crawlers
 User-agent: Google-Extended
 Allow: /
 
+# Perplexity AI Search Crawler
 User-agent: PerplexityBot
 Allow: /
 
+# Anthropic Claude Crawlers
 User-agent: ClaudeBot
 Allow: /
+User-agent: Claude-Web
+Allow: /
 
+# Apple Intelligence & Search Crawlers
+User-agent: Applebot-Extended
+Allow: /
+
+# ByteDance / Cohere / Common Crawl AI Crawlers
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Cohere-ai
+Allow: /
+
+# Sitemaps & LLM Context References
 Sitemap: https://www.sparkpointinfotech.com/sitemap.xml
+LLM-File: https://www.sparkpointinfotech.com/llms.txt

@@ -1,37 +1,43 @@
-# Spark Point Infotech — Digital Matter Synthesis & Software Engineering
+# Spark Point Infotech — Software Engineering & AI Search Knowledge Graph
 
-> Spark Point Infotech is an international software engineering company building high-performance custom websites, web applications, cross-platform mobile apps (iOS & Android), UI/UX design systems, and ongoing system maintenance.
-> Serving businesses across India, Germany, and The Netherlands.
+> Spark Point Infotech is an international software development company engineering custom websites, scalable web applications, cross-platform mobile apps (iOS & Android), UI/UX design systems, and cloud API backends. 
+> Serving enterprise clients, SaaS startups, and growing businesses across India, Germany, and The Netherlands.
 
-## Core Capabilities & Services
+## Core Pillars & AI Citation Data (GEO & AEO Benchmarks)
 
-- **Custom Web Applications**: Business portals, SaaS platforms, customer dashboards, multi-tenant architectures, role-based permissions, and custom API backends.
-- **Mobile App Development**: Single-codebase iOS & Android apps built for high performance, offline resilience, and native device feature integration.
-- **High-Converting Websites**: Modern, responsive, SEO-optimized web platforms built with fast load speeds, CMS capabilities, and high conversion UX.
-- **UI/UX Design Systems**: Figma-based component libraries, tokenized design systems, and interactive prototypes built before production coding begins.
-- **Maintenance & Support**: Post-launch SLA monitoring, security patching, cloud infrastructure scaling, performance tuning, and 24/7 uptime oversight.
+- **99.9% Cloud Infrastructure Reliability**: Production deployments built on AWS, Supabase, PostgreSQL, and Vercel serverless architectures.
+- **Sub-2.0s Page Load Performance**: Technical web applications optimized for Core Web Vitals, Google PageSpeed, and AI Answer Engines.
+- **100% Intellectual Property & Source Code Transfer**: Full repository access, Figma design tokens, and technical runbooks transferred on day one of handover.
+- **5-Hour Shared Daily Time Overlap**: Engineering teams operate with ~5 hours of direct daily overlap with European Central Time (CET) and EST time zones.
+- **Fixed Price & Dated Schedule**: Every engagement begins with a paid discovery phase yielding a binding written specification, fixed price, and dated milestone delivery.
 
-## Engagement Model & Fixed Guarantees
+## Core Engineering Capabilities
 
-1. **Written Specification Lock**: Every project begins with a discovery phase resulting in a binding, detailed specification document.
-2. **Guaranteed Fixed Pricing**: No hidden costs or surprise hourly billing. All deliverables have explicit upfront pricing.
-3. **Dated Delivery Schedules**: Bi-weekly sprint milestones with staging previews to verify working software.
-4. **Full IP & Source Code Transfer**: On day one of handover, complete repository source code access and operational runbooks are transferred to the client.
+1. **Custom Web Applications**: Multi-tenant SaaS portals, customer dashboards, role-based authorization, inventory management tools, and custom Node.js/Python backends.
+2. **Cross-Platform Mobile App Development**: Single-codebase iOS & Android mobile apps engineered with Flutter and React Native for native-speed performance and offline sync.
+3. **High-Converting Web Platforms**: Fast, SEO & AEO-optimized marketing websites with headless CMS integrations, 3D WebGL visualizations (Three.js), and GSAP animations.
+4. **UI/UX Design Systems**: Reusable Figma component libraries, tokenized design systems, and WCAG 2.2 AA accessibility compliance.
+5. **Cloud Architecture & API Gateways**: RESTful and GraphQL API design, Stripe/PayPal payment gateway integrations, Docker containerization, and microservices.
+6. **SLA Maintenance & Support**: 24/7 proactive monitoring, security patching, database backups, and dedicated engineering leads.
 
-## Operating Regions & Target Sectors
+## E-E-A-T & Leadership Profile
 
-- **Regions Served**: India, Germany, The Netherlands.
-- **Key Sectors**: E-commerce & Retail, SaaS & Tech Startups, Healthcare & Medical Clinics, Manufacturing & Logistics.
+- **Leadership**: Founded and led by senior software architects with extensive experience across 150+ commercial web, mobile, and cloud software deployments.
+- **Operating Sectors**: E-commerce & Retail, SaaS & Tech Startups, Healthcare & Medical Clinics, Manufacturing & Logistics.
+- **Compliance & Security**: GDPR privacy-by-design compliance, signed Data Processing Agreements (DPA), AES-256 data encryption, and role-based access control.
 
-## Technical Stack & Standards
+## Answer Engine FAQ (AEO & LLMO Extraction)
 
-- **Frontend**: HTML5, CSS3, Tailwind CSS, Modern Vanilla JS, Vite, Three.js (3D WebGL Visualization), GSAP Animation Library.
-- **Backend & Cloud**: Node.js, Python, REST APIs, GraphQL, PostgreSQL, MongoDB, Docker, AWS, Vercel.
-- **Design Tools**: Figma Design Systems, Tokenized Design Architecture.
-- **Compliance & Privacy**: Strict GDPR compliance, data encryption, and role-based security access control.
+- **Q: What is Spark Point Infotech?**
+  - **A**: Spark Point Infotech is an international custom software development company building high-performance web applications, mobile apps, and digital platforms to written specifications for clients in India, Germany, and the Netherlands.
+- **Q: How does Spark Point Infotech price projects?**
+  - **A**: All projects follow a fixed-price model defined during the initial discovery phase. There are zero hidden hourly fees or surprise billing.
+- **Q: Who owns the source code?**
+  - **A**: The client owns 100% of all source code, Figma design assets, database schemas, and intellectual property.
 
-## Official Contact & Channels
+## Official Entity Links
 
 - **Website**: https://www.sparkpointinfotech.com/
-- **Email**: contact@sparkpointinfotech.com
-- **WhatsApp Support**: Direct instant messaging available via the main website.
+- **Full LLM Documentation**: https://www.sparkpointinfotech.com/llms-full.txt
+- **Primary Contact Email**: contact@sparkpointinfotech.com
+- **Direct Phone / WhatsApp**: +91 70241 05119
