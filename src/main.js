@@ -767,34 +767,133 @@ function initFaqAccordion() {
 // 9. FORMS HANDLER (Contact & Careers)
 // ==========================================
 function initForms() {
+  // 1. Contact Form Handler
   const contactForm = document.getElementById('contact-form');
   const contactStatus = document.getElementById('form-status');
 
   if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      if (contactStatus) {
-        contactStatus.classList.remove('hidden');
-        contactForm.reset();
-        setTimeout(() => {
-          contactStatus.classList.add('hidden');
-        }, 5000);
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      const originalBtnText = submitBtn ? submitBtn.innerText : 'Send project enquiry';
+
+      const payload = {
+        name: document.getElementById('form-name')?.value || '',
+        email: document.getElementById('form-email')?.value || '',
+        phone: document.getElementById('form-phone')?.value || '',
+        company: document.getElementById('form-company')?.value || '',
+        service: document.getElementById('form-service')?.value || '',
+        budget: document.getElementById('form-budget')?.value || '',
+        message: document.getElementById('form-message')?.value || ''
+      };
+
+      try {
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.innerText = 'Sending enquiry...';
+        }
+
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          if (contactStatus) {
+            contactStatus.classList.remove('hidden', 'text-red-400');
+            contactStatus.classList.add('text-accent');
+            contactStatus.innerHTML = `&check; ${data.message}`;
+          }
+          contactForm.reset();
+        } else {
+          throw new Error(data.error || 'Failed to submit enquiry.');
+        }
+      } catch (err) {
+        console.error('Contact Form Submission Error:', err);
+        if (contactStatus) {
+          contactStatus.classList.remove('hidden', 'text-accent');
+          contactStatus.classList.add('text-red-400');
+          contactStatus.innerText = `✕ ${err.message || 'Something went wrong. Please try again.'}`;
+        }
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerText = originalBtnText;
+        }
+        if (contactStatus) {
+          setTimeout(() => {
+            contactStatus.classList.add('hidden');
+          }, 8000);
+        }
       }
     });
   }
 
+  // 2. Talent / Careers Form Handler
   const talentForm = document.getElementById('talent-form');
   const talentStatus = document.getElementById('talent-status');
 
   if (talentForm) {
-    talentForm.addEventListener('submit', (e) => {
+    talentForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      if (talentStatus) {
-        talentStatus.classList.remove('hidden');
-        talentForm.reset();
-        setTimeout(() => {
-          talentStatus.classList.add('hidden');
-        }, 5000);
+      const submitBtn = talentForm.querySelector('button[type="submit"]');
+      const originalBtnText = submitBtn ? submitBtn.innerText : 'Register for future engineering roles';
+
+      const payload = {
+        name: document.getElementById('talent-name')?.value || '',
+        email: document.getElementById('talent-email')?.value || '',
+        phone: document.getElementById('talent-phone')?.value || '',
+        role: document.getElementById('talent-role')?.value || '',
+        experience: document.getElementById('talent-exp')?.value || '',
+        location: document.getElementById('talent-location')?.value || '',
+        notice_period: document.getElementById('talent-notice')?.value || '',
+        resume_url: document.getElementById('talent-resume')?.value || ''
+      };
+
+      try {
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.innerText = 'Registering profile...';
+        }
+
+        const response = await fetch('/api/talent', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          if (talentStatus) {
+            talentStatus.classList.remove('hidden', 'text-red-400');
+            talentStatus.classList.add('text-emerald-400');
+            talentStatus.innerHTML = `&check; ${data.message}`;
+          }
+          talentForm.reset();
+        } else {
+          throw new Error(data.error || 'Failed to register talent profile.');
+        }
+      } catch (err) {
+        console.error('Talent Form Submission Error:', err);
+        if (talentStatus) {
+          talentStatus.classList.remove('hidden', 'text-emerald-400');
+          talentStatus.classList.add('text-red-400');
+          talentStatus.innerText = `✕ ${err.message || 'Something went wrong. Please try again.'}`;
+        }
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerText = originalBtnText;
+        }
+        if (talentStatus) {
+          setTimeout(() => {
+            talentStatus.classList.add('hidden');
+          }, 8000);
+        }
       }
     });
   }

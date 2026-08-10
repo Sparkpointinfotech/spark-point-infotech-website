@@ -2,6 +2,12 @@
   "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index.js"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
@@ -38,7 +44,7 @@
       ]
     },
     {
-      "source": "/(spi-logo.png|favicon.ico|favicon.png|apple-touch-icon.png)",
+      "source": "/(SPI LOGO.png|spi-logo.png|favicon.ico|favicon.png|apple-touch-icon.png)",
       "headers": [
         {
           "key": "Cache-Control",

@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Portal | Spark Point Infotech</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            bgDark: '#05030a',
+            surfaceDark: '#0b0717',
+            surfaceCard: '#130d25',
+            accent: '#8B5CF6',
+            accentGlow: '#A855F7'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #05030a;
+      color: #f3f4f6;
+      font-family: 'Inter', sans-serif;
+    }
+    .glass-card {
+      background: rgba(15, 10, 30, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .glass-card-hover {
+      transition: all 0.2s ease-in-out;
+    }
+    .glass-card-hover:hover {
+      border-color: rgba(139, 92, 246, 0.4);
+      box-shadow: 0 10px 30px -10px rgba(139, 92, 246, 0.2);
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #05030a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #261942;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #8B5CF6;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-bgDark text-slate-100 font-sans pb-20">
+
+  <!-- ==================== 1. LOGIN MODAL OVERLAY (SECURITY GUARD) ==================== -->
+  <div id="login-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-xl p-4">
+    <div class="glass-card bg-surfaceDark border border-purple-500/30 rounded-3xl max-w-md w-full p-8 space-y-6 shadow-[0_0_50px_rgba(139,92,246,0.15)] relative">
+      
+      <div class="text-center space-y-2">
+        <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-accent/10 border border-accent/30 text-accent mb-2">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 002-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+        </div>
+        <h2 class="text-2xl font-bold text-white tracking-tight">Admin Authentication</h2>
+        <p class="text-xs text-slate-400">Enter your administrator credentials to access live website submissions.</p>
+      </div>
+
+      <form id="login-form" onsubmit="handleLogin(event)" class="space-y-4">
+        <div class="space-y-1">
+          <label for="admin-username" class="text-[10px] font-mono text-white/80 uppercase tracking-wider font-bold">Admin Username</label>
+          <input type="text" id="admin-username" required placeholder="admin" value="admin" class="w-full px-4 py-2.5 rounded-xl bg-black/60 border border-white/10 text-white text-xs focus:outline-none focus:border-accent transition-colors font-mono">
+        </div>
+
+        <div class="space-y-1">
+          <label for="admin-password" class="text-[10px] font-mono text-white/80 uppercase tracking-wider font-bold">Admin Password</label>
+          <input type="password" id="admin-password" required placeholder="••••••••••••" class="w-full px-4 py-2.5 rounded-xl bg-black/60 border border-white/10 text-white text-xs focus:outline-none focus:border-accent transition-colors font-mono">
+        </div>
+
+        <div id="login-error" class="hidden text-xs text-red-400 font-mono bg-red-500/10 border border-red-500/20 p-3 rounded-xl"></div>
+
+        <button type="submit" id="login-btn" class="w-full py-3 rounded-xl text-xs font-semibold font-mono uppercase tracking-wider bg-accent hover:bg-purple-600 text-white transition-all shadow-lg shadow-purple-900/40">
+          Authenticate & Unlock
+        </button>
+      </form>
+
+      <div class="text-center border-t border-white/10 pt-4">
+        <p class="text-[11px] text-slate-400 font-mono">
+          Protected by JWT Auth & Security Rate Limiter
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 2. MAIN ADMIN DASHBOARD CONTAINER ==================== -->
+  <div id="dashboard-container" class="hidden">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-40 glass-card border-b border-white/10 px-4 sm:px-8 py-3.5">
+      <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center space-x-3">
+          <a href="/" class="flex items-center space-x-3 hover:opacity-90 transition-opacity">
+            <img src="/SPI LOGO.png" alt="Spark Point Infotech" class="h-9 w-auto" onerror="this.onerror=null; this.src='/spi-logo.png'">
+            <span class="text-[11px] font-mono text-accent font-bold uppercase tracking-wider bg-accent/10 px-2.5 py-1 rounded-full border border-accent/20">Live Admin Portal</span>
+          </a>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <!-- Status Indicator -->
+          <div id="status-indicator" class="flex items-center space-x-2 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-xl text-xs font-mono text-emerald-400">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span id="status-text">Live Server Connected</span>
+          </div>
+
+          <button id="refresh-btn" onclick="loadAllSubmissions()" class="flex items-center space-x-2 bg-white/5 hover:bg-white/10 text-white text-xs font-mono px-3.5 py-1.5 rounded-xl border border-white/10 transition-all">
+            <svg id="refresh-icon" class="w-3.5 h-3.5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            <span>Refresh</span>
+          </button>
+
+          <button onclick="openChangePasswordModal()" class="bg-purple-900/30 hover:bg-purple-900/50 text-purple-300 border border-purple-500/30 text-xs font-mono px-3.5 py-1.5 rounded-xl transition-all flex items-center space-x-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
+            <span>Password</span>
+          </button>
+
+          <button onclick="handleLogout()" class="bg-red-900/30 hover:bg-red-900/50 text-red-300 border border-red-500/30 text-xs font-mono px-3.5 py-1.5 rounded-xl transition-all flex items-center space-x-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+            <span>Logout</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-8 pt-8 space-y-8">
+
+      <!-- Header Banner & Guide Link -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Live Form Submissions & Data Center</h1>
+          <p class="text-xs sm:text-sm text-slate-400 mt-1">View, search, inspect, filter, and export all client & applicant form data stored in database.</p>
+        </div>
+
+        <div class="flex items-center space-x-3">
+          <button onclick="toggleAccessGuide()" class="bg-purple-900/30 hover:bg-purple-900/50 text-purple-300 border border-purple-500/30 text-xs font-mono font-medium px-4 py-2 rounded-xl transition-all flex items-center space-x-2">
+            <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span>Vercel Cloud Setup Guide</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Vercel Cloud Database Guide (Expandable) -->
+      <div id="access-guide-drawer" class="hidden glass-card p-6 rounded-2xl border border-purple-500/30 space-y-4 bg-surfaceDark/90 shadow-2xl">
+        <div class="flex items-center justify-between border-b border-white/10 pb-3">
+          <h3 class="text-base font-semibold text-white flex items-center space-x-2">
+            <span class="text-accent font-mono">⚡</span>
+            <span>Vercel Cloud Deployment & Persistent Database Guide</span>
+          </h3>
+          <button onclick="toggleAccessGuide()" class="text-slate-400 hover:text-white text-xs font-mono">[Close]</button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-300">
+          <div class="space-y-2 bg-white/5 p-4 rounded-xl border border-white/5">
+            <div class="font-mono text-accent font-bold uppercase text-[11px] flex items-center space-x-1.5">
+              <span class="bg-accent/20 text-accent px-2 py-0.5 rounded">1</span>
+              <span>Vercel Serverless Function</span>
+            </div>
+            <p class="text-slate-400 leading-relaxed">
+              All backend endpoints run on Vercel Serverless Functions (`api/index.js`). Form submissions from <code class="text-purple-300 bg-black/40 px-1 py-0.5 rounded">sparkpointinfotech.com</code> automatically reach the backend.
+            </p>
+          </div>
+
+          <div class="space-y-2 bg-white/5 p-4 rounded-xl border border-white/5">
+            <div class="font-mono text-emerald-400 font-bold uppercase text-[11px] flex items-center space-x-1.5">
+              <span class="bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded">2</span>
+              <span>Persistent Cloud DB (Supabase / Neon)</span>
+            </div>
+            <p class="text-slate-400 leading-relaxed">
+              To persist data permanently on Vercel across function restarts, add a free PostgreSQL database URL in Vercel project environment variables:
+            </p>
+            <div class="font-mono text-[10px] text-emerald-300 bg-black/50 p-2 rounded border border-white/5">
+              DATABASE_URL = postgres://user:pass@ep-xyz.neon.tech/neondb?sslmode=require
+            </div>
+          </div>
+
+          <div class="space-y-2 bg-white/5 p-4 rounded-xl border border-white/5">
+            <div class="font-mono text-amber-400 font-bold uppercase text-[11px] flex items-center space-x-1.5">
+              <span class="bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded">3</span>
+              <span>Custom Admin Security Password</span>
+            </div>
+            <p class="text-slate-400 leading-relaxed">
+              Set custom password in Vercel Environment Variables:
+            </p>
+            <div class="font-mono text-[10px] text-amber-300 bg-black/50 p-2 rounded border border-white/5">
+              ADMIN_PASSWORD = YourSecurePassword2026!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Metric Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="glass-card glass-card-hover p-5 rounded-2xl space-y-2">
+          <div class="flex items-center justify-between text-xs font-mono text-slate-400 uppercase tracking-wider font-semibold">
+            <span>Project Enquiries</span>
+            <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <div id="metric-contact-count" class="text-3xl font-bold text-white">0</div>
+          <p class="text-xs text-slate-400">Total client requests</p>
+        </div>
+
+        <div class="glass-card glass-card-hover p-5 rounded-2xl space-y-2">
+          <div class="flex items-center justify-between text-xs font-mono text-slate-400 uppercase tracking-wider font-semibold">
+            <span>Talent Profiles</span>
+            <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+          </div>
+          <div id="metric-talent-count" class="text-3xl font-bold text-white">0</div>
+          <p class="text-xs text-slate-400">Total applicant profiles</p>
+        </div>
+
+        <div class="glass-card glass-card-hover p-5 rounded-2xl space-y-2">
+          <div class="flex items-center justify-between text-xs font-mono text-slate-400 uppercase tracking-wider font-semibold">
+            <span>Total Records</span>
+            <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          </div>
+          <div id="metric-total-count" class="text-3xl font-bold text-white">0</div>
+          <p class="text-xs text-slate-400">Combined form submissions</p>
+        </div>
+
+        <div class="glass-card glass-card-hover p-5 rounded-2xl space-y-2">
+          <div class="flex items-center justify-between text-xs font-mono text-slate-400 uppercase tracking-wider font-semibold">
+            <span>Engine & Security</span>
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1 animate-pulse"></span> JWT Auth
+            </span>
+          </div>
+          <div id="metric-db-engine" class="text-xl font-bold text-white font-mono truncate">SQLite / PG</div>
+          <p class="text-xs text-slate-400">Authenticated Session</p>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs & Toolbar -->
+      <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 bg-surfaceCard/60 p-4 rounded-2xl border border-white/10">
+        <!-- Tabs -->
+        <div class="flex space-x-2 p-1 bg-black/40 rounded-xl border border-white/10 self-start">
+          <button id="tab-contact-btn" onclick="switchTab('contact')" class="px-4 py-2 rounded-lg text-xs font-semibold font-mono transition-all bg-accent text-white shadow-lg">
+            Project Enquiries (<span id="tab-contact-badge">0</span>)
+          </button>
+          <button id="tab-talent-btn" onclick="switchTab('talent')" class="px-4 py-2 rounded-lg text-xs font-semibold font-mono transition-all text-slate-400 hover:text-white">
+            Talent Profiles (<span id="tab-talent-badge">0</span>)
+          </button>
+        </div>
+
+        <!-- Controls: Search, Batch Actions, Export Dropdown -->
+        <div class="flex flex-wrap items-center gap-3">
+          <div class="relative flex-grow sm:flex-grow-0">
+            <input type="text" id="search-input" onkeyup="filterTable()" placeholder="Search name, email, role..." class="px-4 py-2 pl-9 rounded-xl bg-black/60 border border-white/15 text-white text-xs focus:outline-none focus:border-accent w-full sm:w-64 transition-all">
+            <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          </div>
+
+          <!-- Batch Delete Selected -->
+          <button id="batch-delete-btn" onclick="deleteSelected()" class="hidden bg-red-900/30 hover:bg-red-900/50 text-red-300 border border-red-500/30 text-xs font-mono px-3.5 py-2 rounded-xl transition-all items-center space-x-1.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+            <span>Delete Selected (<span id="selected-count">0</span>)</span>
+          </button>
+
+          <!-- Export Dropdown -->
+          <div class="relative inline-block text-left">
+            <button onclick="toggleExportMenu()" class="bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-500/30 text-xs font-mono font-semibold px-4 py-2 rounded-xl transition-all flex items-center space-x-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              <span>Export Data</span>
+              <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+
+            <div id="export-dropdown" class="hidden absolute right-0 mt-2 w-56 rounded-xl glass-card border border-white/10 shadow-2xl z-50 overflow-hidden divide-y divide-white/5">
+              <div class="py-1">
+                <button onclick="exportData('csv', false)" class="w-full text-left px-4 py-2 text-xs font-mono text-slate-200 hover:bg-white/10 flex items-center space-x-2">
+                  <span class="text-emerald-400">📄</span>
+                  <span>Export CSV (Current View)</span>
+                </button>
+                <button onclick="exportData('json', false)" class="w-full text-left px-4 py-2 text-xs font-mono text-slate-200 hover:bg-white/10 flex items-center space-x-2">
+                  <span class="text-purple-400">{ }</span>
+                  <span>Export JSON (Current View)</span>
+                </button>
+              </div>
+              <div class="py-1">
+                <button onclick="exportData('csv', true)" class="w-full text-left px-4 py-2 text-xs font-mono text-slate-200 hover:bg-white/10 flex items-center space-x-2">
+                  <span class="text-emerald-400">📦</span>
+                  <span>Export CSV (All Tabs)</span>
+                </button>
+                <button onclick="exportData('json', true)" class="w-full text-left px-4 py-2 text-xs font-mono text-slate-200 hover:bg-white/10 flex items-center space-x-2">
+                  <span class="text-purple-400">📦</span>
+                  <span>Export JSON (All Tabs)</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Contact Submissions Table -->
+      <div id="contact-tab-content" class="glass-card rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-slate-300">
+            <thead class="bg-white/5 border-b border-white/10 text-[11px] font-mono uppercase tracking-wider text-slate-400">
+              <tr>
+                <th class="py-3.5 px-4 w-10 text-center">
+                  <input type="checkbox" id="select-all-contact" onchange="toggleSelectAll(this)" class="rounded bg-black/50 border-white/20 text-accent focus:ring-accent">
+                </th>
+                <th class="py-3.5 px-4 font-semibold">ID</th>
+                <th class="py-3.5 px-4 font-semibold">Submitted At</th>
+                <th class="py-3.5 px-4 font-semibold">Name & Contact</th>
+                <th class="py-3.5 px-4 font-semibold">Company</th>
+                <th class="py-3.5 px-4 font-semibold">Service Required</th>
+                <th class="py-3.5 px-4 font-semibold">Budget</th>
+                <th class="py-3.5 px-4 font-semibold">Project Overview</th>
+                <th class="py-3.5 px-4 font-semibold text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="contact-table-body" class="divide-y divide-white/5 font-normal">
+              <tr>
+                <td colspan="9" class="text-center py-10 text-slate-400 font-mono">Loading project enquiries...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Talent Submissions Table -->
+      <div id="talent-tab-content" class="glass-card rounded-2xl overflow-hidden border border-white/10 shadow-2xl hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-slate-300">
+            <thead class="bg-white/5 border-b border-white/10 text-[11px] font-mono uppercase tracking-wider text-slate-400">
+              <tr>
+                <th class="py-3.5 px-4 w-10 text-center">
+                  <input type="checkbox" id="select-all-talent" onchange="toggleSelectAll(this)" class="rounded bg-black/50 border-white/20 text-emerald-500 focus:ring-emerald-500">
+                </th>
+                <th class="py-3.5 px-4 font-semibold">ID</th>
+                <th class="py-3.5 px-4 font-semibold">Submitted At</th>
+                <th class="py-3.5 px-4 font-semibold">Candidate</th>
+                <th class="py-3.5 px-4 font-semibold">Primary Expertise</th>
+                <th class="py-3.5 px-4 font-semibold">Experience</th>
+                <th class="py-3.5 px-4 font-semibold">Location</th>
+                <th class="py-3.5 px-4 font-semibold">Notice</th>
+                <th class="py-3.5 px-4 font-semibold">Resume / Portfolio</th>
+                <th class="py-3.5 px-4 font-semibold text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="talent-table-body" class="divide-y divide-white/5 font-normal">
+              <tr>
+                <td colspan="10" class="text-center py-10 text-slate-400 font-mono">Loading talent profiles...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Submission Detail Modal -->
+  <div id="detail-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
+    <div class="glass-card bg-surfaceDark border border-white/15 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 space-y-6 shadow-2xl relative">
+      
+      <div class="flex items-center justify-between border-b border-white/10 pb-4">
+        <div class="flex items-center space-x-3">
+          <span id="modal-type-tag" class="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-accent/20 text-accent border border-accent/30">Project Enquiry</span>
+          <span id="modal-id" class="text-sm font-mono text-slate-400">#0</span>
+        </div>
+        <button onclick="closeModal()" class="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-white/10 transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div id="modal-body-content" class="space-y-5 text-xs"></div>
+
+      <div class="flex items-center justify-between border-t border-white/10 pt-4">
+        <button id="modal-delete-btn" onclick="" class="bg-red-500/20 hover:bg-red-500/30 text-red-300 border border-red-500/30 font-mono px-4 py-2 rounded-xl text-xs transition-all">
+          Delete Submission
+        </button>
+        <button onclick="closeModal()" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-5 py-2 rounded-xl text-xs transition-all">
+          Close
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Change Password Modal -->
+  <div id="password-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
+    <div class="glass-card bg-surfaceDark border border-white/15 rounded-3xl max-w-md w-full p-6 space-y-5 shadow-2xl relative">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <h3 class="text-sm font-bold text-white font-mono flex items-center space-x-2">
+          <span>🔒 Update Admin Password</span>
+        </h3>
+        <button onclick="closePasswordModal()" class="text-slate-400 hover:text-white text-xs font-mono">[Close]</button>
+      </div>
+
+      <form onsubmit="handleChangePassword(event)" class="space-y-4">
+        <div class="space-y-1">
+          <label class="text-[10px] font-mono text-white/80 uppercase font-bold">Current Password</label>
+          <input type="password" id="current-pass-input" required class="w-full px-3.5 py-2 rounded-xl bg-black/60 border border-white/10 text-white text-xs focus:outline-none focus:border-accent">
+        </div>
+        <div class="space-y-1">
+          <label class="text-[10px] font-mono text-white/80 uppercase font-bold">New Password (Min 6 chars)</label>
+          <input type="password" id="new-pass-input" required minlength="6" class="w-full px-3.5 py-2 rounded-xl bg-black/60 border border-white/10 text-white text-xs focus:outline-none focus:border-accent">
+        </div>
+
+        <div id="pass-msg" class="hidden text-xs font-mono p-2.5 rounded-lg"></div>
+
+        <button type="submit" class="w-full py-2.5 rounded-xl text-xs font-semibold font-mono bg-accent hover:bg-purple-600 text-white transition-all">
+          Update Password
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    let activeTab = 'contact';
+    let contactData = [];
+    let talentData = [];
+    let selectedIds = new Set();
+    let authToken = sessionStorage.getItem('admin_token') || localStorage.getItem('admin_token') || '';
+
+    // Auth Helper
+    function getAuthHeaders() {
+      return {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${authToken}`
+      };
+    }
+
+    async function checkAuth() {
+      if (!authToken) {
+        showLoginModal();
+        return false;
+      }
+      try {
+        const res = await fetch('/api/auth/verify', { headers: getAuthHeaders() });
+        const json = await res.json();
+        if (json.success && json.valid) {
+          hideLoginModal();
+          return true;
+        } else {
+          sessionStorage.removeItem('admin_token');
+          localStorage.removeItem('admin_token');
+          authToken = '';
+          showLoginModal();
+          return false;
+        }
+      } catch (err) {
+        showLoginModal();
+        return false;
+      }
+    }
+
+    function showLoginModal() {
+      document.getElementById('login-modal').classList.remove('hidden');
+      document.getElementById('dashboard-container').classList.add('hidden');
+    }
+
+    function hideLoginModal() {
+      document.getElementById('login-modal').classList.add('hidden');
+      document.getElementById('dashboard-container').classList.remove('hidden');
+    }
+
+    async function handleLogin(e) {
+      e.preventDefault();
+      const usernameInput = document.getElementById('admin-username').value.trim();
+      const passwordInput = document.getElementById('admin-password').value;
+      const errorDiv = document.getElementById('login-error');
+      const submitBtn = document.getElementById('login-btn');
+
+      errorDiv.classList.add('hidden');
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'Authenticating...';
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: usernameInput, password: passwordInput })
+        });
+        const json = await res.json();
+
+        if (res.ok && json.success && json.token) {
+          authToken = json.token;
+          sessionStorage.setItem('admin_token', authToken);
+          hideLoginModal();
+          loadAllSubmissions();
+        } else {
+          errorDiv.innerText = json.error || 'Authentication failed.';
+          errorDiv.classList.remove('hidden');
+        }
+      } catch (err) {
+        errorDiv.innerText = 'Network error authenticating with live server.';
+        errorDiv.classList.remove('hidden');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'Authenticate & Unlock';
+      }
+    }
+
+    function handleLogout() {
+      sessionStorage.removeItem('admin_token');
+      localStorage.removeItem('admin_token');
+      authToken = '';
+      showLoginModal();
+    }
+
+    async function loadAllSubmissions() {
+      const isAuthed = await checkAuth();
+      if (!isAuthed) return;
+
+      const refreshIcon = document.getElementById('refresh-icon');
+      if (refreshIcon) refreshIcon.classList.add('animate-spin');
+
+      try {
+        const [contactRes, talentRes, healthRes] = await Promise.all([
+          fetch('/api/submissions/contact', { headers: getAuthHeaders() }),
+          fetch('/api/submissions/talent', { headers: getAuthHeaders() }),
+          fetch('/api/health')
+        ]);
+
+        const contactJson = await contactRes.json();
+        const talentJson = await talentRes.json();
+        const healthJson = await healthRes.json();
+
+        contactData = contactJson.data || [];
+        talentData = talentJson.data || [];
+
+        document.getElementById('metric-contact-count').innerText = contactData.length;
+        document.getElementById('metric-talent-count').innerText = talentData.length;
+        document.getElementById('metric-total-count').innerText = contactData.length + talentData.length;
+        document.getElementById('tab-contact-badge').innerText = contactData.length;
+        document.getElementById('tab-talent-badge').innerText = talentData.length;
+
+        if (healthJson.database) {
+          document.getElementById('metric-db-engine').innerText = healthJson.database;
+        }
+
+        selectedIds.clear();
+        updateBatchButton();
+        filterTable();
+
+        document.getElementById('status-indicator').className = "flex items-center space-x-2 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-xl text-xs font-mono text-emerald-400";
+        document.getElementById('status-text').innerText = "Live Backend Connected";
+      } catch (err) {
+        console.error('Error fetching submissions:', err);
+        document.getElementById('status-indicator').className = "flex items-center space-x-2 bg-red-500/10 border border-red-500/20 px-3 py-1.5 rounded-xl text-xs font-mono text-red-400";
+        document.getElementById('status-text').innerText = "Connection Error";
+      } finally {
+        if (refreshIcon) refreshIcon.classList.remove('animate-spin');
+      }
+    }
+
+    function renderContactTable(items) {
+      const tbody = document.getElementById('contact-table-body');
+      if (!items || items.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="9" class="text-center py-12 text-slate-500 font-mono">No contact submissions found in database.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = items.map(item => {
+        const isChecked = selectedIds.has(item.id) ? 'checked' : '';
+        return `
+        <tr class="hover:bg-white/[0.02] transition-colors">
+          <td class="py-3.5 px-4 text-center">
+            <input type="checkbox" value="${item.id}" ${isChecked} onchange="toggleSelectRow(${item.id}, this)" class="rounded bg-black/50 border-white/20 text-accent focus:ring-accent">
+          </td>
+          <td class="py-3.5 px-4 font-mono text-accent font-bold">#${item.id}</td>
+          <td class="py-3.5 px-4 font-mono text-slate-400 whitespace-nowrap">${formatDate(item.created_at)}</td>
+          <td class="py-3.5 px-4">
+            <div class="font-semibold text-white">${escapeHtml(item.name)}</div>
+            <div class="text-slate-400 font-mono text-[11px]">${escapeHtml(item.email)}</div>
+            <div class="text-emerald-400 font-mono text-[11px]">${escapeHtml(item.phone)}</div>
+          </td>
+          <td class="py-3.5 px-4">${escapeHtml(item.company || 'N/A')}</td>
+          <td class="py-3.5 px-4">
+            <span class="inline-block px-2.5 py-1 rounded-full text-[10px] font-mono font-medium bg-purple-500/20 text-purple-300 border border-purple-500/30">
+              ${escapeHtml(item.service || 'General')}
+            </span>
+          </td>
+          <td class="py-3.5 px-4 font-mono text-emerald-300 font-semibold">${escapeHtml(item.budget || 'N/A')}</td>
+          <td class="py-3.5 px-4 max-w-xs leading-relaxed text-slate-300 line-clamp-2" title="${escapeHtml(item.message)}">
+            ${escapeHtml(item.message)}
+          </td>
+          <td class="py-3.5 px-4 text-right whitespace-nowrap">
+            <button onclick="openDetailModal('contact', ${item.id})" class="text-accent hover:text-purple-300 font-mono text-[11px] hover:underline mr-3">
+              View
+            </button>
+            <button onclick="deleteSubmission('contact', ${item.id})" class="text-red-400 hover:text-red-300 font-mono text-[11px] hover:underline">
+              Delete
+            </button>
+          </td>
+        </tr>
+      `}).join('');
+    }
+
+    function renderTalentTable(items) {
+      const tbody = document.getElementById('talent-table-body');
+      if (!items || items.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="10" class="text-center py-12 text-slate-500 font-mono">No talent profiles registered in database.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = items.map(item => {
+        const isChecked = selectedIds.has(item.id) ? 'checked' : '';
+        return `
+        <tr class="hover:bg-white/[0.02] transition-colors">
+          <td class="py-3.5 px-4 text-center">
+            <input type="checkbox" value="${item.id}" ${isChecked} onchange="toggleSelectRow(${item.id}, this)" class="rounded bg-black/50 border-white/20 text-emerald-500 focus:ring-emerald-500">
+          </td>
+          <td class="py-3.5 px-4 font-mono text-emerald-400 font-bold">#${item.id}</td>
+          <td class="py-3.5 px-4 font-mono text-slate-400 whitespace-nowrap">${formatDate(item.created_at)}</td>
+          <td class="py-3.5 px-4">
+            <div class="font-semibold text-white">${escapeHtml(item.name)}</div>
+            <div class="text-slate-400 font-mono text-[11px]">${escapeHtml(item.email)}</div>
+            <div class="text-emerald-400 font-mono text-[11px]">${escapeHtml(item.phone)}</div>
+          </td>
+          <td class="py-3.5 px-4 font-semibold text-purple-300">${escapeHtml(item.role)}</td>
+          <td class="py-3.5 px-4 font-mono text-slate-300">${escapeHtml(item.experience || 'N/A')} Yrs</td>
+          <td class="py-3.5 px-4">${escapeHtml(item.location || 'N/A')}</td>
+          <td class="py-3.5 px-4 font-mono text-amber-300">${escapeHtml(item.notice_period || 'N/A')}</td>
+          <td class="py-3.5 px-4 max-w-xs">
+            ${item.resume_url ? `<a href="${escapeHtml(item.resume_url)}" target="_blank" rel="noopener noreferrer" class="text-accent underline font-mono text-[11px] truncate block">${escapeHtml(item.resume_url)}</a>` : '<span class="text-slate-500 font-mono">N/A</span>'}
+          </td>
+          <td class="py-3.5 px-4 text-right whitespace-nowrap">
+            <button onclick="openDetailModal('talent', ${item.id})" class="text-emerald-400 hover:text-emerald-300 font-mono text-[11px] hover:underline mr-3">
+              View
+            </button>
+            <button onclick="deleteSubmission('talent', ${item.id})" class="text-red-400 hover:text-red-300 font-mono text-[11px] hover:underline">
+              Delete
+            </button>
+          </td>
+        </tr>
+      `}).join('');
+    }
+
+    function switchTab(tab) {
+      activeTab = tab;
+      selectedIds.clear();
+      updateBatchButton();
+
+      const contactBtn = document.getElementById('tab-contact-btn');
+      const talentBtn = document.getElementById('tab-talent-btn');
+      const contactContent = document.getElementById('contact-tab-content');
+      const talentContent = document.getElementById('talent-tab-content');
+
+      if (tab === 'contact') {
+        contactBtn.className = 'px-4 py-2 rounded-lg text-xs font-semibold font-mono transition-all bg-accent text-white shadow-lg';
+        talentBtn.className = 'px-4 py-2 rounded-lg text-xs font-semibold font-mono transition-all text-slate-400 hover:text-white';
+        contactContent.classList.remove('hidden');
+        talentContent.classList.add('hidden');
+      } else {
+        talentBtn.className = 'px-4 py-2 rounded-lg text-xs font-semibold font-mono transition-all bg-emerald-600 text-white shadow-lg';
+        contactBtn.className = 'px-4 py-2 rounded-lg text-xs font-semibold font-mono transition-all text-slate-400 hover:text-white';
+        talentContent.classList.remove('hidden');
+        contactContent.classList.add('hidden');
+      }
+      filterTable();
+    }
+
+    function filterTable() {
+      const q = document.getElementById('search-input').value.toLowerCase().trim();
+      if (activeTab === 'contact') {
+        const filtered = contactData.filter(item =>
+          (item.name || '').toLowerCase().includes(q) ||
+          (item.email || '').toLowerCase().includes(q) ||
+          (item.phone || '').toLowerCase().includes(q) ||
+          (item.company || '').toLowerCase().includes(q) ||
+          (item.service || '').toLowerCase().includes(q) ||
+          (item.message || '').toLowerCase().includes(q)
+        );
+        renderContactTable(filtered);
+      } else {
+        const filtered = talentData.filter(item =>
+          (item.name || '').toLowerCase().includes(q) ||
+          (item.email || '').toLowerCase().includes(q) ||
+          (item.phone || '').toLowerCase().includes(q) ||
+          (item.role || '').toLowerCase().includes(q) ||
+          (item.location || '').toLowerCase().includes(q)
+        );
+        renderTalentTable(filtered);
+      }
+    }
+
+    function toggleSelectRow(id, cb) {
+      if (cb.checked) {
+        selectedIds.add(id);
+      } else {
+        selectedIds.delete(id);
+      }
+      updateBatchButton();
+    }
+
+    function toggleSelectAll(masterCb) {
+      const currentList = activeTab === 'contact' ? contactData : talentData;
+      selectedIds.clear();
+      if (masterCb.checked) {
+        currentList.forEach(item => selectedIds.add(item.id));
+      }
+      filterTable();
+      updateBatchButton();
+    }
+
+    function updateBatchButton() {
+      const btn = document.getElementById('batch-delete-btn');
+      const countSpan = document.getElementById('selected-count');
+      if (selectedIds.size > 0) {
+        btn.classList.remove('hidden');
+        btn.classList.add('flex');
+        countSpan.innerText = selectedIds.size;
+      } else {
+        btn.classList.add('hidden');
+        btn.classList.remove('flex');
+      }
+    }
+
+    async function deleteSubmission(type, id) {
+      if (!confirm(`Are you sure you want to delete submission #${id}?`)) return;
+
+      try {
+        const res = await fetch(`/api/submissions/${type}/${id}`, {
+          method: 'DELETE',
+          headers: getAuthHeaders()
+        });
+        const json = await res.json();
+        if (json.success) {
+          closeModal();
+          loadAllSubmissions();
+        } else {
+          alert('Error deleting submission: ' + json.error);
+        }
+      } catch (err) {
+        alert('Network error deleting submission');
+      }
+    }
+
+    async function deleteSelected() {
+      if (selectedIds.size === 0) return;
+      if (!confirm(`Are you sure you want to delete ${selectedIds.size} selected submissions?`)) return;
+
+      try {
+        const ids = Array.from(selectedIds);
+        const res = await fetch(`/api/submissions/${activeTab}/batch-delete`, {
+          method: 'POST',
+          headers: getAuthHeaders(),
+          body: JSON.stringify({ ids })
+        });
+        const json = await res.json();
+        if (json.success) {
+          loadAllSubmissions();
+        } else {
+          alert('Error batch deleting: ' + json.error);
+        }
+      } catch (err) {
+        alert('Network error during batch delete');
+      }
+    }
+
+    function toggleAccessGuide() {
+      const drawer = document.getElementById('access-guide-drawer');
+      drawer.classList.toggle('hidden');
+    }
+
+    function toggleExportMenu() {
+      const menu = document.getElementById('export-dropdown');
+      menu.classList.toggle('hidden');
+    }
+
+    document.addEventListener('click', (e) => {
+      const dropdown = document.getElementById('export-dropdown');
+      const btn = e.target.closest('button[onclick="toggleExportMenu()"]');
+      if (!btn && dropdown && !dropdown.contains(e.target)) {
+        dropdown.classList.add('hidden');
+      }
+    });
+
+    function exportData(format, allTabs) {
+      document.getElementById('export-dropdown').classList.add('hidden');
+
+      let exportPayload = [];
+      let filenamePrefix = '';
+
+      if (allTabs) {
+        filenamePrefix = 'spark_point_all_submissions';
+        exportPayload = {
+          contact_submissions: contactData,
+          talent_submissions: talentData
+        };
+      } else {
+        filenamePrefix = `spark_point_${activeTab}_submissions`;
+        exportPayload = activeTab === 'contact' ? contactData : talentData;
+      }
+
+      if (format === 'json') {
+        const blob = new Blob([JSON.stringify(exportPayload, null, 2)], { type: 'application/json' });
+        downloadBlob(blob, `${filenamePrefix}_${new Date().toISOString().split('T')[0]}.json`);
+      } else if (format === 'csv') {
+        if (allTabs) {
+          const contactCsv = generateCSV(contactData);
+          const talentCsv = generateCSV(talentData);
+          downloadBlob(new Blob([contactCsv], { type: 'text/csv' }), `spark_point_contact_enquiries_${new Date().toISOString().split('T')[0]}.csv`);
+          setTimeout(() => {
+            downloadBlob(new Blob([talentCsv], { type: 'text/csv' }), `spark_point_talent_profiles_${new Date().toISOString().split('T')[0]}.csv`);
+          }, 300);
+        } else {
+          const csvText = generateCSV(exportPayload);
+          downloadBlob(new Blob([csvText], { type: 'text/csv' }), `${filenamePrefix}_${new Date().toISOString().split('T')[0]}.csv`);
+        }
+      }
+    }
+
+    function generateCSV(data) {
+      if (!data || data.length === 0) return '';
+      const headers = Object.keys(data[0]);
+      const csvRows = [headers.join(',')];
+
+      for (const row of data) {
+        const values = headers.map(header => {
+          const val = row[header] === null || row[header] === undefined ? '' : row[header];
+          const escaped = ('' + val).replace(/"/g, '""');
+          return `"${escaped}"`;
+        });
+        csvRows.push(values.join(','));
+      }
+      return csvRows.join('\n');
+    }
+
+    function downloadBlob(blob, filename) {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    }
+
+    function openDetailModal(type, id) {
+      const dataList = type === 'contact' ? contactData : talentData;
+      const item = dataList.find(d => d.id === id);
+      if (!item) return;
+
+      const modal = document.getElementById('detail-modal');
+      const tag = document.getElementById('modal-type-tag');
+      const modalId = document.getElementById('modal-id');
+      const body = document.getElementById('modal-body-content');
+      const deleteBtn = document.getElementById('modal-delete-btn');
+
+      modalId.innerText = `#${item.id}`;
+      deleteBtn.setAttribute('onclick', `deleteSubmission('${type}', ${item.id})`);
+
+      if (type === 'contact') {
+        tag.className = 'text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-accent/20 text-accent border border-accent/30';
+        tag.innerText = 'Project Enquiry';
+
+        body.innerHTML = `
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-white/5 p-4 rounded-2xl border border-white/10">
+            <div>
+              <span class="text-slate-400 font-mono text-[10px] uppercase block">Full Name</span>
+              <span class="text-sm font-semibold text-white">${escapeHtml(item.name)}</span>
+            </div>
+            <div>
+              <span class="text-slate-400 font-mono text-[10px] uppercase block">Submission Date</span>
+              <span class="text-xs font-mono text-purple-300">${formatDate(item.created_at)}</span>
+            </div>
+            <div>
+              <span class="text-slate-400 font-mono text-[10px] uppercase block">Email Address</span>
+              <span class="text-xs font-mono text-accent font-semibold flex items-center space-x-2">
+                <span>${escapeHtml(item.email)}</span>
+                <button onclick="copyToClipboard('${escapeHtml(item.email)}')" class="hover:text-white text-[10px]">📋 Copy</button>
+              </span>
+            </div>
+            <div>
+              <span class="text-slate-400 font-mono text-[10px] uppercase block">Phone / WhatsApp</span>
+              <span class="text-xs font-mono text-emerald-400 font-semibold flex items-center space-x-2">
+                <span>${escapeHtml(item.phone)}</span>
+                <button onclick="copyToClipboard('${escapeHtml(item.phone)}')" class="hover:text-white text-[10px]">📋 Copy</button>
+              </span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="bg-white/5 p-3 rounded-xl border border-white/5">
+              <span class="text-slate-400 font-mono text-[10px] uppercase block">Company / Website</span>
+              <span class="text-xs font-semibold text-white">${escapeHtml(item.company || 'N/A')}</span>
+            </div>
+            <div class="bg-white/5 p-3 rounded-xl border border-white/5">
+              <span class="text-slate-400 font-mono text-[10px] uppercase block">Service Requested</span>
+              <span class="text-xs font-semibold text-purple-300">${escapeHtml(item.service || 'General')}</span>
+            </div>
+            <div class="bg-white/5 p-3 rounded-xl border border-white/5">
+              <span class="text-slate-400 font-mono text-[10px] uppercase block">Budget</span>
+              <span class="text-xs font-mono font-bold text-emerald-300">${escapeHtml(item.budget || 'N/A')}</span>
+            </div>
+          </div>
+
+          <div class="space-y-1 bg-white/5 p-4 rounded-2xl border border-white/10">
+            <span class="text-slate-400 font-mono text-[10px] uppercase block">Project Overview / Message</span>
+            <div class="text-xs text-slate-200 leading-relaxed whitespace-pre-wrap pt-1 font-sans">${escapeHtml(item.message)}</div>
+          </div>
+        `;
+      } else {
+        tag.className = 'text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30';
+        tag.innerText = 'Talent Profile';
+
+        body.innerHTML = `
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-white/5 p-4 rounded-2xl border border-white/10">
+            <div>
+              <span class="text-slate-400 font-mono text-[10px] uppercase block">Candidate Name</span>
+              <span class="text-sm font-semibold text-white">${escapeHtml(item.name)}</span>
+            </div>
+            <div>
+              <span class="text-slate-400 font-mono text-[10px] uppercase block">Registration Date</span>
+              <span class="text-xs font-mono text-purple-300">${formatDate(item.created_at)}</span>
+            </div>
+            <div>
+              <span class="text-slate-400 font-mono text-[10px] uppercase block">Email Address</span>
+              <span class="text-xs font-mono text-accent font-semibold flex items-center space-x-2">
+                <span>${escapeHtml(item.email)}</span>
+                <button onclick="copyToClipboard('${escapeHtml(item.email)}')" class="hover:text-white text-[10px]">📋 Copy</button>
+              </span>
+            </div>
+            <div>
+              <span class="text-slate-400 font-mono text-[10px] uppercase block">Phone / WhatsApp</span>
+              <span class="text-xs font-mono text-emerald-400 font-semibold flex items-center space-x-2">
+                <span>${escapeHtml(item.phone)}</span>
+                <button onclick="copyToClipboard('${escapeHtml(item.phone)}')" class="hover:text-white text-[10px]">📋 Copy</button>
+              </span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
+            <div class="bg-white/5 p-3 rounded-xl border border-white/5">
+              <span class="text-slate-400 font-mono text-[10px] uppercase block">Primary Expertise</span>
+              <span class="text-xs font-semibold text-purple-300">${escapeHtml(item.role)}</span>
+            </div>
+            <div class="bg-white/5 p-3 rounded-xl border border-white/5">
+              <span class="text-slate-400 font-mono text-[10px] uppercase block">Experience</span>
+              <span class="text-xs font-mono text-white">${escapeHtml(item.experience || 'N/A')} Yrs</span>
+            </div>
+            <div class="bg-white/5 p-3 rounded-xl border border-white/5">
+              <span class="text-slate-400 font-mono text-[10px] uppercase block">Location</span>
+              <span class="text-xs font-semibold text-slate-200">${escapeHtml(item.location || 'N/A')}</span>
+            </div>
+            <div class="bg-white/5 p-3 rounded-xl border border-white/5">
+              <span class="text-slate-400 font-mono text-[10px] uppercase block">Notice Period</span>
+              <span class="text-xs font-mono text-amber-300 font-semibold">${escapeHtml(item.notice_period || 'N/A')}</span>
+            </div>
+          </div>
+
+          <div class="space-y-1 bg-white/5 p-4 rounded-2xl border border-white/10">
+            <span class="text-slate-400 font-mono text-[10px] uppercase block">Resume / Portfolio / GitHub</span>
+            ${item.resume_url ? `
+              <div class="flex items-center justify-between pt-1">
+                <a href="${escapeHtml(item.resume_url)}" target="_blank" rel="noopener noreferrer" class="text-accent underline font-mono text-xs break-all">${escapeHtml(item.resume_url)}</a>
+                <button onclick="copyToClipboard('${escapeHtml(item.resume_url)}')" class="hover:text-white text-[10px] font-mono shrink-0 ml-2">📋 Copy Link</button>
+              </div>
+            ` : '<span class="text-slate-500 font-mono text-xs block pt-1">No link provided</span>'}
+          </div>
+        `;
+      }
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('detail-modal').classList.add('hidden');
+    }
+
+    function openChangePasswordModal() {
+      document.getElementById('password-modal').classList.remove('hidden');
+    }
+
+    function closePasswordModal() {
+      document.getElementById('password-modal').classList.add('hidden');
+    }
+
+    async function handleChangePassword(e) {
+      e.preventDefault();
+      const curr = document.getElementById('current-pass-input').value;
+      const newP = document.getElementById('new-pass-input').value;
+      const msgDiv = document.getElementById('pass-msg');
+
+      try {
+        const res = await fetch('/api/auth/change-password', {
+          method: 'POST',
+          headers: getAuthHeaders(),
+          body: JSON.stringify({ currentPassword: curr, newPassword: newP })
+        });
+        const json = await res.json();
+        if (res.ok && json.success) {
+          msgDiv.className = 'text-xs font-mono p-2.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+          msgDiv.innerText = 'Password updated successfully!';
+          msgDiv.classList.remove('hidden');
+          setTimeout(() => closePasswordModal(), 1500);
+        } else {
+          msgDiv.className = 'text-xs font-mono p-2.5 rounded-lg bg-red-500/20 text-red-300 border border-red-500/30';
+          msgDiv.innerText = json.error || 'Failed to update password.';
+          msgDiv.classList.remove('hidden');
+        }
+      } catch (err) {
+        msgDiv.className = 'text-xs font-mono p-2.5 rounded-lg bg-red-500/20 text-red-300 border border-red-500/30';
+        msgDiv.innerText = 'Network error updating password.';
+        msgDiv.classList.remove('hidden');
+      }
+    }
+
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text);
+      alert('Copied to clipboard: ' + text);
+    }
+
+    function formatDate(str) {
+      if (!str) return 'N/A';
+      const d = new Date(str);
+      return d.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    document.addEventListener('DOMContentLoaded', checkAuth);
+  </script>
+</body>
+
+</html>
