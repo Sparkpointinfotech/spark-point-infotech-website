@@ -95,6 +95,11 @@ const authMiddleware = (req, res, next) => {
 // PUBLIC ENDPOINTS
 // ------------------------------------------------------------------
 
+// API Root Status Endpoint
+app.get(['/api', '/api/'], (req, res) => {
+  res.json({ status: 'ok', service: 'Spark Point Infotech API' });
+});
+
 // Health Check Endpoint
 app.get(['/api/health', '/health'], async (req, res) => {
   try {
