@@ -509,6 +509,7 @@
         if (res.ok && json.success && json.token) {
           authToken = json.token;
           sessionStorage.setItem('admin_token', authToken);
+          localStorage.setItem('admin_token', authToken);
           hideLoginModal();
           loadAllSubmissions();
         } else {
@@ -544,6 +545,14 @@
           fetch('/api/submissions/talent', { headers: getAuthHeaders() }),
           fetch('/api/health')
         ]);
+
+        if (contactRes.status === 401 || talentRes.status === 401) {
+          sessionStorage.removeItem('admin_token');
+          localStorage.removeItem('admin_token');
+          authToken = '';
+          showLoginModal();
+          return;
+        }
 
         const contactJson = await contactRes.json();
         const talentJson = await talentRes.json();

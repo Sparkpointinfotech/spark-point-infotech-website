@@ -1,7 +1,14 @@
 import express from 'express';
 import cors from 'cors';
 import jwt from 'jsonwebtoken';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { dbRun, dbAll, getAdminPassword, setAdminPassword } from './db.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const rootDir = path.resolve(__dirname, '..');
 
 const app = express();
 
@@ -27,10 +34,28 @@ app.use((req, res, next) => {
   next();
 });
 
-// Normalize Vercel Serverless Function paths so /auth/login and /api/auth/login both match
+// Serve static files from project root & dist folder if present
+if (fs.existsSync(path.join(rootDir, 'dist'))) {
+  app.use(express.static(path.join(rootDir, 'dist')));
+}
+app.use(express.static(rootDir));
+
+// Serve Admin Panel directly on /admin or /admin.html
+app.get(['/admin', '/admin.html'], (req, res) => {
+  const adminPath = fs.existsSync(path.join(rootDir, 'dist', 'admin.html')) 
+    ? path.join(rootDir, 'dist', 'admin.html') 
+    : path.join(rootDir, 'admin.html');
+  res.sendFile(adminPath);
+});
+
+// Normalize Vercel Serverless Function API paths (e.g., /auth/login -> /api/auth/login)
+const apiPrefixes = ['/health', '/contact', '/talent', '/auth', '/submissions', '/export'];
 app.use((req, res, next) => {
-  if (req.url && !req.url.startsWith('/api') && !req.url.startsWith('/assets')) {
-    req.url = '/api' + (req.url.startsWith('/') ? '' : '/') + req.url;
+  if (req.url && !req.url.startsWith('/api')) {
+    const isApiMatch = apiPrefixes.some(prefix => req.url.startsWith(prefix));
+    if (isApiMatch) {
+      req.url = '/api' + (req.url.startsWith('/') ? '' : '/') + req.url;
+    }
   }
   next();
 });
@@ -459,6 +484,11 @@ app.get('/api/export/talent/json', authMiddleware, async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.setHeader('Content-Disposition', `attachment; filename="talent_submissions_${Date.now()}.json"`);
     res.json(rows);
+  } catch (err) {
+    res.status(500).send('Error exporting talent JSON: ' + err.message);
+  }
+});
+
 // Catch-all 404 handler for API routes
 app.use((req, res) => {
   res.status(404).json({ success: false, error: `API route ${req.url} not found` });
