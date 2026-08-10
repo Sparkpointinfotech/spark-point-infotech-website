@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import sqlite3 from 'sqlite3';
 import pg from 'pg';
 import { fileURLToPath } from 'url';
 
@@ -8,12 +7,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const dbUrl = process.env.DATABASE_URL || process.env.POSTGRES_URL;
-let dbMode = dbUrl ? 'pg' : 'sqlite';
+let dbMode = dbUrl ? 'pg' : (process.env.VERCEL ? 'fallback' : 'sqlite');
 
 let pgPool = null;
 let sqliteDb = null;
 
-// Zero-config persistent store for serverless/fallback environments
+// Zero-config persistent store for Vercel/Fallback Environments
 const fallbackFile = process.env.VERCEL ? '/tmp/submissions_store.json' : path.resolve(__dirname, 'submissions_store.json');
 let fallbackStore = {
   contact_submissions: [
@@ -70,41 +69,14 @@ function saveFallbackStore() {
 
 loadFallbackStore();
 
-if (dbMode === 'pg') {
-  try {
-    pgPool = new pg.Pool({
-      connectionString: dbUrl,
-      ssl: dbUrl.includes('localhost') ? false : { rejectUnauthorized: false }
-    });
-    console.log('[Database] Connected to PostgreSQL Cloud');
-  } catch (err) {
-    console.warn('[Database] PG error, switching to fallback:', err.message);
-    dbMode = 'fallback';
-  }
-} else {
-  try {
-    let dbPath = path.resolve(__dirname, 'database.db');
-    if (process.env.VERCEL) {
-      dbPath = '/tmp/database.db';
-    }
-    sqliteDb = new sqlite3.Database(dbPath, (err) => {
-      if (err) {
-        console.warn('[Database] SQLite init error, switching to fallback mode:', err.message);
-        dbMode = 'fallback';
-      } else {
-        console.log(`[Database] Connected to SQLite database at: ${dbPath}`);
-      }
-    });
-  } catch (err) {
-    console.warn('[Database] SQLite load error, switching to fallback mode:', err.message);
-    dbMode = 'fallback';
-  }
-}
-
-// Table Initialization
+// Initialize Database Connection & Tables
 export async function initDb() {
-  if (dbMode === 'pg' && pgPool) {
+  if (dbMode === 'pg') {
     try {
+      pgPool = new pg.Pool({
+        connectionString: dbUrl,
+        ssl: dbUrl.includes('localhost') ? false : { rejectUnauthorized: false }
+      });
       await pgPool.query(`
         CREATE TABLE IF NOT EXISTS contact_submissions (
           id SERIAL PRIMARY KEY,
@@ -132,46 +104,75 @@ export async function initDb() {
           created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
       `);
+      console.log('[Database] Connected & initialized PostgreSQL Cloud');
+      return;
     } catch (err) {
-      console.warn('[Database] PG init table error, falling back:', err.message);
+      console.warn('[Database] PG init error, switching to fallback mode:', err.message);
       dbMode = 'fallback';
     }
-  } else if (dbMode === 'sqlite' && sqliteDb) {
-    return new Promise((resolve) => {
-      sqliteDb.serialize(() => {
-        sqliteDb.run(`
-          CREATE TABLE IF NOT EXISTS contact_submissions (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            email TEXT NOT NULL,
-            phone TEXT NOT NULL,
-            company TEXT,
-            service TEXT,
-            budget TEXT,
-            message TEXT NOT NULL,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-          )
-        `, (err) => {
-          if (err) dbMode = 'fallback';
+  }
+
+  if (dbMode === 'sqlite') {
+    try {
+      const sqlite3Module = await import('sqlite3').catch(() => null);
+      const sqlite3 = sqlite3Module?.default || sqlite3Module;
+      if (sqlite3) {
+        const dbPath = path.resolve(__dirname, 'database.db');
+        sqliteDb = new sqlite3.Database(dbPath, (err) => {
+          if (err) {
+            console.warn('[Database] SQLite init error, switching to fallback mode:', err.message);
+            dbMode = 'fallback';
+          } else {
+            console.log(`[Database] Connected to SQLite database at: ${dbPath}`);
+          }
         });
-        sqliteDb.run(`
-          CREATE TABLE IF NOT EXISTS talent_submissions (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            email TEXT NOT NULL,
-            phone TEXT NOT NULL,
-            role TEXT NOT NULL,
-            experience TEXT,
-            location TEXT,
-            notice_period TEXT,
-            resume_url TEXT,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-          )`, (err) => {
-            if (err) dbMode = 'fallback';
-            resolve();
+
+        return new Promise((resolve) => {
+          sqliteDb.serialize(() => {
+            sqliteDb.run(`
+              CREATE TABLE IF NOT EXISTS contact_submissions (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                email TEXT NOT NULL,
+                phone TEXT NOT NULL,
+                company TEXT,
+                service TEXT,
+                budget TEXT,
+                message TEXT NOT NULL,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+              )
+            `, (err) => {
+              if (err) dbMode = 'fallback';
+            });
+            sqliteDb.run(`
+              CREATE TABLE IF NOT EXISTS talent_submissions (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                email TEXT NOT NULL,
+                phone TEXT NOT NULL,
+                role TEXT NOT NULL,
+                experience TEXT,
+                location TEXT,
+                notice_period TEXT,
+                resume_url TEXT,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+              )`, (err) => {
+                if (err) dbMode = 'fallback';
+                resolve();
+              });
           });
-      });
-    });
+        });
+      } else {
+        dbMode = 'fallback';
+      }
+    } catch (err) {
+      console.warn('[Database] SQLite load error, switching to fallback mode:', err.message);
+      dbMode = 'fallback';
+    }
+  }
+
+  if (dbMode === 'fallback') {
+    console.log('[Database] Active Mode: Pure JS Zero-Config Engine (Serverless persistent)');
   }
 }
 

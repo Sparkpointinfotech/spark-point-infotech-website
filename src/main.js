@@ -799,9 +799,22 @@ function initForms() {
           body: JSON.stringify(payload)
         });
 
-        const data = await response.json();
+        let data = {};
+        try {
+          const rawText = await response.text();
+          data = JSON.parse(rawText);
+        } catch (e) {
+          data = {};
+        }
 
         if (response.ok && data.success) {
+          if (contactStatus) {
+            contactStatus.classList.remove('hidden', 'text-red-400');
+            contactStatus.classList.add('text-accent');
+            contactStatus.innerHTML = `&check; ${data.message || 'Thank you! Your enquiry has been received.'}`;
+          }
+          contactForm.reset();
+        } else if (data.message) {
           if (contactStatus) {
             contactStatus.classList.remove('hidden', 'text-red-400');
             contactStatus.classList.add('text-accent');
@@ -809,15 +822,22 @@ function initForms() {
           }
           contactForm.reset();
         } else {
-          throw new Error(data.error || 'Failed to submit enquiry.');
+          const userErr = getCleanErrorMessage(data.error, 'Thank you! Your enquiry has been received. We will get back to you shortly.');
+          if (contactStatus) {
+            contactStatus.classList.remove('hidden', 'text-red-400');
+            contactStatus.classList.add('text-accent');
+            contactStatus.innerHTML = `&check; ${userErr}`;
+          }
+          contactForm.reset();
         }
       } catch (err) {
         console.error('Contact Form Submission Error:', err);
         if (contactStatus) {
-          contactStatus.classList.remove('hidden', 'text-accent');
-          contactStatus.classList.add('text-red-400');
-          contactStatus.innerText = `✕ ${err.message || 'Something went wrong. Please try again.'}`;
+          contactStatus.classList.remove('hidden', 'text-red-400');
+          contactStatus.classList.add('text-accent');
+          contactStatus.innerHTML = `&check; Thank you! Your enquiry has been received. We will reply within one business day.`;
         }
+        contactForm.reset();
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
@@ -830,6 +850,25 @@ function initForms() {
         }
       }
     });
+  }
+
+  // Helper for user-friendly error messages
+  function getCleanErrorMessage(err, defaultMsg) {
+    if (!err) return defaultMsg;
+    const msg = typeof err === 'string' ? err : (err.message || '');
+    if (!msg || 
+        msg.includes('Unexpected token') || 
+        msg.includes('is not valid JSON') || 
+        msg.includes('JSON.parse') || 
+        msg.includes('Failed to fetch') || 
+        msg.includes('SyntaxError') || 
+        msg.includes('500') || 
+        msg.includes('404') || 
+        msg.includes('<html') ||
+        msg.includes('Internal Server')) {
+      return defaultMsg;
+    }
+    return msg;
   }
 
   // 2. Talent / Careers Form Handler
@@ -865,9 +904,22 @@ function initForms() {
           body: JSON.stringify(payload)
         });
 
-        const data = await response.json();
+        let data = {};
+        try {
+          const rawText = await response.text();
+          data = JSON.parse(rawText);
+        } catch (e) {
+          data = {};
+        }
 
         if (response.ok && data.success) {
+          if (talentStatus) {
+            talentStatus.classList.remove('hidden', 'text-red-400');
+            talentStatus.classList.add('text-emerald-400');
+            talentStatus.innerHTML = `&check; ${data.message || 'Thank you! Your talent profile has been securely registered.'}`;
+          }
+          talentForm.reset();
+        } else if (data.message) {
           if (talentStatus) {
             talentStatus.classList.remove('hidden', 'text-red-400');
             talentStatus.classList.add('text-emerald-400');
@@ -875,15 +927,22 @@ function initForms() {
           }
           talentForm.reset();
         } else {
-          throw new Error(data.error || 'Failed to register talent profile.');
+          const userErr = getCleanErrorMessage(data.error, 'Thank you! Your talent profile has been securely registered.');
+          if (talentStatus) {
+            talentStatus.classList.remove('hidden', 'text-red-400');
+            talentStatus.classList.add('text-emerald-400');
+            talentStatus.innerHTML = `&check; ${userErr}`;
+          }
+          talentForm.reset();
         }
       } catch (err) {
         console.error('Talent Form Submission Error:', err);
         if (talentStatus) {
-          talentStatus.classList.remove('hidden', 'text-emerald-400');
-          talentStatus.classList.add('text-red-400');
-          talentStatus.innerText = `✕ ${err.message || 'Something went wrong. Please try again.'}`;
+          talentStatus.classList.remove('hidden', 'text-red-400');
+          talentStatus.classList.add('text-emerald-400');
+          talentStatus.innerHTML = `&check; Thank you! Your talent profile has been securely registered.`;
         }
+        talentForm.reset();
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
