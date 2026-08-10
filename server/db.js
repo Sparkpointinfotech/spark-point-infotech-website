@@ -73,14 +73,25 @@ loadFallbackStore();
 
 export function getAdminPassword() {
   loadFallbackStore();
-  return fallbackStore.admin_password || process.env.ADMIN_PASSWORD || 'SparkPoint2026!Admin';
+  const stored = fallbackStore ? fallbackStore.admin_password : null;
+  if (typeof stored === 'string' && stored.trim().length > 0) {
+    return stored.trim();
+  }
+  const envPass = process.env.ADMIN_PASSWORD;
+  if (typeof envPass === 'string' && envPass.trim().length > 0) {
+    return envPass.trim();
+  }
+  return 'SparkPoint2026!Admin';
 }
 
 export function setAdminPassword(newPassword) {
   loadFallbackStore();
-  fallbackStore.admin_password = newPassword;
-  saveFallbackStore();
-  return true;
+  if (newPassword && typeof newPassword === 'string' && newPassword.trim().length >= 6) {
+    fallbackStore.admin_password = newPassword.trim();
+    saveFallbackStore();
+    return true;
+  }
+  return false;
 }
 
 // Initialize Database Connection & Tables
