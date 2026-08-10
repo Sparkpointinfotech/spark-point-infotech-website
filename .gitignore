@@ -5,4 +5,7 @@ dist
 .tempmediaStorage
 *.db
 submissions_store.json
+.env
+.env*.local
+
 
