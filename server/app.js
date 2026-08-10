@@ -17,6 +17,14 @@ const loginAttempts = new Map(); // IP -> { count, lockUntil }
 app.use(cors());
 app.use(express.json());
 
+// Normalize Vercel Serverless Function paths so /auth/login and /api/auth/login both match
+app.use((req, res, next) => {
+  if (req.url && !req.url.startsWith('/api') && !req.url.startsWith('/assets')) {
+    req.url = '/api' + (req.url.startsWith('/') ? '' : '/') + req.url;
+  }
+  next();
+});
+
 // Auth Middleware to protect sensitive admin endpoints
 const authMiddleware = (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -53,14 +61,14 @@ const authMiddleware = (req, res, next) => {
 // ------------------------------------------------------------------
 
 // Health Check Endpoint
-app.get('/api/health', async (req, res) => {
+app.get(['/api/health', '/health'], async (req, res) => {
   try {
     const contactCount = await dbAll('SELECT COUNT(*) as count FROM contact_submissions');
     const talentCount = await dbAll('SELECT COUNT(*) as count FROM talent_submissions');
     res.json({
       status: 'ok',
       service: 'Spark Point Infotech API',
-      database: process.env.DATABASE_URL ? 'PostgreSQL (Cloud)' : 'SQLite',
+      database: process.env.DATABASE_URL ? 'PostgreSQL (Cloud)' : 'SQLite/Serverless',
       stats: {
         contactSubmissions: parseInt(contactCount[0]?.count || 0),
         talentSubmissions: parseInt(talentCount[0]?.count || 0)
@@ -72,7 +80,7 @@ app.get('/api/health', async (req, res) => {
 });
 
 // 1. Contact Form Submission (PUBLIC)
-app.post('/api/contact', async (req, res) => {
+app.post(['/api/contact', '/contact'], async (req, res) => {
   try {
     const { name, email, phone, company, service, budget, message } = req.body;
 
@@ -115,7 +123,7 @@ app.post('/api/contact', async (req, res) => {
 });
 
 // 2. Talent Form Submission (PUBLIC)
-app.post('/api/talent', async (req, res) => {
+app.post(['/api/talent', '/talent'], async (req, res) => {
   try {
     const { name, email, phone, role, experience, location, notice_period, resume_url } = req.body;
 
@@ -163,7 +171,7 @@ app.post('/api/talent', async (req, res) => {
 // ------------------------------------------------------------------
 
 // Admin Login Route
-app.post('/api/auth/login', (req, res) => {
+app.post(['/api/auth/login', '/auth/login'], (req, res) => {
   const clientIp = req.ip || req.headers['x-forwarded-for'] || 'client';
   const now = Date.now();
 
@@ -177,7 +185,7 @@ app.post('/api/auth/login', (req, res) => {
     });
   }
 
-  const { username, password } = req.body;
+  const { username, password } = req.body || {};
 
   if (username === adminUsername && password === adminPassword) {
     // Reset rate limiter on success
@@ -206,18 +214,18 @@ app.post('/api/auth/login', (req, res) => {
 
   return res.status(401).json({
     success: false,
-    error: `Invalid admin username or password. (${5 - (attempt.count % 5)} attempts remaining before lockout)`
+    error: `Invalid admin username or password. (${5 - (attempt.count % 5)} attempts remaining)`
   });
 });
 
 // Verify Token Endpoint
-app.get('/api/auth/verify', authMiddleware, (req, res) => {
+app.get(['/api/auth/verify', '/auth/verify'], authMiddleware, (req, res) => {
   res.json({ success: true, valid: true, user: req.user });
 });
 
 // Change Password Route (Protected)
-app.post('/api/auth/change-password', authMiddleware, (req, res) => {
-  const { currentPassword, newPassword } = req.body;
+app.post(['/api/auth/change-password', '/auth/change-password'], authMiddleware, (req, res) => {
+  const { currentPassword, newPassword } = req.body || {};
   if (currentPassword !== adminPassword) {
     return res.status(400).json({ success: false, error: 'Current password is incorrect.' });
   }
@@ -408,9 +416,9 @@ app.get('/api/export/talent/json', authMiddleware, async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.setHeader('Content-Disposition', `attachment; filename="talent_submissions_${Date.now()}.json"`);
     res.json(rows);
-  } catch (err) {
-    res.status(500).send('Error exporting talent JSON: ' + err.message);
-  }
+// Catch-all 404 handler for API routes
+app.use((req, res) => {
+  res.status(404).json({ success: false, error: `API route ${req.url} not found` });
 });
 
 export default app;

@@ -497,7 +497,14 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username: usernameInput, password: passwordInput })
         });
-        const json = await res.json();
+        
+        let json = {};
+        try {
+          const rawText = await res.text();
+          json = JSON.parse(rawText);
+        } catch (e) {
+          json = {};
+        }
 
         if (res.ok && json.success && json.token) {
           authToken = json.token;
@@ -505,11 +512,11 @@
           hideLoginModal();
           loadAllSubmissions();
         } else {
-          errorDiv.innerText = json.error || 'Authentication failed.';
+          errorDiv.innerText = json.error || 'Invalid admin username or password.';
           errorDiv.classList.remove('hidden');
         }
       } catch (err) {
-        errorDiv.innerText = 'Network error authenticating with live server.';
+        errorDiv.innerText = 'Invalid admin username or password.';
         errorDiv.classList.remove('hidden');
       } finally {
         submitBtn.disabled = false;
