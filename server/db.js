@@ -201,8 +201,21 @@ export async function initDb() {
   }
 }
 
+let initPromise = null;
+
+export async function ensureDb() {
+  if (!initPromise) {
+    initPromise = initDb();
+  }
+  await initPromise;
+}
+
 // Helper: Run Mutation Query
 export const dbRun = async (sql, params = []) => {
+  if (dbUrl) {
+    await ensureDb();
+  }
+
   if (dbMode === 'pg' && pgPool) {
     try {
       let index = 1;
@@ -212,8 +225,7 @@ export const dbRun = async (sql, params = []) => {
       const res = await pgPool.query(finalSql, params);
       return { lastID: res.rows[0]?.id || 0, rowCount: res.rowCount };
     } catch (err) {
-      console.warn('[Database] PG Run error, using fallback:', err.message);
-      dbMode = 'fallback';
+      console.warn('[Database] PG Run error:', err.message);
     }
   }
   
@@ -317,6 +329,10 @@ export const dbRun = async (sql, params = []) => {
 
 // Helper: Query Rows
 export const dbAll = async (sql, params = []) => {
+  if (dbUrl) {
+    await ensureDb();
+  }
+
   if (dbMode === 'pg' && pgPool) {
     try {
       let index = 1;
@@ -324,8 +340,7 @@ export const dbAll = async (sql, params = []) => {
       const res = await pgPool.query(pgSql, params);
       return res.rows;
     } catch (err) {
-      console.warn('[Database] PG All error, using fallback:', err.message);
-      dbMode = 'fallback';
+      console.warn('[Database] PG All error:', err.message);
     }
   }
 
