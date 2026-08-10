@@ -1,13 +1,12 @@
 import express from 'express';
 import cors from 'cors';
 import jwt from 'jsonwebtoken';
-import { dbRun, dbAll } from './db.js';
+import { dbRun, dbAll, getAdminPassword, setAdminPassword } from './db.js';
 
 const app = express();
 
 // Security & Secret Configs
 const JWT_SECRET = process.env.JWT_SECRET || 'spark-point-infotech-admin-secret-2026';
-let adminPassword = process.env.ADMIN_PASSWORD || 'SparkPoint2026!Admin';
 const adminUsername = process.env.ADMIN_USERNAME || 'admin';
 
 // Rate Limiter for Login Attempts
@@ -15,7 +14,18 @@ const loginAttempts = new Map(); // IP -> { count, lockUntil }
 
 // Middleware
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true }));
+
+// Normalize Body if Vercel passes raw string/buffer
+app.use((req, res, next) => {
+  if (req.body && typeof req.body === 'string') {
+    try {
+      req.body = JSON.parse(req.body);
+    } catch (e) {}
+  }
+  next();
+});
 
 // Normalize Vercel Serverless Function paths so /auth/login and /api/auth/login both match
 app.use((req, res, next) => {
@@ -82,7 +92,14 @@ app.get(['/api/health', '/health'], async (req, res) => {
 // 1. Contact Form Submission (PUBLIC)
 app.post(['/api/contact', '/contact'], async (req, res) => {
   try {
-    const { name, email, phone, company, service, budget, message } = req.body;
+    const body = req.body || {};
+    const name = String(body.name || '').trim();
+    const email = String(body.email || '').trim();
+    const phone = String(body.phone || '').trim();
+    const company = String(body.company || '').trim();
+    const service = String(body.service || '').trim();
+    const budget = String(body.budget || '').trim();
+    const message = String(body.message || '').trim();
 
     if (!name || !email || !phone || !message) {
       return res.status(400).json({
@@ -97,13 +114,13 @@ app.post(['/api/contact', '/contact'], async (req, res) => {
     `;
 
     const result = await dbRun(query, [
-      name.trim(),
-      email.trim(),
-      phone.trim(),
-      company ? company.trim() : null,
-      service ? service.trim() : null,
-      budget ? budget.trim() : null,
-      message.trim()
+      name,
+      email,
+      phone,
+      company || null,
+      service || null,
+      budget || null,
+      message
     ]);
 
     console.log(`[Contact Submission] Saved enquiry from ${name} (${email}) - ID: ${result.lastID}`);
@@ -125,7 +142,15 @@ app.post(['/api/contact', '/contact'], async (req, res) => {
 // 2. Talent Form Submission (PUBLIC)
 app.post(['/api/talent', '/talent'], async (req, res) => {
   try {
-    const { name, email, phone, role, experience, location, notice_period, resume_url } = req.body;
+    const body = req.body || {};
+    const name = String(body.name || '').trim();
+    const email = String(body.email || '').trim();
+    const phone = String(body.phone || '').trim();
+    const role = String(body.role || '').trim();
+    const experience = String(body.experience || '').trim();
+    const location = String(body.location || '').trim();
+    const notice_period = String(body.notice_period || '').trim();
+    const resume_url = String(body.resume_url || '').trim();
 
     if (!name || !email || !phone || !role) {
       return res.status(400).json({
@@ -140,14 +165,14 @@ app.post(['/api/talent', '/talent'], async (req, res) => {
     `;
 
     const result = await dbRun(query, [
-      name.trim(),
-      email.trim(),
-      phone.trim(),
-      role.trim(),
-      experience ? experience.trim() : null,
-      location ? location.trim() : null,
-      notice_period ? notice_period.trim() : null,
-      resume_url ? resume_url.trim() : null
+      name,
+      email,
+      phone,
+      role,
+      experience || null,
+      location || null,
+      notice_period || null,
+      resume_url || null
     ]);
 
     console.log(`[Talent Submission] Saved profile from ${name} (${email}) - ID: ${result.lastID}`);
@@ -175,7 +200,6 @@ app.post(['/api/auth/login', '/auth/login'], (req, res) => {
   const clientIp = req.ip || req.headers['x-forwarded-for'] || 'client';
   const now = Date.now();
 
-  // Check rate limiting
   const attempt = loginAttempts.get(clientIp) || { count: 0, lockUntil: 0 };
   if (attempt.lockUntil > now) {
     const minutesLeft = Math.ceil((attempt.lockUntil - now) / 60000);
@@ -185,10 +209,13 @@ app.post(['/api/auth/login', '/auth/login'], (req, res) => {
     });
   }
 
-  const { username, password } = req.body || {};
+  const body = req.body || {};
+  const username = String(body.username || '').trim();
+  const password = String(body.password || '').trim();
 
-  if (username === adminUsername && password === adminPassword) {
-    // Reset rate limiter on success
+  const currentPassword = getAdminPassword();
+
+  if (username.toLowerCase() === adminUsername.toLowerCase() && password === currentPassword) {
     loginAttempts.delete(clientIp);
 
     const token = jwt.sign(
@@ -205,16 +232,15 @@ app.post(['/api/auth/login', '/auth/login'], (req, res) => {
     });
   }
 
-  // Failed login tracking
   attempt.count += 1;
   if (attempt.count >= 5) {
-    attempt.lockUntil = now + 15 * 60 * 1000; // 15 minute lockout
+    attempt.lockUntil = now + 15 * 60 * 1000;
   }
   loginAttempts.set(clientIp, attempt);
 
   return res.status(401).json({
     success: false,
-    error: `Invalid admin username or password. (${5 - (attempt.count % 5)} attempts remaining)`
+    error: `Invalid admin username or password.`
   });
 });
 
@@ -225,14 +251,20 @@ app.get(['/api/auth/verify', '/auth/verify'], authMiddleware, (req, res) => {
 
 // Change Password Route (Protected)
 app.post(['/api/auth/change-password', '/auth/change-password'], authMiddleware, (req, res) => {
-  const { currentPassword, newPassword } = req.body || {};
-  if (currentPassword !== adminPassword) {
+  const body = req.body || {};
+  const currentInput = String(body.currentPassword || '').trim();
+  const newPassword = String(body.newPassword || '').trim();
+
+  const activePassword = getAdminPassword();
+
+  if (currentInput !== activePassword) {
     return res.status(400).json({ success: false, error: 'Current password is incorrect.' });
   }
   if (!newPassword || newPassword.length < 6) {
     return res.status(400).json({ success: false, error: 'New password must be at least 6 characters long.' });
   }
-  adminPassword = newPassword;
+
+  setAdminPassword(newPassword);
   res.json({ success: true, message: 'Admin password updated successfully!' });
 });
 

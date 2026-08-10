@@ -12,9 +12,10 @@ let dbMode = dbUrl ? 'pg' : (process.env.VERCEL ? 'fallback' : 'sqlite');
 let pgPool = null;
 let sqliteDb = null;
 
-// Zero-config persistent store for Vercel/Fallback Environments
+// Persistent Store for Vercel/Fallback Environments & Configuration
 const fallbackFile = process.env.VERCEL ? '/tmp/submissions_store.json' : path.resolve(__dirname, 'submissions_store.json');
 let fallbackStore = {
+  admin_password: process.env.ADMIN_PASSWORD || 'SparkPoint2026!Admin',
   contact_submissions: [
     {
       id: 1,
@@ -50,7 +51,8 @@ function loadFallbackStore() {
   try {
     if (fs.existsSync(fallbackFile)) {
       const data = fs.readFileSync(fallbackFile, 'utf8');
-      fallbackStore = JSON.parse(data);
+      const loaded = JSON.parse(data);
+      fallbackStore = { ...fallbackStore, ...loaded };
     } else {
       saveFallbackStore();
     }
@@ -68,6 +70,18 @@ function saveFallbackStore() {
 }
 
 loadFallbackStore();
+
+export function getAdminPassword() {
+  loadFallbackStore();
+  return fallbackStore.admin_password || process.env.ADMIN_PASSWORD || 'SparkPoint2026!Admin';
+}
+
+export function setAdminPassword(newPassword) {
+  loadFallbackStore();
+  fallbackStore.admin_password = newPassword;
+  saveFallbackStore();
+  return true;
+}
 
 // Initialize Database Connection & Tables
 export async function initDb() {
@@ -356,4 +370,4 @@ export const dbAll = async (sql, params = []) => {
 // Trigger table init
 initDb().catch(err => console.error('[Database Init Error]:', err));
 
-export default { dbRun, dbAll, initDb };
+export default { dbRun, dbAll, initDb, getAdminPassword, setAdminPassword };
