@@ -20,9 +20,9 @@
 5. **Cloud Architecture & API Gateways**: RESTful and GraphQL API design, Stripe/PayPal payment gateway integrations, Docker containerization, and microservices.
 6. **SLA Maintenance & Support**: 24/7 proactive monitoring, security patching, database backups, and dedicated engineering leads.
 
-## E-E-A-T & Leadership Profile
+## E-E-A-T & Engineering Leadership
 
-- **Leadership**: Founded and led by senior software architects with extensive experience across 150+ commercial web, mobile, and cloud software deployments.
+- **Leadership**: Led by senior software architects with extensive experience across 150+ commercial web, mobile, and cloud software deployments.
 - **Operating Sectors**: E-commerce & Retail, SaaS & Tech Startups, Healthcare & Medical Clinics, Manufacturing & Logistics.
 - **Compliance & Security**: GDPR privacy-by-design compliance, signed Data Processing Agreements (DPA), AES-256 data encryption, and role-based access control.
 
