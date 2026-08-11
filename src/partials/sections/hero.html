@@ -1,0 +1,74 @@
+<!-- ==================== SECTION 2 - HERO ==================== -->
+  <section id="hero-section" class="relative h-[280vh] md:h-[420vh]">
+
+    <!-- Hero Title & Tagline -->
+    <div id="hero-content"
+      class="fixed inset-0 z-10 flex flex-col items-center justify-center text-center px-4 sm:px-8 pointer-events-none">
+      <div class="max-w-6xl mx-auto space-y-6 sm:space-y-8 pointer-events-auto mt-[-20px] sm:mt-[-30px]">
+
+        <!-- Status Pill (Increased font size & legibility) -->
+        <div
+          class="inline-flex items-center space-x-2 sm:space-x-3 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-accent/25 border border-accent/50 text-white text-[10px] sm:text-xs font-mono font-bold tracking-[0.2em] uppercase shadow-[0_0_25px_rgba(168,85,247,0.5)]">
+          <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-accentGlow animate-ping"></span>
+          <span class="text-white font-bold">INDIA &bull; GERMANY &bull; NETHERLANDS</span>
+        </div>
+
+        <!-- Main Headline (Stretched & Larger) -->
+        <h1 class="text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white tracking-[-0.03em] leading-[1.1]">
+          Engineered with clarity <span class="bg-gradient-to-r from-accent via-purple-300 to-accentGlow bg-clip-text text-transparent">built for scale.</span>
+        </h1>
+
+        <!-- Subheadline & Tagline (Highly Visible Text) -->
+        <p class="text-sm sm:text-lg md:text-xl text-slate-200 max-w-4xl mx-auto font-normal leading-[1.6]">
+          Websites, custom web applications and mobile apps built with a fixed price, a dated schedule, and zero agency overhead.
+        </p>
+
+        <!-- Action Buttons (Removed WhatsApp button, Added 'Our services' button) -->
+        <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 pt-2 sm:pt-4">
+          <a href="#contact" class="px-6 sm:px-9 py-3 sm:py-4 rounded-full text-xs sm:text-sm font-bold btn-primary">
+            Start a project
+          </a>
+
+          <a href="#services"
+            class="px-6 sm:px-9 py-3 sm:py-4 rounded-full text-xs sm:text-sm font-semibold glass-panel text-white hover:bg-white/15 transition-all border border-white/20 flex items-center space-x-2 group shadow-lg">
+            <span>Our services</span>
+            <svg class="w-4 h-4 text-accent group-hover:translate-y-0.5 transition-transform duration-200" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contextual Popovers (Refined position & size to prevent overlap) -->
+    <div id="story-popovers" class="fixed inset-0 z-[15] pointer-events-none flex flex-col justify-between p-4 sm:p-8 md:p-12">
+      <div id="popover-1"
+        class="self-center md:self-end mt-16 md:mt-20 glass-panel p-4 sm:p-5 rounded-2xl border border-accent/40 w-[90%] max-w-xs transition-all duration-500 opacity-0 translate-y-4 pointer-events-auto shadow-2xl bg-surfaceDark/95 backdrop-blur-xl">
+        <div class="flex items-center space-x-2.5 mb-1.5">
+          <div class="w-2.5 h-2.5 rounded-full bg-accent"></div>
+          <span class="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-accent font-bold">Scope & Fixed Price</span>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-100 leading-relaxed font-normal">Detailed written scope, fixed pricing, and guaranteed timelines for every project.</p>
+      </div>
+
+      <div id="popover-2"
+        class="self-center md:self-start mb-20 md:mb-24 glass-panel p-4 sm:p-5 rounded-2xl border border-accent/40 w-[90%] max-w-xs transition-all duration-500 opacity-0 translate-y-4 pointer-events-auto shadow-2xl bg-surfaceDark/95 backdrop-blur-xl">
+        <div class="flex items-center space-x-2.5 mb-1.5">
+          <div class="w-2.5 h-2.5 rounded-full bg-accent"></div>
+          <span class="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-accent font-bold">Cross-Platform Apps</span>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-100 leading-relaxed font-normal">Native iOS & Android apps crafted efficiently from a single codebase.</p>
+      </div>
+
+      <div id="popover-3"
+        class="self-center md:self-end mb-12 md:mb-16 glass-panel p-4 sm:p-5 rounded-2xl border border-accent/40 w-[90%] max-w-xs transition-all duration-500 opacity-0 translate-y-4 pointer-events-auto shadow-2xl bg-surfaceDark/95 backdrop-blur-xl">
+        <div class="flex items-center space-x-2.5 mb-1.5">
+          <div class="w-2.5 h-2.5 rounded-full bg-accent"></div>
+          <span class="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-accent font-bold">Sub-2s Speed & SEO</span>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-100 leading-relaxed font-normal">Lightning-fast websites optimized for search engines & AI discovery.</p>
+      </div>
+    </div>
+
+  </section>
