@@ -12,18 +12,40 @@ const INCLUDE_RE = /<!--\s*@include\s+([^\s]+?)\s*-->/g;
 export default function htmlIncludes(partialsRoot = 'src/partials') {
   const root = path.resolve(process.cwd(), partialsRoot);
 
-  function resolve(html) {
+  function resolveIncludes(html, chain) {
     return html.replace(INCLUDE_RE, (_match, includePath) => {
       const filePath = path.join(root, includePath);
+
+      if (filePath !== root && !filePath.startsWith(root + path.sep)) {
+        throw new Error(`@include path escapes partials root: ${includePath}`);
+      }
+
+      if (chain.includes(filePath)) {
+        const cycle = [...chain, filePath].map((p) => path.relative(root, p)).join(' -> ');
+        throw new Error(`Circular @include detected: ${cycle}`);
+      }
+
       const partial = fs.readFileSync(filePath, 'utf-8');
-      return resolve(partial);
+      return resolveIncludes(partial, [...chain, filePath]);
     });
   }
 
   return {
     name: 'html-includes',
     transformIndexHtml(html) {
-      return resolve(html);
+      return resolveIncludes(html, []);
+    },
+    configureServer(server) {
+      server.watcher.add(root);
+      server.watcher.on('change', (file) => reloadOnPartialChange(file));
+      server.watcher.on('add', (file) => reloadOnPartialChange(file));
+      server.watcher.on('unlink', (file) => reloadOnPartialChange(file));
+
+      function reloadOnPartialChange(file) {
+        if (file === root || file.startsWith(root + path.sep)) {
+          server.ws.send({ type: 'full-reload' });
+        }
+      }
     }
   };
 }
