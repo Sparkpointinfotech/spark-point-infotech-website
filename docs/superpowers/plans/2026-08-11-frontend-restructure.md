@@ -157,7 +157,29 @@ Expected: 16 new files, none empty. Sanity check line counts:
 wc -l src/partials/head.html src/partials/loading-screen.html src/partials/background-layers.html src/partials/nav.html src/partials/sections/*.html src/partials/footer.html src/partials/whatsapp-button.html
 ```
 
-Expected total across all 16 files: 1,079 lines (this is less than 1,399 because the section-comment lines, the `<main>` wrapper, and structural boilerplate stay in the skeleton, not the partials).
+Expected total across all 16 files: 1,367 lines (this is less than 1,399 because the section-comment lines, the `<main>` wrapper, and structural boilerplate stay in the skeleton, not the partials).
+
+- [ ] **Step 2.5: Tell Tailwind to scan the new partial files**
+
+Tailwind's JIT compiler only sees classes in files matched by `tailwind.config.js`'s `content` array — today that's `["./index.html", "./src/**/*.{js,ts,jsx,tsx}"]`. Once markup moves into `src/partials/`, none of those `.html` files are scanned, so their utility classes get silently dropped from the compiled CSS (a real, visible regression, not a whitespace nit).
+
+In `tailwind.config.js`, change:
+```js
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+```
+to:
+```js
+  content: [
+    "./index.html",
+    "./src/partials/**/*.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+```
+
+This glob is recursive, so it also covers `src/partials/admin/*.html` once Task 7 creates that folder — Task 7 does not need its own separate content-glob change.
 
 - [ ] **Step 3: Replace `index.html` with the skeleton**
 
@@ -1475,6 +1497,8 @@ git commit -m "refactor: move admin.html off CDN Tailwind onto the Vite build pi
 **Files:**
 - Create: `src/partials/admin/head.html`, `src/partials/admin/login-modal.html`, `src/partials/admin/dashboard-header.html`, `src/partials/admin/dashboard-toolbar.html`, `src/partials/admin/dashboard-tables.html`, `src/partials/admin/detail-modal.html`, `src/partials/admin/password-modal.html`
 - Modify: `admin.html`
+
+No `tailwind.config.js` change needed here — Task 2 already added `"./src/partials/**/*.html"` to the `content` array, and that glob is recursive, so it covers this folder too.
 
 Same `sed`-extraction technique as Task 2, applied to `admin.html` **after** Task 6's head/class changes are in place.
 
