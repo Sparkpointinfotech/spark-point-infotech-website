@@ -1,6 +1,8 @@
 import { defineConfig } from 'vite';
+import htmlIncludes from './vite-plugin-html-includes.js';
 
 export default defineConfig({
+  plugins: [htmlIncludes()],
   server: {
     port: 3000,
     open: true,
