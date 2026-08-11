@@ -7,5 +7,6 @@ dist
 submissions_store.json
 .env
 .env*.local
+.worktrees
 
 
