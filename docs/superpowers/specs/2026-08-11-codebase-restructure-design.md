@@ -15,7 +15,9 @@ The Spark Point Infotech website works and looks correct today, but the source i
 
 This makes the codebase hard to navigate and risky to change: any edit to one section requires scrolling past unrelated code, and there's no clear place to add new code.
 
-**Goal of this pass:** reorganize the code into small, single-purpose files with clear boundaries, with zero change to visible content, theme, copy, or existing animation timing. A secondary, explicitly-approved goal is to fix real performance waste (things running when they don't need to) without changing how anything looks or behaves.
+**Goal of this pass:** reorganize the code into small, single-purpose files with clear boundaries, with zero change to visible content, theme, copy, or existing animation timing. A secondary, explicitly-approved goal is to fix real performance waste (things running when they don't need to) without changing how anything looks or behaves. A third, explicitly-approved goal is to fix three specific backend hardening gaps found during review (§6a) — these touch edge-case/abuse behavior, not normal user-facing behavior.
+
+**On adding a framework (React, etc.):** considered and explicitly rejected for this pass. This site is animation/3D-driven (GSAP + Three.js manipulate the DOM imperatively) and recently had significant SEO/AEO/GEO investment that depends on static, crawlable HTML — a framework migration (especially one needing SSR/SSG to preserve that SEO work) is a rewrite, not a restructure, and contradicts "don't change anything." Vanilla JS + Vite, cleanly modularized, meets the maintainability goal without that risk. Revisit only if the site grows genuinely app-like (logged-in portal, real-time dashboards, complex client state).
 
 **Explicitly out of scope:** content/copy changes, color/theme/typography changes, new animations or retimed motion, new features, changes to API contracts, changes to database behavior.
 
@@ -123,7 +125,8 @@ Purely mechanical split — same selectors, same rules, same cascade order, just
 server/
   app.js                 (thin: express() setup, middleware mounting, router mounting only)
   middleware/
-    auth.js              (authMiddleware, extracted as-is)
+    auth.js              (authMiddleware — updated per §6a fix #1, requires JWT_SECRET)
+    rate-limit.js         (new — §6a fix #3, applied only to contact/talent/login routes)
   routes/
     health.js
     contact.js
@@ -131,7 +134,7 @@ server/
     auth.js
     submissions.js
     export.js
-  db.js                  (unchanged — see below)
+  db.js                  (unchanged, aside from the startup warning in §6a fix #2)
 ```
 
 `server/index.js` (local dev listener) and `api/index.js` (Vercel serverless entry) are untouched; both just `import app from './app.js'` / `'../server/app.js'`, and that default export's shape doesn't change.
@@ -151,13 +154,27 @@ These were raised during design but are explicitly **not** part of this pass —
 
 - `prefers-reduced-motion` fallback for the Three.js scenes and CTA-door transition — the project's own `design.md` calls for this but it isn't implemented today
 - Accessibility: visible focus rings, `aria-expanded` on the FAQ accordion, proper label/error semantics on the contact/talent forms
-- Rate-limiting on the public `POST /api/contact` and `POST /api/talent` endpoints — none currently exists
 - Splitting `server/db.js` into per-mode adapter files behind the same public API
+
+## 6a. Hardening fixes (added to scope — user requested these be fixed)
+
+Three concrete issues were found while reviewing `server/app.js` and `server/db.js` and the user asked to fix all of them as part of this pass. These are small, targeted, behavior-preserving-for-legitimate-use fixes — they change what happens in edge cases (missing config, abuse) not normal operation:
+
+1. **Hardcoded JWT fallback secret** — [server/app.js:16](server/app.js#L16) falls back to a literal string if `JWT_SECRET` isn't set, which is a forgeable-admin-token risk in production if the env var is ever missing.
+   - Fix: `middleware/auth.js` requires `JWT_SECRET` from the environment. In production (`NODE_ENV=production` or `process.env.VERCEL`), missing `JWT_SECRET` fails fast at startup with a clear error instead of silently using a guessable default. In local dev, if it's missing, generate a random per-process secret and log a one-line warning (so `npm run dev` still works out of the box, but nobody can rely on a fixed guessable value).
+   - Add `JWT_SECRET` to `.env.example` with a comment.
+
+2. **Non-durable fallback storage on Vercel** — when no `DATABASE_URL`/`POSTGRES_URL` is set, `server/db.js` writes submissions to `/tmp`, which Vercel does not guarantee persists between invocations. This fails silently today (writes appear to succeed, data can vanish).
+   - Fix: at startup, if running on Vercel (`process.env.VERCEL`) with no `DATABASE_URL` configured, log a loud warning identifying the risk. No behavior change for anyone with `DATABASE_URL` set (which the project's Supabase migration implies is the intended production setup) — this only makes an already-fragile misconfiguration visible instead of silent.
+
+3. **No rate limiting on public endpoints** — `POST /api/contact` and `POST /api/talent` (form spam risk) and `POST /api/auth/login` (brute-force risk on the admin password) have no request throttling.
+   - Fix: add `express-rate-limit` (one new, widely-used dependency) as middleware on those three routes specifically — not applied globally, so normal admin dashboard usage (GETs, exports) is unaffected.
 
 ## 7. Success criteria
 
 - `npm run build` and `npm run dev` both work exactly as before; `dist/index.html` and `dist/admin.html` are visually and behaviorally identical to today's build
-- All existing routes/API contracts respond identically (same URLs, same request/response shapes)
+- All existing routes/API contracts respond identically for legitimate requests (same URLs, same request/response shapes) — the only new response shape is a `429` from the three rate-limited routes under abuse, which didn't exist before
 - All existing animations, 3D scenes, forms, and the FAQ accordion behave identically to a user
 - No file in `src/js/`, `src/styles/`, `server/routes/` exceeds roughly 150-200 lines (the `iphone-model.js` 3D mesh builder is the expected exception, since it's one cohesive geometry-construction routine)
 - A new contributor can find "where does the contact form submit handler live" or "where is the FAQ route defined" without grep — the folder name tells them
+- With `JWT_SECRET` and `DATABASE_URL` set (as `.env.example` documents), server startup is silent; with either missing, a clear warning/error identifies exactly what's missing and why it matters
