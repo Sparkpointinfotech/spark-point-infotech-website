@@ -1500,7 +1500,7 @@ git commit -m "refactor: move admin.html off CDN Tailwind onto the Vite build pi
 
 No `tailwind.config.js` change needed here — Task 2 already added `"./src/partials/**/*.html"` to the `content` array, and that glob is recursive, so it covers this folder too.
 
-Same `sed`-extraction technique as Task 2, applied to `admin.html` **after** Task 6's head/class changes are in place.
+Same `sed`-extraction technique as Task 2, applied to `admin.html` **after** Task 6's head/class changes are in place. **Same trailing-newline convention as Task 2, deliberately:** each partial should end with no trailing newline (`sed` extraction naturally produces this). A trailing `\n` in a partial would inject an extra blank line at its `@include` site under the plugin's plain string-concatenation model — that's why Task 2's partials have "No newline at end of file" and this task's should too, not because it's an accident to tidy up.
 
 - [ ] **Step 1: Create the folder**
 
