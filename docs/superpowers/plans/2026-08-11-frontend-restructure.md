@@ -1421,12 +1421,15 @@ In `tailwind.config.js`, inside `theme.extend.colors`, add three new keys alongs
       },
 ```
 
-Also add `"./admin.html"` to the `content` array so Tailwind's build-time scanner actually sees admin's classes (today it doesn't need to, because the CDN version scans the live DOM in the browser instead):
+Also add `"./admin.html"` to the `content` array so Tailwind's build-time scanner actually sees admin's classes (today it doesn't need to, because the CDN version scans the live DOM in the browser instead).
+
+**By this point in the plan, `content` already has a `"./src/partials/**/*.html"` line (added in Task 2, to fix a different content-scanning gap) — add `"./admin.html"` alongside it, don't replace the array with the version below verbatim:**
 
 ```js
   content: [
     "./index.html",
     "./admin.html",
+    "./src/partials/**/*.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
 ```
