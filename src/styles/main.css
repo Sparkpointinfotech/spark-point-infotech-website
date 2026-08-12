@@ -1,3 +1,26 @@
+/*
+ * Cascade-layer convention for files under styles/components/:
+ *
+ * Wrap a new component file's rules in `@layer utilities { }` so they land
+ * in the same cascade layer as Tailwind's own utility classes. This matches
+ * the pre-split single-file `src/style.css`, where custom classes were
+ * written after all `@tailwind` output and so won any same-specificity tie
+ * against a Tailwind utility. Without the `@layer` wrapper, an `@import`ed
+ * file's rules apply in plain source order (ahead of `@tailwind utilities`
+ * below), which can flip that tie the wrong way.
+ *
+ * Exceptions: components/bento.css and components/beam.css are deliberately
+ * left UNWRAPPED. Their classes (.bento-card, .bento-3d-canvas, .beam-live)
+ * are confirmed dead code as of this restructure (zero references in the
+ * current HTML/JS) — wrapping them in `@layer utilities` would make
+ * Tailwind's JIT purge strip them from the build entirely, since @layer
+ * utilities content is subject to the same content-based purge as real
+ * Tailwind utilities. Leaving them unwrapped keeps them compiled into the
+ * output (at the top, ahead of the Tailwind reset) so they survive as inert,
+ * inspectable dead code instead of vanishing silently. If either class is
+ * ever reintroduced into markup, wrap that file in `@layer utilities { }`
+ * at that point to restore correct cascade position.
+ */
 @import './base.css';
 @import './components/glass.css';
 @import './components/buttons.css';

@@ -1,3 +1,4 @@
+/* Intentionally NOT wrapped in @layer utilities — dead code kept unwrapped to survive Tailwind's JIT purge; see convention/rationale in styles/main.css. */
 /* Protocol Beams */
 .beam-live {
   stroke-dasharray: 6 6;
