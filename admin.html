@@ -9,67 +9,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            bgDark: '#05030a',
-            surfaceDark: '#0b0717',
-            surfaceCard: '#130d25',
-            accent: '#8B5CF6',
-            accentGlow: '#A855F7'
-          },
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace']
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    body {
-      background-color: #05030a;
-      color: #f3f4f6;
-      font-family: 'Inter', sans-serif;
-    }
-    .glass-card {
-      background: rgba(15, 10, 30, 0.85);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    .glass-card-hover {
-      transition: all 0.2s ease-in-out;
-    }
-    .glass-card-hover:hover {
-      border-color: rgba(139, 92, 246, 0.4);
-      box-shadow: 0 10px 30px -10px rgba(139, 92, 246, 0.2);
-    }
-    ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #05030a;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #261942;
-      border-radius: 3px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #8B5CF6;
-    }
-  </style>
+  <link rel="stylesheet" href="/src/styles/admin.css">
 </head>
 
-<body class="min-h-screen bg-bgDark text-slate-100 font-sans pb-20">
+<body class="min-h-screen bg-adminBgDark text-slate-100 font-sans pb-20">
 
   <!-- ==================== 1. LOGIN MODAL OVERLAY (SECURITY GUARD) ==================== -->
   <div id="login-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-xl p-4">
-    <div class="glass-card bg-surfaceDark border border-purple-500/30 rounded-3xl max-w-md w-full p-8 space-y-6 shadow-[0_0_50px_rgba(139,92,246,0.15)] relative">
+    <div class="glass-card bg-adminSurfaceDark border border-purple-500/30 rounded-3xl max-w-md w-full p-8 space-y-6 shadow-[0_0_50px_rgba(139,92,246,0.15)] relative">
       
       <div class="text-center space-y-2">
         <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-accent/10 border border-accent/30 text-accent mb-2">
@@ -164,7 +111,7 @@
       </div>
 
       <!-- Vercel Cloud Database Guide (Expandable) -->
-      <div id="access-guide-drawer" class="hidden glass-card p-6 rounded-2xl border border-purple-500/30 space-y-4 bg-surfaceDark/90 shadow-2xl">
+      <div id="access-guide-drawer" class="hidden glass-card p-6 rounded-2xl border border-purple-500/30 space-y-4 bg-adminSurfaceDark/90 shadow-2xl">
         <div class="flex items-center justify-between border-b border-white/10 pb-3">
           <h3 class="text-base font-semibold text-white flex items-center space-x-2">
             <span class="text-accent font-mono">⚡</span>
@@ -254,7 +201,7 @@
       </div>
 
       <!-- Navigation Tabs & Toolbar -->
-      <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 bg-surfaceCard/60 p-4 rounded-2xl border border-white/10">
+      <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 bg-adminSurfaceCard/60 p-4 rounded-2xl border border-white/10">
         <!-- Tabs -->
         <div class="flex space-x-2 p-1 bg-black/40 rounded-xl border border-white/10 self-start">
           <button id="tab-contact-btn" onclick="switchTab('contact')" class="px-4 py-2 rounded-lg text-xs font-semibold font-mono transition-all bg-accent text-white shadow-lg">
@@ -376,7 +323,7 @@
 
   <!-- Submission Detail Modal -->
   <div id="detail-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
-    <div class="glass-card bg-surfaceDark border border-white/15 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 space-y-6 shadow-2xl relative">
+    <div class="glass-card bg-adminSurfaceDark border border-white/15 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 space-y-6 shadow-2xl relative">
       
       <div class="flex items-center justify-between border-b border-white/10 pb-4">
         <div class="flex items-center space-x-3">
@@ -404,7 +351,7 @@
 
   <!-- Change Password Modal -->
   <div id="password-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
-    <div class="glass-card bg-surfaceDark border border-white/15 rounded-3xl max-w-md w-full p-6 space-y-5 shadow-2xl relative">
+    <div class="glass-card bg-adminSurfaceDark border border-white/15 rounded-3xl max-w-md w-full p-6 space-y-5 shadow-2xl relative">
       <div class="flex items-center justify-between border-b border-white/10 pb-3">
         <h3 class="text-sm font-bold text-white font-mono flex items-center space-x-2">
           <span>🔒 Update Admin Password</span>

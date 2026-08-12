@@ -2,6 +2,7 @@
 export default {
   content: [
     "./index.html",
+    "./admin.html",
     "./src/partials/**/*.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
@@ -16,6 +17,9 @@ export default {
         accentGlow: '#A855F7',  // Vibrant Purple Glow
         accentDark: '#7C3AED',  // Deep Purple
         textMuted: '#9CA3AF',
+        adminBgDark: '#05030a',
+        adminSurfaceDark: '#0b0717',
+        adminSurfaceCard: '#130d25',
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
