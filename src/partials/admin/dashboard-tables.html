@@ -1,0 +1,60 @@
+      <!-- Contact Submissions Table -->
+      <div id="contact-tab-content" class="glass-card rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-slate-300">
+            <thead class="bg-white/5 border-b border-white/10 text-[11px] font-mono uppercase tracking-wider text-slate-400">
+              <tr>
+                <th class="py-3.5 px-4 w-10 text-center">
+                  <input type="checkbox" id="select-all-contact" onchange="toggleSelectAll(this)" class="rounded bg-black/50 border-white/20 text-accent focus:ring-accent">
+                </th>
+                <th class="py-3.5 px-4 font-semibold">ID</th>
+                <th class="py-3.5 px-4 font-semibold">Submitted At</th>
+                <th class="py-3.5 px-4 font-semibold">Name & Contact</th>
+                <th class="py-3.5 px-4 font-semibold">Company</th>
+                <th class="py-3.5 px-4 font-semibold">Service Required</th>
+                <th class="py-3.5 px-4 font-semibold">Budget</th>
+                <th class="py-3.5 px-4 font-semibold">Project Overview</th>
+                <th class="py-3.5 px-4 font-semibold text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="contact-table-body" class="divide-y divide-white/5 font-normal">
+              <tr>
+                <td colspan="9" class="text-center py-10 text-slate-400 font-mono">Loading project enquiries...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Talent Submissions Table -->
+      <div id="talent-tab-content" class="glass-card rounded-2xl overflow-hidden border border-white/10 shadow-2xl hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-slate-300">
+            <thead class="bg-white/5 border-b border-white/10 text-[11px] font-mono uppercase tracking-wider text-slate-400">
+              <tr>
+                <th class="py-3.5 px-4 w-10 text-center">
+                  <input type="checkbox" id="select-all-talent" onchange="toggleSelectAll(this)" class="rounded bg-black/50 border-white/20 text-emerald-500 focus:ring-emerald-500">
+                </th>
+                <th class="py-3.5 px-4 font-semibold">ID</th>
+                <th class="py-3.5 px-4 font-semibold">Submitted At</th>
+                <th class="py-3.5 px-4 font-semibold">Candidate</th>
+                <th class="py-3.5 px-4 font-semibold">Primary Expertise</th>
+                <th class="py-3.5 px-4 font-semibold">Experience</th>
+                <th class="py-3.5 px-4 font-semibold">Location</th>
+                <th class="py-3.5 px-4 font-semibold">Notice</th>
+                <th class="py-3.5 px-4 font-semibold">Resume / Portfolio</th>
+                <th class="py-3.5 px-4 font-semibold text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="talent-table-body" class="divide-y divide-white/5 font-normal">
+              <tr>
+                <td colspan="10" class="text-center py-10 text-slate-400 font-mono">Loading talent profiles...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+
+  </div>

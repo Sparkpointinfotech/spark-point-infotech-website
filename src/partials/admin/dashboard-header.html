@@ -1,0 +1,40 @@
+  <!-- ==================== 2. MAIN ADMIN DASHBOARD CONTAINER ==================== -->
+  <div id="dashboard-container" class="hidden">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-40 glass-card border-b border-white/10 px-4 sm:px-8 py-3.5">
+      <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center space-x-3">
+          <a href="/" class="flex items-center space-x-3 hover:opacity-90 transition-opacity">
+            <img src="/SPI LOGO.png" alt="Spark Point Infotech" class="h-9 w-auto" onerror="this.onerror=null; this.src='/spi-logo.png'">
+            <span class="text-[11px] font-mono text-accent font-bold uppercase tracking-wider bg-accent/10 px-2.5 py-1 rounded-full border border-accent/20">Live Admin Portal</span>
+          </a>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <!-- Status Indicator -->
+          <div id="status-indicator" class="flex items-center space-x-2 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-xl text-xs font-mono text-emerald-400">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span id="status-text">Live Server Connected</span>
+          </div>
+
+          <button id="refresh-btn" onclick="loadAllSubmissions()" class="flex items-center space-x-2 bg-white/5 hover:bg-white/10 text-white text-xs font-mono px-3.5 py-1.5 rounded-xl border border-white/10 transition-all">
+            <svg id="refresh-icon" class="w-3.5 h-3.5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            <span>Refresh</span>
+          </button>
+
+          <button onclick="openChangePasswordModal()" class="bg-purple-900/30 hover:bg-purple-900/50 text-purple-300 border border-purple-500/30 text-xs font-mono px-3.5 py-1.5 rounded-xl transition-all flex items-center space-x-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
+            <span>Password</span>
+          </button>
+
+          <button onclick="handleLogout()" class="bg-red-900/30 hover:bg-red-900/50 text-red-300 border border-red-500/30 text-xs font-mono px-3.5 py-1.5 rounded-xl transition-all flex items-center space-x-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+            <span>Logout</span>
+          </button>
+        </div>
+      </div>
+    </header>
