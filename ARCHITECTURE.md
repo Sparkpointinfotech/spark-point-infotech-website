@@ -34,6 +34,18 @@ Component-specific CSS (things Tailwind's utility classes don't cover — glass-
 
 ## Backend
 
-`server/app.js` only does Express app setup — CORS, body parsing, static file serving, the `/admin` redirect, and the legacy-URL-prefix normalizer — then mounts one router per concern from `server/routes/` (`health.js`, `contact.js`, `talent.js`, `auth.js`, `submissions.js`, `export.js`). `server/middleware/auth.js` holds JWT verification and secret resolution (required in production, never a hardcoded fallback); `server/middleware/rate-limit.js` holds rate limiting for the contact/talent/login routes. `server/db.js` is deliberately left as one file — already a single-responsibility data-access layer with three internal modes (Postgres, SQLite, JSON-file fallback).
+`server/app.js` only does Express app setup — CORS, body parsing, static file serving, the `/admin` redirect, and the legacy-URL-prefix normalizer (so `/contact` and `/api/contact` both work, which Vercel's routing relies on) — then mounts one router per concern from `server/routes/`:
 
-To add a new API endpoint: create (or add to) a file in `server/routes/`, export an Express `Router`, mount it in `server/app.js`.
+- `health.js` — API root + health check
+- `contact.js` / `talent.js` — the two public form-submission endpoints
+- `auth.js` — login, token verification, password change
+- `submissions.js` — admin CRUD over stored submissions
+- `export.js` — CSV/JSON export endpoints
+
+`server/middleware/auth.js` holds the JWT verification middleware and JWT secret resolution — required in production (fails fast at startup if missing), auto-generated with a warning in local dev, never a hardcoded fallback. `server/middleware/rate-limit.js` holds the two `express-rate-limit` instances applied to the contact, talent, and login routes.
+
+`server/db.js` is deliberately left as one file — it's already a single-responsibility data-access layer (`dbRun`, `dbAll`, `getAdminPassword`, `setAdminPassword`, `initDb`) used identically by every route, with three internal modes (Postgres, SQLite, and a JSON-file fallback for Vercel-without-a-database). It now logs a startup warning if the risky fallback mode is active on Vercel with no database configured.
+
+To add a new API endpoint: create (or add to) a file in `server/routes/`, export an Express `Router`, mount it in `server/app.js`. If it needs to be admin-only, add `authMiddleware` from `server/middleware/auth.js`. If it's a public endpoint that accepts user input, consider `publicFormLimiter` from `server/middleware/rate-limit.js`.
+
+`server/index.js` (local dev) and `api/index.js` (Vercel serverless) both just import `server/app.js`'s default export — neither needs to change when routes are added or moved.
