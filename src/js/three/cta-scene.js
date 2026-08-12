@@ -1,7 +1,9 @@
 import * as THREE from 'three';
 import { createAuthenticIPhoneMesh } from './iphone-model.js';
+import { debounce } from '../utils/debounce.js';
 
 let ctaScene, ctaCamera, ctaRenderer, ctaPhoneGroup;
+let ctaAnimating = false;
 
 export function initCtaThreeCanvas() {
   const container = document.getElementById('cta-canvas');
@@ -36,19 +38,13 @@ export function initCtaThreeCanvas() {
     mouseY = (e.clientY / window.innerHeight - 0.5) * 0.8;
   });
 
-  window.addEventListener('resize', onCtaResize);
+  window.addEventListener('resize', debounce(onCtaResize, 150));
 
   const clock = new THREE.Clock();
 
   function animateCta() {
+    if (!ctaAnimating) return;
     requestAnimationFrame(animateCta);
-
-    // Suppress WebGL rendering when CTA section is far out of viewport
-    const ctaEl = document.getElementById('contact');
-    if (ctaEl) {
-      const rect = ctaEl.getBoundingClientRect();
-      if (rect.bottom < 0 || rect.top > window.innerHeight * 1.5) return;
-    }
 
     const elapsedTime = clock.getElapsedTime();
 
@@ -63,7 +59,28 @@ export function initCtaThreeCanvas() {
     }
   }
 
-  animateCta();
+  function startCtaAnimation() {
+    if (ctaAnimating) return;
+    ctaAnimating = true;
+    animateCta();
+  }
+
+  function stopCtaAnimation() {
+    ctaAnimating = false;
+  }
+
+  const ctaSection = document.getElementById('contact');
+  if (ctaSection && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) startCtaAnimation();
+        else stopCtaAnimation();
+      });
+    }, { rootMargin: '150% 0px 150% 0px' });
+    observer.observe(ctaSection);
+  } else {
+    startCtaAnimation();
+  }
 }
 
 function onCtaResize() {

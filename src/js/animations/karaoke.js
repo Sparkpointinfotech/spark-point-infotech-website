@@ -10,8 +10,9 @@ export function initKaraokeText() {
     .join('');
 
   const wordElements = container.querySelectorAll('.karaoke-word');
+  let ticking = false;
 
-  window.addEventListener('scroll', () => {
+  function updateKaraoke() {
     const rect = container.getBoundingClientRect();
     const windowHeight = window.innerHeight;
 
@@ -27,5 +28,14 @@ export function initKaraokeText() {
         el.classList.remove('active');
       }
     });
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateKaraoke);
+      ticking = true;
+    }
   });
 }

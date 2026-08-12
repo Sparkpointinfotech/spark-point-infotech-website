@@ -1,8 +1,10 @@
 import * as THREE from 'three';
 import { gsap } from 'gsap';
 import { createAuthenticIPhoneMesh } from './iphone-model.js';
+import { debounce } from '../utils/debounce.js';
 
 let heroScene, heroCamera, heroRenderer, phoneGroup, ring1, ring2, particlesMesh;
+let heroAnimating = false;
 
 export function initHeroThreeCanvas() {
   const container = document.getElementById('canvas-container');
@@ -84,15 +86,13 @@ export function initHeroThreeCanvas() {
   phoneGroup.rotation.x = 0.12;
   phoneGroup.rotation.y = -0.18;
 
-  window.addEventListener('resize', onHeroResize);
+  window.addEventListener('resize', debounce(onHeroResize, 150));
 
   const clock = new THREE.Clock();
 
   function animateHero() {
+    if (!heroAnimating) return;
     requestAnimationFrame(animateHero);
-
-    // Suppress WebGL rendering when hero section is out of viewport
-    if (window.scrollY > window.innerHeight * 4.5) return;
 
     const elapsedTime = clock.getElapsedTime();
 
@@ -105,7 +105,29 @@ export function initHeroThreeCanvas() {
     }
   }
 
-  animateHero();
+  function startHeroAnimation() {
+    if (heroAnimating) return;
+    heroAnimating = true;
+    animateHero();
+  }
+
+  function stopHeroAnimation() {
+    heroAnimating = false;
+  }
+
+  const heroSection = document.getElementById('hero-section');
+  if (heroSection && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) startHeroAnimation();
+        else stopHeroAnimation();
+      });
+    });
+    observer.observe(heroSection);
+  } else {
+    startHeroAnimation();
+  }
+
   setupHeroScrollAnimation();
 }
 
