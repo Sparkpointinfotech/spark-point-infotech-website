@@ -117,6 +117,8 @@ src/styles/
     whatsapp-button.css
 ```
 
+Implementation note (found during Task 5 of the frontend plan, not known at design time): `@import` must precede `@tailwind` directives in `main.css` (a CSS-spec constraint), and component files must be wrapped in `@layer utilities { }` to preserve the original file's cascade order — see the frontend plan's Task 5 for the corrected, verified version. This doesn't change the file layout above, only the exact contents of `main.css` and each component file.
+
 Purely mechanical split — same selectors, same rules, same cascade order, just grouped by component instead of concatenated in one file.
 
 ### 4.4 Backend: `server/app.js` → routes/middleware split

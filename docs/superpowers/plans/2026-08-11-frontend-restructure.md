@@ -1310,12 +1310,29 @@ sed -n '162,171p' src/style.css > src/styles/components/whatsapp-button.css
 sed -n '173,193p' src/style.css > src/styles/components/responsive-overrides.css
 ```
 
+- [ ] **Step 2.5: Wrap each extracted file in `@layer utilities { }` (except two dead-code files)**
+
+`@import` rules must precede all other CSS rules (a real CSS-spec constraint), so `main.css` (Step 3 below) has to put its `@import`s before its `@tailwind` directives. That changes where these files' content lands relative to Tailwind's own output — in the original single `src/style.css`, custom classes were written *after* all three `@tailwind` directives, so they won any same-specificity cascade tie against a Tailwind utility. Importing them *before* `@tailwind utilities` would flip that tie the wrong way.
+
+The fix: wrap each file's rules in `@layer utilities { }`, Tailwind's own mechanism for injecting custom CSS into the utilities cascade layer regardless of where the `@import` physically sits. Wrap the content of `glass.css`, `buttons.css`, `karaoke.css`, `timeline.css`, `cta-doors.css`, `faq.css`, `whatsapp-button.css`, `responsive-overrides.css`, and the `.bg-noise` portion of `base.css` (its pre-existing `@layer base { }` block around `:root`/`body` stays as-is) like this:
+
+```css
+@layer utilities {
+/* ...file's existing content, unchanged... */
+}
+```
+
+**Exception — do NOT wrap `bento.css` or `beam.css`.** Their classes (`.bento-card`, `.bento-3d-canvas`, `.beam-live`) are confirmed dead code as of this restructure (zero references anywhere in `index.html`, `admin.html`, or `src/`) — verify with `grep -rn "bento-card\|bento-3d-canvas\|beam-live" src/partials src/js index.html admin.html` before proceeding, expect zero output. Content inside `@layer utilities` is subject to Tailwind's JIT content-purge just like real utility classes, so wrapping these two would silently strip them from the build. Leaving them unwrapped keeps them present as inert, inspectable dead code (which also satisfies Step 6's verification grep, which checks for their presence). If either class is ever reintroduced into markup, wrap its file in `@layer utilities { }` at that point.
+
 - [ ] **Step 3: Create `src/styles/main.css`**
 
 ```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/*
+ * Cascade-layer convention for files under styles/components/:
+ * Wrap a component file's rules in `@layer utilities { }` (see Step 2.5)
+ * unless its classes are confirmed dead code — see the bento.css/beam.css
+ * exception below and the comment in each of those two files.
+ */
 
 @import './base.css';
 @import './components/glass.css';
@@ -1328,7 +1345,13 @@ sed -n '173,193p' src/style.css > src/styles/components/responsive-overrides.css
 @import './components/faq.css';
 @import './components/whatsapp-button.css';
 @import './components/responsive-overrides.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 ```
+
+Note `@import` statements come **before** `@tailwind` here (not after, as you might expect from the original file's top-to-bottom order) — this is the CSS-spec-required position for `@import`, and it's what Step 2.5's `@layer utilities` wrapping is there to compensate for.
 
 - [ ] **Step 4: Update the import in `src/main.js`**
 
