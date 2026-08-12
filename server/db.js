@@ -29,6 +29,15 @@ try {
 const dbUrl = process.env.DATABASE_URL || process.env.POSTGRES_URL;
 let dbMode = dbUrl ? 'pg' : (process.env.VERCEL ? 'fallback' : 'sqlite');
 
+if (dbMode === 'fallback') {
+  console.warn(
+    '[Database] WARNING: Running on Vercel with no DATABASE_URL/POSTGRES_URL configured. ' +
+    'Submissions will be written to /tmp, which Vercel does not guarantee persists between ' +
+    'invocations — data can be silently lost. Set DATABASE_URL in your Vercel project environment ' +
+    'variables (see .env.example) to use persistent Postgres storage.'
+  );
+}
+
 
 let pgPool = null;
 let sqliteDb = null;
