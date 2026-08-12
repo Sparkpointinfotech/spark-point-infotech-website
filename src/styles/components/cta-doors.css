@@ -1,0 +1,16 @@
+@layer utilities {
+/* CTA Doors */
+.cta-door-panel {
+  will-change: transform;
+}
+/* Contact Section Scrollbar Suppression */
+#contact, #contact *, #cta-door-wrapper, #cta-door-wrapper * {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+#contact::-webkit-scrollbar, #contact *::-webkit-scrollbar,
+#cta-door-wrapper::-webkit-scrollbar, #cta-door-wrapper *::-webkit-scrollbar {
+  display: none;
+}
+}

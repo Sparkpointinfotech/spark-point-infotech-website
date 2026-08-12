@@ -1,0 +1,15 @@
+@layer utilities {
+/* Button Primary Glow */
+.btn-primary {
+  background-color: #8B5CF6;
+  color: #FFFFFF;
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #7C3AED;
+  box-shadow: 0 0 50px rgba(168, 85, 247, 0.65);
+  transform: translateY(-2px);
+}
+}

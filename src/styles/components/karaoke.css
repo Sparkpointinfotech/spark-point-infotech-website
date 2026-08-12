@@ -1,0 +1,14 @@
+@layer utilities {
+/* Karaoke text effect */
+.karaoke-word {
+  opacity: 0.15;
+  transition: opacity 0.25s cubic-bezier(0.22, 1, 0.36, 1), color 0.25s ease, text-shadow 0.25s ease;
+  display: inline-block;
+}
+
+.karaoke-word.active {
+  opacity: 1;
+  color: #FFFFFF;
+  text-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
+}
+}

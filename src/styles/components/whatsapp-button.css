@@ -1,0 +1,12 @@
+@layer utilities {
+/* Floating WhatsApp Button */
+.floating-whatsapp {
+  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.floating-whatsapp:hover {
+  transform: scale(1.1) translateY(-4px);
+  box-shadow: 0 15px 40px rgba(37, 211, 102, 0.75);
+}
+}

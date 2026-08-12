@@ -1,0 +1,11 @@
+/* Protocol Beams */
+.beam-live {
+  stroke-dasharray: 6 6;
+  animation: beamFlow 1.5s linear infinite;
+}
+
+@keyframes beamFlow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}

@@ -1,0 +1,23 @@
+@layer utilities {
+/* Mobile Performance Optimizations & Responsiveness */
+@media (max-width: 768px) {
+  .glass-panel {
+    background: rgba(10, 6, 20, 0.94);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .btn-primary {
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 0 25px rgba(168, 85, 247, 0.5);
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+}

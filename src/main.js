@@ -1,6 +1,6 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import './style.css';
+import './styles/main.css';
 
 import { initLoadingScreen } from './js/loading-screen.js';
 import { initHeroThreeCanvas } from './js/three/hero-scene.js';
