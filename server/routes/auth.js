@@ -27,14 +27,12 @@ router.post(['/api/auth/login', '/auth/login'], loginLimiter, (req, res) => {
   const password = String(body.password || '').trim();
 
   const currentPassword = getAdminPassword();
-  const defaultPassword = 'SparkPoint2026!Admin';
   const envPassword = String(process.env.ADMIN_PASSWORD || '').trim();
 
-  const isUsernameValid = (username === 'admin' || username === String(adminUsername).trim().toLowerCase());
+  const isUsernameValid = (username === String(adminUsername).trim().toLowerCase());
   const isPasswordValid = Boolean(
     password && (
       password === currentPassword ||
-      password === defaultPassword ||
       (envPassword.length > 0 && password === envPassword)
     )
   );
