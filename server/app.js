@@ -246,7 +246,7 @@ app.post(['/api/auth/login', '/auth/login'], (req, res) => {
   const currentPassword = getAdminPassword();
   const envPassword = String(process.env.ADMIN_PASSWORD || '').trim();
 
-  const isUsernameValid = (username === 'admin' || username === String(adminUsername).trim().toLowerCase());
+  const isUsernameValid = (username === String(adminUsername).trim().toLowerCase());
   const isPasswordValid = Boolean(
     password && (
       password === currentPassword ||
