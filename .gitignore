@@ -8,5 +8,6 @@ submissions_store.json
 .env
 .env*.local
 .worktrees
+docs/superpowers
 
 
