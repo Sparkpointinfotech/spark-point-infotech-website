@@ -22,7 +22,6 @@ export function initContactForm() {
         phone: document.getElementById('form-phone')?.value || '',
         company: document.getElementById('form-company')?.value || '',
         service: document.getElementById('form-service')?.value || '',
-        budget: document.getElementById('form-budget')?.value || '',
         message: document.getElementById('form-message')?.value || ''
       })
     });
