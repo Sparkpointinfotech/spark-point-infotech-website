@@ -1,6 +1,6 @@
 import { state } from './state.js';
 import { getAuthHeaders, checkAuth } from './auth.js';
-import { formatDate, escapeHtml } from './utils.js';
+import { formatDate, escapeHtml, isSafeUrl } from './utils.js';
 import { closeModal } from './modals.js';
 
 export async function loadAllSubmissions() {
@@ -126,7 +126,7 @@ export function renderTalentTable(items) {
       <td class="py-3.5 px-4">${escapeHtml(item.location || 'N/A')}</td>
       <td class="py-3.5 px-4 font-mono text-amber-300">${escapeHtml(item.notice_period || 'N/A')}</td>
       <td class="py-3.5 px-4 max-w-xs">
-        ${item.resume_url ? `<a href="${escapeHtml(item.resume_url)}" target="_blank" rel="noopener noreferrer" class="text-accent underline font-mono text-[11px] truncate block">${escapeHtml(item.resume_url)}</a>` : '<span class="text-slate-500 font-mono">N/A</span>'}
+        ${item.resume_url ? (isSafeUrl(item.resume_url) ? `<a href="${escapeHtml(item.resume_url)}" target="_blank" rel="noopener noreferrer" class="text-accent underline font-mono text-[11px] truncate block">${escapeHtml(item.resume_url)}</a>` : '<span class="text-red-400 font-mono text-[11px]">Blocked (unsafe URL)</span>') : '<span class="text-slate-500 font-mono">N/A</span>'}
       </td>
       <td class="py-3.5 px-4 text-right whitespace-nowrap">
         <button onclick="openDetailModal('talent', ${item.id})" class="text-emerald-400 hover:text-emerald-300 font-mono text-[11px] hover:underline mr-3">

@@ -14,7 +14,8 @@ router.post(['/api/talent', '/talent'], publicFormLimiter, async (req, res) => {
     const experience = String(body.experience || '').trim();
     const location = String(body.location || '').trim();
     const notice_period = String(body.notice_period || '').trim();
-    const resume_url = String(body.resume_url || '').trim();
+    const rawResumeUrl = String(body.resume_url || '').trim();
+    const resume_url = /^https?:\/\//i.test(rawResumeUrl) ? rawResumeUrl : '';
 
     if (!name || !email || !phone || !role) {
       return res.status(400).json({

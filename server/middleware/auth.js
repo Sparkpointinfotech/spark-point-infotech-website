@@ -25,14 +25,7 @@ export const JWT_SECRET = resolveJwtSecret();
 
 export const authMiddleware = (req, res, next) => {
   const authHeader = req.headers.authorization;
-  const queryToken = req.query.token;
-  let token = null;
-
-  if (authHeader && authHeader.startsWith('Bearer ')) {
-    token = authHeader.substring(7);
-  } else if (queryToken) {
-    token = queryToken;
-  }
+  const token = (authHeader && authHeader.startsWith('Bearer ')) ? authHeader.substring(7) : null;
 
   if (!token) {
     return res.status(401).json({

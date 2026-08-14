@@ -14,6 +14,16 @@ export function formatDate(str) {
   return d.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' });
 }
 
+export function isSafeUrl(url) {
+  if (!url) return false;
+  try {
+    const parsed = new URL(String(url), window.location.origin);
+    return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+  } catch {
+    return false;
+  }
+}
+
 export function escapeHtml(str) {
   if (!str) return '';
   return String(str)

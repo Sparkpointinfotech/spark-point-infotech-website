@@ -1,6 +1,6 @@
 import { state } from './state.js';
 import { getAuthHeaders } from './auth.js';
-import { formatDate, escapeHtml } from './utils.js';
+import { formatDate, escapeHtml, isSafeUrl, copyToClipboard } from './utils.js';
 
 export function openDetailModal(type, id) {
   const dataList = type === 'contact' ? state.contactData : state.talentData;
@@ -34,14 +34,14 @@ export function openDetailModal(type, id) {
           <span class="text-slate-400 font-mono text-[10px] uppercase block">Email Address</span>
           <span class="text-xs font-mono text-accent font-semibold flex items-center space-x-2">
             <span>${escapeHtml(item.email)}</span>
-            <button onclick="copyToClipboard('${escapeHtml(item.email)}')" class="hover:text-white text-[10px]">📋 Copy</button>
+            <button class="copy-btn hover:text-white text-[10px]" data-copy="${escapeHtml(item.email)}">📋 Copy</button>
           </span>
         </div>
         <div>
           <span class="text-slate-400 font-mono text-[10px] uppercase block">Phone / WhatsApp</span>
           <span class="text-xs font-mono text-emerald-400 font-semibold flex items-center space-x-2">
             <span>${escapeHtml(item.phone)}</span>
-            <button onclick="copyToClipboard('${escapeHtml(item.phone)}')" class="hover:text-white text-[10px]">📋 Copy</button>
+            <button class="copy-btn hover:text-white text-[10px]" data-copy="${escapeHtml(item.phone)}">📋 Copy</button>
           </span>
         </div>
       </div>
@@ -84,14 +84,14 @@ export function openDetailModal(type, id) {
           <span class="text-slate-400 font-mono text-[10px] uppercase block">Email Address</span>
           <span class="text-xs font-mono text-accent font-semibold flex items-center space-x-2">
             <span>${escapeHtml(item.email)}</span>
-            <button onclick="copyToClipboard('${escapeHtml(item.email)}')" class="hover:text-white text-[10px]">📋 Copy</button>
+            <button class="copy-btn hover:text-white text-[10px]" data-copy="${escapeHtml(item.email)}">📋 Copy</button>
           </span>
         </div>
         <div>
           <span class="text-slate-400 font-mono text-[10px] uppercase block">Phone / WhatsApp</span>
           <span class="text-xs font-mono text-emerald-400 font-semibold flex items-center space-x-2">
             <span>${escapeHtml(item.phone)}</span>
-            <button onclick="copyToClipboard('${escapeHtml(item.phone)}')" class="hover:text-white text-[10px]">📋 Copy</button>
+            <button class="copy-btn hover:text-white text-[10px]" data-copy="${escapeHtml(item.phone)}">📋 Copy</button>
           </span>
         </div>
       </div>
@@ -117,15 +117,19 @@ export function openDetailModal(type, id) {
 
       <div class="space-y-1 bg-white/5 p-4 rounded-2xl border border-white/10">
         <span class="text-slate-400 font-mono text-[10px] uppercase block">Resume / Portfolio / GitHub</span>
-        ${item.resume_url ? `
+        ${item.resume_url ? (isSafeUrl(item.resume_url) ? `
           <div class="flex items-center justify-between pt-1">
             <a href="${escapeHtml(item.resume_url)}" target="_blank" rel="noopener noreferrer" class="text-accent underline font-mono text-xs break-all">${escapeHtml(item.resume_url)}</a>
-            <button onclick="copyToClipboard('${escapeHtml(item.resume_url)}')" class="hover:text-white text-[10px] font-mono shrink-0 ml-2">📋 Copy Link</button>
+            <button class="copy-btn hover:text-white text-[10px] font-mono shrink-0 ml-2" data-copy="${escapeHtml(item.resume_url)}">📋 Copy Link</button>
           </div>
-        ` : '<span class="text-slate-500 font-mono text-xs block pt-1">No link provided</span>'}
+        ` : '<span class="text-red-400 font-mono text-xs block pt-1">Link blocked (unsafe URL scheme)</span>') : '<span class="text-slate-500 font-mono text-xs block pt-1">No link provided</span>'}
       </div>
     `;
   }
+
+  body.querySelectorAll('.copy-btn').forEach((btn) => {
+    btn.addEventListener('click', () => copyToClipboard(btn.dataset.copy));
+  });
 
   modal.classList.remove('hidden');
 }
